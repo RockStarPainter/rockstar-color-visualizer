@@ -131,7 +131,6 @@ const ColorVisualiser = (props: any) => {
       );
       setInitialMasks(JSON.parse(res?.data?.yolo_results.replace(/'/g, '"')));
 
-
       // setInitialMasks(yoloResultsData);
 
       setTimeout(() => {
@@ -575,7 +574,7 @@ const ColorVisualiser = (props: any) => {
                     imgSrc={image?.src}
                     maskData={initialMasks}
                     selectedColor={selectedColor}
-                    clearMasksSignal={clearSignal} 
+                    clearMasksSignal={clearSignal}
                   />
                 </div>
 

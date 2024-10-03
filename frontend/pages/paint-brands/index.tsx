@@ -15,10 +15,10 @@ import { useColorContext } from "../../contexts/ColorContext";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 
 const colorCategories = [
-  { name: "Red", key: "red" },
   { name: "Orange", key: "orange" },
   { name: "Yellow", key: "yellow" },
   { name: "Green", key: "green" },
+  { name: "Red", key: "red" },
   { name: "Blue", key: "blue" },
   { name: "Purple", key: "purple" },
   { name: "Neutral", key: "neutral" },
@@ -95,9 +95,10 @@ const PaintSelectionPage: React.FC<PaintSelectionPageProps> = ({
             }}
           ></div>
           <div className="mt-2 text-center">
-            <strong>{paint.name}</strong>
+            <span className="fw-bold" style={{fontSize:'.8rem'}}>{paint.name}</span>
             <br />
-            {paint.code}
+            <span  style={{fontSize:'.8rem'}}>{paint.code}</span>
+            {/* {paint.code} */}
           </div>
 
           {/* Show tick on selected paints */}
@@ -196,7 +197,7 @@ const PaintSelectionPage: React.FC<PaintSelectionPageProps> = ({
 
       <Row>
         {/* Main Paints Grid that scrolls with the page */}
-        <Col xs={12} md={9} className="px-5 py-3">
+        <Col xs={12} md={8} className="px-2 py-3">
           {/* Paint Grid */}
           <Row>{renderPaints()}</Row>
         </Col>
@@ -204,7 +205,7 @@ const PaintSelectionPage: React.FC<PaintSelectionPageProps> = ({
         {/* Saved Colors Section - Sticky with its own scroll */}
         <Col
           xs={12}
-          md={3}
+          md={4}
           style={{
             position: "sticky",
             top: 0,
@@ -231,7 +232,7 @@ const PaintSelectionPage: React.FC<PaintSelectionPageProps> = ({
                   key={index}
                   className="list-group-item d-flex justify-content-between align-items-center"
                 >
-                  <span>
+                  <div className="d-flex items-center pt-2">
                     <div
                       style={{
                         display: "inline-block",
@@ -242,8 +243,8 @@ const PaintSelectionPage: React.FC<PaintSelectionPageProps> = ({
                         borderRadius: "50%",
                       }}
                     ></div>
-                    {paint.name}
-                  </span>
+                    <div className="fw-bold block pb-2" style={{fontSize:'.9rem'}}>{paint.name}</div>
+                  </div>
                   <Button
                     variant="danger"
                     className="rounded-3"
