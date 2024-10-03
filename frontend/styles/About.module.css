@@ -1,0 +1,78 @@
+/* about.module.css */
+.section {
+    background-color: white;
+    padding: 1.5rem 0;
+  }
+  
+  .container {
+    margin: 0 auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  @media (min-width: 1024px) {
+    .container {
+      flex-direction: row;
+    }
+  }
+  
+  .textSection, .videoSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  @media (min-width: 1024px) {
+    .textSection, .videoSection {
+      width: 50%;
+      min-height: 500px; /* Ensure both sections have equal height */
+    }
+  }
+  
+  /* Adjusted font size and margin for a smaller appearance */
+  .heading {
+    font-size: 1.5rem; /* Reduced font size */
+    font-weight: 700;
+    margin-bottom: 0.5rem; /* Reduced margin between heading and paragraph */
+  }
+  
+  .subHeading {
+    font-size: 1rem; /* Reduced font size */
+    font-weight: 600;
+    /* margin-top: 1rem; */
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .paragraph {
+    font-size: 0.9rem; /* Reduced font size for paragraphs */
+    margin-bottom: 0.5rem; /* Reduced gap between paragraphs */
+  }
+  
+  .motionDiv {
+    background-color: #FCD34E;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem; /* Reduced gap between sections */
+  }
+  
+  .checkIcon {
+    font-size: 2rem; /* Reduced size of check icon */
+    color: green;
+    margin-right: 0.75rem;
+  }
+  
+  .video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    max-height: 600px; /* Increase video height on large screens */
+  }
+  

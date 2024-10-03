@@ -1,0 +1,48 @@
+.servicesContainer {
+    padding: 50px 0;
+  }
+  
+  .serviceCol {
+    margin-bottom: 30px;
+  }
+  
+  .serviceCard {
+    border: none;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .serviceCard:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .serviceVideoWrapper {
+    position: relative;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    overflow: hidden;
+    border-radius: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .serviceVideoIcon {
+    position: absolute;
+    top: 0;
+    left: 100px;
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+  }
+  
+  .serviceTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .serviceDescription {
+    font-size: 1rem;
+    color: #555;
+  }
+  

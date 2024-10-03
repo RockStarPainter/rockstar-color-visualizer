@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Home Decor Visualizer</title>
+    <script>
+        function uploadImage(event) {
+            event.preventDefault(); // Prevent the form from reloading the page
+
+            const formData = new FormData();
+            const fileField = document.querySelector('input[type="file"]');
+
+            formData.append('file', fileField.files[0]);
+
+            fetch('/upload/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.file_path) {
+                    document.getElementById('image-preview').src = data.file_path;
+                    document.getElementById('image-preview-container').style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">Home Decor Visualizer</div>
+            <ul class="nav-links">
+                <li><a href="#">Visualize Your Home</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Gallery</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content with Heading on Image -->
+    <section class="visualization">
+        <div class="room-image-container">
+            <img src="/static/image/main-image.jpg" alt="Room Example" class="room-image">
+            <div class="image-text">
+                <h1>Home Decor Visualizer</h1>
+                <p>See how your room looks with new colors by uploading an image and selecting a paint color.</p>
+            </div>
+        </div>
+    </section>
+    <div class="container" style="margin: 2em;">
+        <!-- Two-column layout for image and color picker -->
+        <section class="upload-section">
+            <h2>Upload a picture of your room</h2>
+            <form onsubmit="uploadImage(event)" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" id="file" accept="image/*" required>
+                <button type="submit" class="btn upload-btn">Upload</button>
+            </form>
+        </section>
+    
+        <div class="main-content two-columns" style="margin:2erm">
+            <!-- Image Preview Section -->
+            <section class="preview-section">
+                <h3>Preview:</h3>
+                <div id="image-preview-container" style="display: none;">
+                    <img id="image-preview" src="" alt="Uploaded Image Preview" class="image-preview">
+                </div>
+            </section>
+            <!-- Color Picker Section -->
+            <section class="color-picker">
+               
+                <h3>Select a Paint Color:</h3>
+                <div class="color-options">
+                    <button class="color-circle" style="background-color: #d9cdc3;"></button>
+                    <button class="color-circle" style="background-color: #9faab7;"></button>
+                    <button class="color-circle" style="background-color: #5c6e7b;"></button>
+                    <button class="color-circle" style="background-color: #aa9896;"></button>
+                    <button class="color-circle" style="background-color: #b5b9c5;"></button>
+                    <button class="color-circle" style="background-color: #9aa0a5;"></button>
+                    <button class="color-circle" style="background-color: #c0d4df;"></button>
+                    <button class="color-circle" style="background-color: #d4bfb8;"></button>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Home Decor Visualizer. All rights reserved.</p>
+    </footer>
+</body>
+</html>

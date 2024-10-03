@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Home Decor Visualizer</title>
+    <script>
+        // JavaScript to handle image upload and preview on canvas
+        function uploadImage(event) {
+            event.preventDefault(); // Prevent the form from reloading the page
+
+            const formData = new FormData();
+            const fileField = document.querySelector('input[type="file"]');
+
+            formData.append('file', fileField.files[0]);
+
+            // Upload the image using AJAX
+            fetch('/upload/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.file_path) {
+                    // Load the uploaded image onto the canvas
+                    loadImageOnCanvas(data.file_path);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function loadImageOnCanvas(imageSrc) {
+            const canvas = document.getElementById('imageCanvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+        
+            img.crossOrigin = "Anonymous"; // Prevent CORS issues
+        
+            img.onload = function() {
+                const maxWidth = 800;  // Set your desired max width here
+                const maxHeight = 600;  // Set your desired max height here
+        
+                let width = img.width;
+                let height = img.height;
+        
+                // Calculate the new dimensions while maintaining the aspect ratio
+                if (width > maxWidth) {
+                    height = height * (maxWidth / width);
+                    width = maxWidth;
+                }
+                if (height > maxHeight) {
+                    width = width * (maxHeight / height);
+                    height = maxHeight;
+                }
+        
+                // Resize the canvas to fit the image dimensions
+                canvas.width = width;
+                canvas.height = height;
+        
+                // Draw the resized image on the canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);  // Clear the canvas
+                ctx.drawImage(img, 0, 0, width, height);
+            };
+        
+            img.onerror = function() {
+                console.error("Failed to load the image at:", imageSrc);
+            };
+        
+            img.src = imageSrc;  // Set the image source
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo"><img src="/static/logo/logo.png" alt="Room Example" class="logo-image"></div>
+            <ul class="nav-links">
+                <li><a href="#">Visualize Your Home</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Gallery</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="visualization">
+        <div class="room-image-container">
+            <img src="/static/image/main-image.jpg" alt="Room Example" class="room-image">
+            <div class="image-text">
+                <h1>Rockstar Painting Color Studio </h1>
+                <p>See how your home looks with new colors by uploading an image and selecting a paint color.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="container" style="margin: 2em;">
+        <section class="upload-section">
+            <h2>Upload a picture of your room</h2>
+            <form onsubmit="uploadImage(event)" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" id="file" accept="image/*" required>
+                <button type="submit" class="btn upload-btn">Upload</button>
+            </form>
+        </section>
+        <div class="main-content two-columns" style="margin:2erm">
+            <!-- Image Preview Section -->
+            <section class="preview-section">
+                <div id="image-preview-container">
+                    <!-- The canvas where the uploaded image will be displayed -->
+                    <canvas id="imageCanvas" class="image-canvas" style="margin-top: 7em;border-radius: 5px;"></canvas>
+                </div>
+            </section>
+            <!-- Color Picker Section -->
+            <section class="color-picker">
+                <h3>Select a Paint Color:</h3>
+                <div class="color-options">
+                    <button class="color-circle button" style="background-color: #FF0000;" onclick="showColors('red')">Red</button>
+                    <button class="color-circle button" style="background-color: #FFA500;" onclick="showColors('orange')">Orange</button>
+                    <button class="color-circle button" style="background-color: #FFFF00;" onclick="showColors('yellow')">Yellow</button>
+                    <button class="color-circle button" style="background-color: #008000;" onclick="showColors('green')">Green</button>
+                    <button class="color-circle button" style="background-color: #0000FF;" onclick="showColors('blue')">Blue</button>
+                    <button class="color-circle button" style="background-color: #A020F0;" onclick="showColors('purple')">Purple</button>
+                    <button class="color-circle button" style="background-color: #d0ba98;" onclick="showColors('neutral')">Neutral</button>
+                    <button class="color-circle button" style="background-color: #ffffff;" onclick="showColors('white')">White</button>
+                </div>
+                <div id="palette-container"></div>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Home Decor Visualizer. All rights reserved.</p>
+    </footer>
+
+
+    <script>
+        const apiUrl = 'http://localhost:8000/colors';  // Update the URL if needed for deployment
+
+        // Function to fetch and display the colors for a given main color category
+        function showColors(mainColor) {
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const colors = data.colors[mainColor];
+                    const paletteContainer = document.getElementById('palette-container');
+                    paletteContainer.innerHTML = '';  // Clear previous palettes
+
+                    // Create color boxes and append them to the container
+                    colors.forEach(color => {
+                        const colorBox = document.createElement('div');
+                        colorBox.className = 'color-box';
+                        colorBox.style.backgroundColor = color.hex;
+                        colorBox.innerHTML = `<span class="color-hex">${color.code}</span><span class="color-name">${color.name}</span>`;
+                        paletteContainer.appendChild(colorBox);
+                    });
+                })
+                .catch(error => console.error('Error loading color data:', error));
+        }
+    </script>
+</body>
+</html>

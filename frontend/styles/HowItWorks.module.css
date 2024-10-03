@@ -1,0 +1,60 @@
+.howItWorksSection {
+    text-align: center;
+    padding: 50px 0;
+    background-color: #f9f9f9;
+  }
+  
+  .sectionTitle {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: #323232;
+  }
+  
+  .stepsContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap; /* Ensures responsiveness */
+  }
+  
+  .step {
+    flex: 1;
+    max-width: 300px;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .icon {
+    font-size: 4rem;
+    color: #719E37; /* Green accent color */
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+  }
+  
+  .icon:hover {
+    transform: scale(1.1);
+  }
+  
+  .stepTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .stepDescription {
+    font-size: 1rem;
+    color: #555;
+    margin: 0 auto;
+    max-width: 200px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .stepsContainer {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  

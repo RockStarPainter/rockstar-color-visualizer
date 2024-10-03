@@ -1,0 +1,110 @@
+/* Testimonial Section */
+.testimonialSection {
+  padding: 3rem 1rem;
+  text-align: center;
+  background-color: #fafbfd;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 4rem;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden; /* Prevent any content overflow */
+}
+
+/* Carousel Container */
+.carousel {
+  width: 100%;
+  overflow: hidden; /* Ensure no overflow */
+  position: relative;
+  max-width: 800px; /* Limit the width for better layout */
+  margin: 0 auto; /* Center the carousel */
+}
+
+/* Carousel Inner */
+.carouselInner {
+  display: flex;
+  transition: transform 0.5s ease-in-out; /* Smooth sliding transition */
+  will-change: transform; /* Optimize for performance */
+}
+
+/* Testimonial Card */
+.testimonialCard {
+  flex: 0 0 100%; /* Each testimonial takes full width of the container */
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  margin: 0 15px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  transition: opacity 0.5s ease-in-out; /* Smooth fade effect */
+}
+
+/* Testimonial Text */
+.testimonialText {
+  font-size: 1.25rem;
+  color: #333;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  font-family: "Lato", sans-serif;
+}
+
+/* Testimonial Author */
+.testimonialAuthor {
+  font-size: 1.1rem;
+  color: #666666;
+  font-weight: bold;
+  text-align: right;
+  margin-top: 1rem;
+}
+
+/* Dots for pagination */
+.dotContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background: #ddd;
+  border-radius: 50%;
+  margin: 0 8px;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.activeDot {
+  background: #719e37; /* Active dot color to match the theme */
+}
+
+/* Hover effect for dots */
+.dot:hover {
+  background: #666666;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .testimonialCard {
+    padding: 1.5rem;
+    margin: 0 10px;
+  }
+
+  .testimonialText {
+    font-size: 1.1rem;
+  }
+
+  .testimonialAuthor {
+    font-size: 1rem;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+}
