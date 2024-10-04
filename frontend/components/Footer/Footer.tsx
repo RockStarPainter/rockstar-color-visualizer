@@ -17,7 +17,7 @@ import {
 } from "react-icons/fa"; // Added FaPalette for Color Visualizer
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons"; // Removed faInfoCircle and faCog
-import styles from "./footer.module.css";
+import styles from "./Footer.module.css";
 
 const Footer = () => {
   const year = new Date().getFullYear();
