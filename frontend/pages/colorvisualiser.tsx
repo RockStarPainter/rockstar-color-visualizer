@@ -537,30 +537,29 @@ const ColorVisualiser = (props: any) => {
                 Try One of Our Preloaded Images
               </StyledTypography>
 
-              <div className="row justify-content-center gap-4">
-                {preimage.map((image: any, index: number) => {
-                  return (
-                    <Card
-                      key={index}
-                      className={`col-10 col-md-5 col-lg-3 ${styles.projectcard}`}
-                      onClick={() => handlePreloadedImage(image)}
-                    >
-                      <div className={styles.imageWrapper}>
-                        <img
-                          src={image.image}
-                          alt={image.name}
-                          className={styles.projectImg}
-                        />
-                      </div>
-                      <Card.ImgOverlay className={styles.overlay}>
-                        <Card.Title className={styles.cardtitle}>
-                          {image.name}
-                        </Card.Title>
-                      </Card.ImgOverlay>
-                    </Card>
-                  );
-                })}
-              </div>
+              
+
+              <div className={styles.preloadedGrid}>
+      {preimage.map((image, index) => (
+        <div
+          key={index}
+          onClick={() => handlePreloadedImage(image)}
+          className={styles.preloadedCard}
+        >
+          <div className={styles.preloadedImageWrapper}>
+            <img
+              src={image.image}
+              alt={image.name}
+              className={styles.preloadedImage}
+            />
+          </div>
+          <div className={styles.preloadedCardContent}>
+            <h4 className={styles.preloadedCardTitle}>{image.name}</h4>
+          </div>
+        </div>
+      ))}
+    </div>
+
             </Container>
           </div>
         )}

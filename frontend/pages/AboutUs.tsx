@@ -49,7 +49,7 @@ const AboutUs: React.FC = () => {
 
   return (
     <section ref={sectionRef} className={styles.section}>
-      <SectionTitle variant="h2">About Us</SectionTitle>
+      <h2 className={styles.AboutUsHeading}>About Us</h2>
       <div className={styles.container}>
         {/* Text Section */}
         <motion.div

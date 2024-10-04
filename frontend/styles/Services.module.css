@@ -1,48 +1,56 @@
 .servicesContainer {
-    padding: 50px 0;
-  }
-  
-  .serviceCol {
-    margin-bottom: 30px;
-  }
-  
-  .serviceCard {
-    border: none;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .serviceCard:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  }
-  
-  .serviceVideoWrapper {
-    position: relative;
-    padding-top: 56.25%; /* 16:9 Aspect Ratio */
-    overflow: hidden;
-    border-radius: 15px;
-    margin-bottom: 15px;
-  }
-  
-  .serviceVideoIcon {
-    position: absolute;
-    top: 0;
-    left: 100px;
-    width: 50%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 15px;
-  }
-  
-  .serviceTitle {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .serviceDescription {
-    font-size: 1rem;
-    color: #555;
-  }
-  
+  padding: 50px 0;
+  background-color: #f9f9f9;
+}
+
+.serviceCol {
+  margin-bottom: 30px;
+}
+
+.serviceCard {
+  border: 2px solid #58AB05; /* Adds a green border to the cards */
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.serviceCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(88, 171, 5, 0.5); /* Green shadow on hover */
+}
+
+.serviceVideoWrapper {
+  position: relative;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  overflow: hidden;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.serviceVideoIcon {
+  position: absolute;
+  top: 0;
+  left: 100px;
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+/* Background color added to the text area */
+.serviceCardBody {
+  background-color: #58AB05; /* Green background for the text section */
+  padding: 20px;
+  /* border-radius: 0 0 15px 15px; Rounded corners for the bottom of the card */
+}
+
+.serviceTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: white; /* Change text color to white for contrast */
+}
+
+.serviceDescription {
+  font-size: 1rem;
+  color: white; /* Change text color to white for contrast */
+}
