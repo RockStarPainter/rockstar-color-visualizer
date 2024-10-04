@@ -335,3 +335,70 @@
   ); /* Adjust to taste */
   z-index: 3; /* Ensure the overlay is on top of the video */
 }
+.preloadedGrid {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 50px 0;
+}
+
+.preloadedCard {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  width: calc(25% - 16px); /* Default for 4 cards per row */
+  margin-bottom: 16px;
+}
+
+.preloadedCard:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.preloadedImageWrapper {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.preloadedImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.preloadedCardContent {
+  padding: 15px;
+  text-align: center;
+}
+
+.preloadedCardTitle {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  margin: 15px 0;
+}
+
+/* Responsive styling */
+@media (max-width: 1200px) {
+  .preloadedCard {
+    width: calc(33.33% - 16px); /* 3 cards per row for tablet/large mobile screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .preloadedCard {
+    width: calc(50% - 16px); /* 2 cards per row for smaller devices */
+  }
+}
+
+@media (max-width: 480px) {
+  .preloadedCard {
+    width: calc(100% - 16px); /* 1 card per row for very small screens */
+  }
+}

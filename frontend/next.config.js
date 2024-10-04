@@ -7,7 +7,6 @@ const withPWA = require("@ducanh2912/next-pwa").default({
   aggressiveFrontEndNavCaching: true,
   cacheStartUrl: true,
   dynamicStartUrl: true,
-
   reloadOnOnline: true,
   swcMinify: true,
   disable: false,
@@ -15,10 +14,12 @@ const withPWA = require("@ducanh2912/next-pwa").default({
     disableDevLogs: true,
   },
 });
+
+// Merging Webpack and PWA config
 module.exports = withPWA({
   reactStrictMode: true,
   swcMinify: true,
-  // output: "export",
+
   images: {
     unoptimized: true,
     remotePatterns: [
@@ -33,8 +34,14 @@ module.exports = withPWA({
     ],
   },
 
-  //distDir: 'build',
-  webpack: (config, {}) => {
+  webpack: (config, { isServer }) => {
+    // Add custom SVG loader configuration using @svgr/webpack
+    config.module.rules.push({
+      test: /\.svg$/,   // Process SVGs as React components
+      use: ['@svgr/webpack'],
+    });
+
+    // Add node polyfills and custom plugin handling
     config.resolve.extensions.push(".ts", ".tsx");
     config.resolve.fallback = { fs: false };
 

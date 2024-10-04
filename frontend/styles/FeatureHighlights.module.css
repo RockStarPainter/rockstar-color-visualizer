@@ -1,63 +1,71 @@
-.featureSection {
-    padding: 60px 0;
-    background-color: #f9f9f9;
+.featureHighlightsSection {
+  text-align: center;
+  padding: 50px 0;
+  background-color: #f9f9f9;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #323232;
+}
+
+.stepsContainer {
+  display: flex;
+  flex-wrap: wrap; /* Allows wrapping to the next line */
+   /* Evenly distributes the items in a row */
+  gap: 20px; /* Adds space between the items */
+}
+
+.step {
+  flex: 1 1 30%; /* Ensures three items per row */
+  max-width: 30%; /* Restricts each item to 30% of the row */
+  text-align: center;
+  padding: 20px;
+}
+
+.icon {
+  font-size: 4rem; /* Adjust to the size you want all icons to be */
+  color: #719E37; /* Green accent color */
+  margin-bottom: 20px;
+  width: 4rem; /* Ensure width is set for SVGs */
+  height: 4rem; /* Ensure height is set for SVGs */
+  transition: transform 0.3s ease;
+}
+
+.icon:hover {
+  transform: scale(1.1);
+}
+
+.stepTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.stepDescription {
+  font-size: 1rem;
+  color: #555;
+  margin: 0 auto;
+  max-width: 200px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .step {
+    flex: 1 1 45%; /* On medium screens, display two items per row */
+    max-width: 45%;
   }
-  
-  .splitScreen {
-    display: flex;
+}
+
+@media (max-width: 768px) {
+  .stepsContainer {
+    flex-direction: column; /* Stacks items vertically on smaller screens */
     align-items: center;
-    margin-bottom: 50px;
   }
-  
-  .leftCol {
-    text-align: left;
+
+  .step {
+    max-width: 100%; /* Ensures full width on smaller screens */
   }
-  
-  .rightCol {
-    text-align: center;
-  }
-  
-  .featureVideo {
-    width: 100%; /* Full width */
-    max-width: 600px; /* Fix the max width */
-    height: 350px; /* Fix the height */
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  .featuresTitle {
-    font-size: 2rem;
-    margin-bottom: 20px;
-  }
-  
-  .featuresList {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .featuresList li {
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-  }
-  
-  .featuresList strong {
-    color: #719e37;
-  }
-  
-  .paletteSection {
-    margin-top: 50px;
-  }
-  
-  .paletteTitle {
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  
-  .carouselImage {
-    border-radius: 10px;
-    width: 100%;
-    height: auto;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
-  
+}

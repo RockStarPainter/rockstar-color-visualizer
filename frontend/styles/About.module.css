@@ -3,10 +3,17 @@
     background-color: white;
     padding: 1.5rem 0;
   }
+  .AboutUsHeading{
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #58AB05;
+    margin-bottom: 20px;
+    text-align: center;
+  }
   
   .container {
     margin: 0 auto;
-    padding-left: 1rem;
+    padding-left: 3rem;
     padding-right: 1rem;
     display: flex;
     flex-direction: column-reverse;
@@ -51,7 +58,7 @@
   }
   
   .paragraph {
-    font-size: 0.9rem; /* Reduced font size for paragraphs */
+    font-size: 1rem; /* Reduced font size for paragraphs */
     margin-bottom: 0.5rem; /* Reduced gap between paragraphs */
   }
   
