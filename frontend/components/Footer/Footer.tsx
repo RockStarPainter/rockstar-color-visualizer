@@ -63,6 +63,7 @@ const Footer = () => {
   }, [controls]);
 
   return (
+    <>
     <motion.footer
       ref={footerRef}
       initial="hidden"
@@ -83,15 +84,7 @@ const Footer = () => {
               quality={100}
             />
           </Link>
-          <Image
-          style={{marginTop:"20%"}}
-            src="/images/rockstar-footer-image.png"
-            alt="Second Logo"
-            width={192}
-            height={64}
-            className={`${styles.image} ${styles.secondImage}`}
-            quality={100}
-          />
+          
         </motion.div>
 
         {/* Center Section: Features */}
@@ -190,9 +183,19 @@ const Footer = () => {
 
       <div className={styles.footerInfo}>
         <p className={styles.company}>Rockstar Painting</p>
+        <Image
+         
+            src="/images/rockstar-footer-image.png"
+            alt="Second Logo"
+            width={100}
+            height={64}
+            className={` `}
+            quality={100}
+          />
         <p className={styles.copyright}>Copyright {year}</p>
       </div>
     </motion.footer>
+    </>
   );
 };
 

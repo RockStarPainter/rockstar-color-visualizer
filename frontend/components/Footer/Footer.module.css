@@ -1,5 +1,5 @@
 .footer {
-  padding: 2rem;
+  padding: 1rem;
   color: #58AB05;
   overflow: hidden;
 }
@@ -133,7 +133,7 @@
 .footerInfo {
   display: flex;
   justify-content: space-between;
-  margin-top: 2rem;
+  margin-top: 1rem;
   font-size: 0.875rem;
 }
 
@@ -162,9 +162,4 @@
   color: black;  /* Change icon color on hover */
 }
 /* Responsive for mobile view */
-@media (max-width: 768px) {
-  .secondImage {
-    margin-top: 10%;
-    padding-left: 8%;
-  }
-}
+
