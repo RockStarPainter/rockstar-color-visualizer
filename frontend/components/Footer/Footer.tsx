@@ -112,11 +112,11 @@ const Footer = () => {
           <h3 className={styles.heading}>Contact Us</h3>
           <div className={styles.contactItem}>
             <FaPhone className={styles.icon} />
-            <a href="tel:+18134269257"> (720) 771-5791</a>
+            <a href="tel:+7207715791"> (720) 771-5791</a>
           </div>
           <div className={styles.contactItem}>
             <FaEnvelope className={styles.icon} />
-            <a href="mailto:example@example.com">rockstarpainting33@gmail.com</a>
+            <a href="mailto:rockstarpainting33@gmail.com">rockstarpainting33@gmail.com</a>
           </div>
           <div className={styles.contactItem}>
             <FaClock className={styles.icon} />
