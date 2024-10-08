@@ -150,6 +150,7 @@ const ColorVisualiser = (props: any) => {
       console.log(e);
     }
   };
+  
   const loadImage = async (imageFile: any) => {
     try {
       const img = document.createElement("img"); // create a new image object
