@@ -3439,6 +3439,743 @@ export const paints = [
           hex: "#A2A175",
         },
       ],
+      blue: [
+        {
+          name: "White Rain",
+          code: "708",
+          hex: "#C8D8D1",
+        },
+        {
+          name: "Palladian Blue",
+          code: "HC-144",
+          hex: "#C1D1C9",
+        },
+        {
+          name: "Bali",
+          code: "702",
+          hex: "#BDCEC5",
+        },
+        {
+          name: "Wythe Blue",
+          code: "HC-143",
+          hex: "#AABEB4",
+        },
+        {
+          name: "Stratton Blue",
+          code: "HC-142",
+          hex: "#93A9A0",
+        },
+        {
+          name: "Azores",
+          code: "AF-495",
+          hex: "#89A098",
+        },
+        {
+          name: "Cedar Mountains",
+          code: "706",
+          hex: "#71887F",
+        },
+        {
+          name: "Woodlawn Blue",
+          code: "HC-147",
+          hex: "#C1D0CA",
+        },
+        {
+          name: "Sylvan Mist",
+          code: "CSP-740",
+          hex: "#B7C6BE",
+        },
+        {
+          name: "Rhine River",
+          code: "689",
+          hex: "#A4BBB6",
+        },
+        {
+          name: "Grenada Villa",
+          code: "690",
+          hex: "#8AA39C",
+        },
+        {
+          name: "Sioux Falls",
+          code: "705",
+          hex: "#7F958E",
+        },
+        {
+          name: "Dartsmouth Green",
+          code: "691",
+          hex: "#748E88",
+        },
+        {
+          name: "Tropical Oasis",
+          code: "CSP-710",
+          hex: "#597D7D",
+        },
+        {
+          name: "Seacliff Heights",
+          code: "688",
+          hex: "#BACDC8",
+        },
+        {
+          name: "Heavenly Blue",
+          code: "709",
+          hex: "#B7CCC7",
+        },
+        {
+          name: "Sea Star",
+          code: "2123-30",
+          hex: "#889E9E",
+        },
+        {
+          name: "Mystic Lake",
+          code: "CSP-745",
+          hex: "#8A9F9B",
+        },
+        {
+          name: "Atmospheric",
+          code: "AF-500",
+          hex: "#8A9F9B",
+        },
+        {
+          name: "Caribbean Teal",
+          code: "2123-20",
+          hex: "#627C7A",
+        },
+        {
+          name: "Mediterranean Teal",
+          code: "2123-10",
+          hex: "#465956",
+        },
+        {
+          name: "Whispering Spring",
+          code: "2136-70",
+          hex: "#DCE7E6",
+        },
+        {
+          name: "Annapolis Green",
+          code: "687",
+          hex: "#C1D2CE",
+        },
+        {
+          name: "Colorado Gray",
+          code: "2136-50",
+          hex: "#9EB5B8",
+        },
+        {
+          name: "Aegean Teal",
+          code: "2136-40",
+          hex: "#56858C",
+        },
+        {
+          name: "Baltic Sea",
+          code: "CSP-680",
+          hex: "#56858C",
+        },
+        {
+          name: "Fair Isle Blue",
+          code: "CSP-715",
+          hex: "#496E73",
+        },
+        {
+          name: "Yorktowne Green",
+          code: "HC-133",
+          hex: "#465A5D",
+        },
+        {
+          name: "Ocean Air",
+          code: "2123-50",
+          hex: "#D3E1E1",
+        },
+        {
+          name: "Gossamer Blue",
+          code: "2123-40",
+          hex: "#B3C8C8",
+        },
+        {
+          name: "Kensington Green",
+          code: "710",
+          hex: "#9AB9B5",
+        },
+        {
+          name: "Boca Raton Blue",
+          code: "711",
+          hex: "#82A3A3",
+        },
+        {
+          name: "Fort Pierce Green",
+          code: "712",
+          hex: "#6F8F8E",
+        },
+        {
+          name: "Polished Slate",
+          code: "713",
+          hex: "#4E6C6B",
+        },
+        {
+          name: "Olympus Green",
+          code: "679",
+          hex: "#3D585B",
+        },
+        {
+          name: "Iced Green",
+          code: "673",
+          hex: "#C6DEDA",
+        },
+        {
+          name: "Spring Sky",
+          code: "674",
+          hex: "#B7D6D3",
+        },
+        {
+          name: "Thunderbird",
+          code: "675",
+          hex: "#A6CBC9",
+        },
+        {
+          name: "Spirit in the Sky",
+          code: "676",
+          hex: "#8BB9BA",
+        },
+        {
+          name: "Florida Keys Blue",
+          code: "2050-40",
+          hex: "#6DA9A7",
+        },
+        {
+          name: "Intercoastal Green",
+          code: "672",
+          hex: "#2E7572",
+        },
+        {
+          name: "Deep Sea Green",
+          code: "735",
+          hex: "#255456",
+        },
+        {
+          name: "Spring Mint",
+          code: "2040-70",
+          hex: "#C4E3E1",
+        },
+        {
+          name: "Arctic Blue",
+          code: "2050-60",
+          hex: "#C4E3E1",
+        },
+        {
+          name: "Waterfall",
+          code: "2050-50",
+          hex: "#9DCDCB",
+        },
+        {
+          name: "Majestic Blue",
+          code: "2051-40",
+          hex: "#629FA0",
+        },
+        {
+          name: "Casco Bay",
+          code: "2051-30",
+          hex: "#306E6D",
+        },
+        {
+          name: "Mallard Green",
+          code: "2053-10",
+          hex: "#294E4F",
+        },
+        {
+          name: "Pacific Sea Teal",
+          code: "2049-10",
+          hex: "#274043",
+        },
+        {
+          name: "Barely Teal",
+          code: "2048-70",
+          hex: "#D3F1EE",
+        },
+        {
+          name: "Maritime Blue",
+          code: "667",
+          hex: "#B2DDD6",
+        },
+        {
+          name: "Lake Victoria",
+          code: "668",
+          hex: "#87C5C2",
+        },
+        {
+          name: "Oceanic Teal",
+          code: "669",
+          hex: "#87C5C2",
+        },
+        {
+          name: "Gulf Stream",
+          code: "670",
+          hex: "#68B1AD",
+        },
+        {
+          name: "Soft Spruce",
+          code: "671",
+          hex: "#3F9793",
+        },
+        {
+          name: "Oasis Blue",
+          code: "2049-20",
+          hex: "#225A5D",
+        },
+        {
+          name: "Oceanfront",
+          code: "660",
+          hex: "#ADE1DA",
+        },
+        {
+          name: "Caribbean Cool",
+          code: "661",
+          hex: "#ADE1DA",
+        },
+        {
+          name: "Tropicana Cabana",
+          code: "2048-50",
+          hex: "#7ED5D4",
+        },
+        {
+          name: "Teal Tone",
+          code: "663",
+          hex: "#43BBB6",
+        },
+        {
+          name: "Gulf Shores",
+          code: "665",
+          hex: "#ADE1DA",
+        },
+        {
+          name: "Tropical Turquoise",
+          code: "2052-30",
+          hex: "#00706C",
+        },
+        {
+          name: "Beau Green",
+          code: "2054-20",
+          hex: "#0A565A",
+        },
+        {
+          name: "Icing on the Cake",
+          code: "2049-70",
+          hex: "#DCF0ED",
+        },
+        {
+          name: "Jamaican Aqua",
+          code: "2048-60",
+          hex: "#B3E8E6",
+        },
+        {
+          name: "Mexicali Turquoise",
+          code: "662",
+          hex: "#B3E8E6",
+        },
+        {
+          name: "Poolside Blue",
+          code: "2048-40",
+          hex: "#1FB9B4",
+        },
+        {
+          name: "Poseidon",
+          code: "664",
+          hex: "#00A6A1",
+        },
+        {
+          name: "Aruba Blue",
+          code: "2048-30",
+          hex: "#00A6A1",
+        },
+        {
+          name: "Dark Teal",
+          code: "2053-20",
+          hex: "#255A5E",
+        },
+        {
+          name: "Blue Diamond",
+          code: "736",
+          hex: "#B6E2E1",
+        },
+        {
+          name: "Surf City",
+          code: "731",
+          hex: "#B6E2E1",
+        },
+        {
+          name: "Peacock Blue",
+          code: "2049-40",
+          hex: "#61ACAE",
+        },
+        {
+          name: "Blue Spa",
+          code: "2052-40",
+          hex: "#499EA1",
+        },
+        {
+          name: "Teal Ocean",
+          code: "2049-30",
+          hex: "#499EA1",
+        },
+        {
+          name: "Largo Teal",
+          code: "742",
+          hex: "#23777B",
+        },
+        {
+          name: "Tucson Teal",
+          code: "2056-10",
+          hex: "#0B464E",
+        },
+        {
+          name: "Jack Frost",
+          code: "729",
+          hex: "#C1E7E5",
+        },
+        {
+          name: "San Clemente Teal",
+          code: "730",
+          hex: "#AAE0DF",
+        },
+        {
+          name: "Clearlake",
+          code: "738",
+          hex: "#AAE0DF",
+        },
+        {
+          name: "Burbank Blue",
+          code: "732",
+          hex: "#68C1C3",
+        },
+        {
+          name: "Palm Coast Teal",
+          code: "733",
+          hex: "#3AA9A9",
+        },
+        {
+          name: "Tropical Teal",
+          code: "734",
+          hex: "#3AA9A9",
+        },
+        {
+          name: "Jade Garden",
+          code: "2056-20",
+          hex: "#00636C",
+        },
+        {
+          name: "Sonoma Skies",
+          code: "737",
+          hex: "#A1D9DB",
+        },
+        {
+          name: "Spectra Blue",
+          code: "2049-50",
+          hex: "#98CED0",
+        },
+        {
+          name: "Un-Teal We Meet Again",
+          code: "739",
+          hex: "#98CED0",
+        },
+        {
+          name: "Harbor Side Blue",
+          code: "740",
+          hex: "#5CB5B9",
+        },
+        {
+          name: "San Jose Blue",
+          code: "741",
+          hex: "#3B98A2",
+        },
+        {
+          name: "In the Tropics",
+          code: "CSP-640",
+          hex: "#3B98A2",
+        },
+        {
+          name: "North Sea Green",
+          code: "2053-30",
+          hex: "#D6E7E2",
+        },
+        {
+          name: "Sweet Dreams",
+          code: "847",
+          hex: "#D6E7E2",
+        },
+        {
+          name: "Dolphin's Cove",
+          code: "722",
+          hex: "#BCDDDD",
+        },
+        {
+          name: "Sea Isle",
+          code: "751",
+          hex: "#D6E7E2",
+        },
+        {
+          name: "Tranquil Blue",
+          code: "2051-50",
+          hex: "#A5D7DC",
+        },
+        {
+          name: "Seaside Resort",
+          code: "725",
+          hex: "#6FAAB4",
+        },
+        {
+          name: "Blue Lake",
+          code: "2053-40",
+          hex: "#6FAAB4",
+        },
+        {
+          name: "Galápagos Turquoise",
+          code: "2057-20",
+          hex: "#1F5763",
+        },
+        {
+          name: "Seabrook",
+          code: "750",
+          hex: "#B7DFE2",
+        },
+        {
+          name: "Blue Seafoam",
+          code: "2056-60",
+          hex: "#AFE3E9",
+        },
+        {
+          name: "Baby Boy Blue",
+          code: "2056-50",
+          hex: "#7ACFD9",
+        },
+        {
+          name: "Cool Aqua",
+          code: "2056-40",
+          hex: "#18AFBB",
+        },
+        {
+          name: "Surf Blue",
+          code: "2056-30",
+          hex: "#00808B",
+        },
+        {
+          name: "Venezuelan Sea",
+          code: "2054-30",
+          hex: "#006B76",
+        },
+        {
+          name: "Varsity Blues",
+          code: "756",
+          hex: "#226977",
+        },
+        {
+          name: "Icy Moon Drops",
+          code: "2056-70",
+          hex: "#226977",
+        },
+        {
+          name: "Serenity",
+          code: "2055-60",
+          hex: "#AEE1EA",
+        },
+        {
+          name: "Fairy Tale Blue",
+          code: "2055-50",
+          hex: "#78CBDA",
+        },
+        {
+          name: "Bahaman Sea Blue",
+          code: "2055-40",
+          hex: "#43BBB6",
+        },
+        {
+          name: "Meridian Blue",
+          code: "761",
+          hex: "#0493A7",
+        },
+        {
+          name: "Caribbean Blue Water",
+          code: "2055-30",
+          hex: "#00706C",
+        },
+        {
+          name: "Pacific Ocean Blue",
+          code: "2055-20",
+          hex: "#005F6F",
+        },
+        {
+          name: "Innocence",
+          code: "2055-70",
+          hex: "#D1EFF1",
+        },
+        {
+          name: "California Breeze",
+          code: "757",
+          hex: "#9ED9E2",
+        },
+        {
+          name: "Rhythm and Blues",
+          code: "758",
+          hex: "#8AD0DB",
+        },
+        {
+          name: "Madison Avenue",
+          code: "759",
+          hex: "#6BC0CE",
+        },
+        {
+          name: "Baltimore Sky",
+          code: "760",
+          hex: "#45ADBE",
+        },
+        {
+          name: "Pacific Palisades",
+          code: "762",
+          hex: "#3C6C7A",
+        },
+        {
+          name: "Coat of Arms",
+          code: "763",
+          hex: "#3C6C7A",
+        },
+        {
+          name: "Forget Me Not",
+          code: "2049-60",
+          hex: "#C0E3E3",
+        },
+        {
+          name: "Spring Rain",
+          code: "723",
+          hex: "#C0E3E3",
+        },
+        {
+          name: "Pool Blue",
+          code: "2052-50",
+          hex: "#85C1C8",
+        },
+        {
+          name: "How Blue Am I?",
+          code: "752",
+          hex: "#84C5CE",
+        },
+        {
+          name: "Santa Clara",
+          code: "753",
+          hex: "#84C5CE",
+        },
+        {
+          name: "Wilmington Spruce",
+          code: "754",
+          hex: "#355357",
+        },
+        {
+          name: "Calypso Blue",
+          code: "727",
+          hex: "#E1E1E1",
+        },
+        {
+          name: "Ice Blue",
+          code: "2052-70",
+          hex: "#D5EBEA",
+        },
+        {
+          name: "China Blue",
+          code: "2052-60",
+          hex: "#B3DBDE",
+        },
+        {
+          name: "Picture Perfect",
+          code: "743",
+          hex: "#B9DCE1",
+        },
+        {
+          name: "Indigo",
+          code: "744",
+          hex: "#A1CFD7",
+        },
+        {
+          name: "Peacock Feathers",
+          code: "724",
+          hex: "#88BDC8",
+        },
+        {
+          name: "Blue Lagoon",
+          code: "2054-40",
+          hex: "#409CAC",
+        },
+        {
+          name: "Salzburg Blue",
+          code: "755",
+          hex: "#2C8392",
+        },
+        {
+          name: "Morning Sky Blue",
+          code: "2053-70",
+          hex: "#D6EAEC",
+        },
+        {
+          name: "Bird's Egg",
+          code: "2051-60",
+          hex: "#BEDCDD",
+        },
+        {
+          name: "Tear Drop Blue",
+          code: "2053-60",
+          hex: "#BEDCDD",
+        },
+        {
+          name: "Blue Rapids",
+          code: "745",
+          hex: "#95C8D2",
+        },
+        {
+          name: "Spa Day",
+          code: "CSP-635",
+          hex: "#5EA3B1",
+        },
+        {
+          name: "Rendezvous Bay",
+          code: "726",
+          hex: "#50939D",
+        },
+        {
+          name: "Teal",
+          code: "2055-10",
+          hex: "#144552",
+        },
+        {
+          name: "Crystal Blue",
+          code: "2051-70",
+          hex: "#D8EBE9",
+        },
+        {
+          name: "Crystal Springs",
+          code: "764",
+          hex: "#B7DFE5",
+        },
+        {
+          name: "Skyscraper",
+          code: "765",
+          hex: "#B7DFE5",
+        },
+        {
+          name: "Delano Waters",
+          code: "766",
+          hex: "#A0D6E2",
+        },
+        {
+          name: "Seaside Blue",
+          code: "2054-50",
+          hex: "#80C0CF",
+        },
+        {
+          name: "Naples Blue",
+          code: "2057-30",
+          hex: "#136B7B",
+        },
+        {
+          name: "Dark Harbor",
+          code: "CSP-720",
+          hex: "#1E4850",
+        },
+      ],
     },
   },
 

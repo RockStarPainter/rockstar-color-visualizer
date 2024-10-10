@@ -4,12 +4,10 @@ import ImageSelection from "./ImageSelection";
 import ColorSelection from "./ColorSelection";
 import VisualizeRoom from "./VisualizeRoom";
 import OrderPaints from "./OrderPaints";
-import { FaArrowLeft } from "react-icons/fa"; // Import the icon
 
 function ColorVisualizer() {
   const [currentStep, setCurrentStep] = useState(0);
   const [initialMasks, setInitialMasks] = useState<any>(); // State to trigger mask reset
-  const [maskedImageWithColors, setMaskedImageWithColors] = useState<any>(); // State to trigger mask reset
 
   // Function to move to the next step
   const nextStep = () => {
@@ -22,7 +20,7 @@ function ColorVisualizer() {
     if (currentStep > 0) setCurrentStep(currentStep - 1);
   };
 
-  // Function to move to a specific step
+  // Function to move to the previous step
   const moveToStep = (step: number) => {
     if (currentStep > 0 && currentStep < stepList.length - 1) setCurrentStep(step);
   };
@@ -32,7 +30,10 @@ function ColorVisualizer() {
       label: "Select Image",
       content: (
         <div className="">
-          <ImageSelection nextStep={nextStep} setInitialMasks={setInitialMasks} />
+          <ImageSelection
+            nextStep={nextStep}
+            setInitialMasks={setInitialMasks}
+          />
         </div>
       ),
     },
@@ -40,12 +41,6 @@ function ColorVisualizer() {
       label: "Select Colors",
       content: (
         <div className="pt-2">
-          {/* Add Previous button */}
-          <button onClick={prevStep} className="btn btn-secondary mt-4 ms-2">
-            <FaArrowLeft className="me-2" />
-            Back
-          </button>
-
           <ColorSelection nextStep={nextStep} />
         </div>
       ),
@@ -54,37 +49,18 @@ function ColorVisualizer() {
       label: "Visualize Room",
       content: (
         <div className="mt-4">
-          
-          {/* Add Previous button */}
-          <button onClick={prevStep} className="btn btn-secondary mt-4">
-            <FaArrowLeft className="me-2" />
-            Back
-          </button>
-
           <VisualizeRoom
             nextStep={nextStep}
             prevStep={prevStep}
             moveToStep={moveToStep}
             initialMasks={initialMasks}
-            maskedImageWithColors={maskedImageWithColors}
-            setMaskedImageWithColors={setMaskedImageWithColors}
           />
         </div>
       ),
     },
     {
       label: "Order Paint",
-      content: (
-        <div>
-          {/* Add Previous button */}
-          <button onClick={prevStep} className="btn btn-secondary mt-4 ms-3">
-            <FaArrowLeft className="me-2" />
-            Back
-          </button>
-
-          <OrderPaints nextStep={nextStep} maskedImageWithColors={maskedImageWithColors} />
-        </div>
-      ),
+      content: <OrderPaints nextStep={nextStep} />,
     },
   ];
 

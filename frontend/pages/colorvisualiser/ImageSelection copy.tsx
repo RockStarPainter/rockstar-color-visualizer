@@ -1,38 +1,42 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Container, Modal } from "react-bootstrap";
+import Image from "next/image";
 import axios from "axios";
+import FileUpload from "../../components/FileUpload/FileUpload";
 import AppContext from "../../utils/hooks/createContext";
 import { handleImageScale } from "../../utils/helpers/scaleHelper";
 import undoRedo from "../../utils/helpers/linkedlist";
 import { modelScaleProps } from "../../utils/helpers/Interfaces";
+import { toast } from "react-toastify";
 import { styled } from "@mui/material/styles";
 import styles from "../../styles/Home.module.css"; // Import the CSS module
 import { preloadedImages } from "../../public/preloaded-images/preloadedImages";
-import FileUpload from "../../components/FileUpload/FileUpload";
-import Image from "next/image";
-import HowItWorksStyles from "../../styles/HowItWorks.module.css"; // Custom styles
+
 
 function ImageSelection({ nextStep, setInitialMasks }: any) {
   const {
+    clicks: [clicks],
     image: [image, setImage],
+    maskImg: [maskImg, setMaskImg],
+    color: [color, setColor],
     error: [error, setError],
+    texture: [texture, setTexture],
     initialImage: [initialImage, setInitialImage],
   } = useContext(AppContext)!;
 
   const fileInput = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<any>(null);
-  const [isPreloaded, setIsPreloaded] = useState<boolean>(false); // To track preloaded images
-  const [preloadedImageUrl, setPreloadedImageUrl] = useState<string>(""); // Store preloaded image URL
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [type, setType] = useState<boolean>(false);
   const [modelScale, setModelScale] = useState<modelScaleProps | null>(null);
 
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
 
-  // Function to handle file upload (uploaded image)
+
   const getImageEmbedding = async (file: any) => {
     handleShowModal();
-    setIsPreloaded(false); // It's not a preloaded image
+    setType(false);
     const formData = new FormData();
     formData.append("file", file);
     await loadImage(file);
@@ -63,17 +67,16 @@ function ImageSelection({ nextStep, setInitialMasks }: any) {
     }
   };
 
-  // Function to handle loading the image (same for both uploaded and preloaded)
   const loadImage = async (imageFile: any) => {
     try {
-      const img = document.createElement("img");
+      const img = document.createElement("img"); // create a new image object
       img.src = URL.createObjectURL(imageFile);
       img.onload = () => {
         const { height, width, samScale } = handleImageScale(img);
         setModelScale({
-          height: height,
-          width: width,
-          samScale: samScale,
+          height: height, // original image height
+          width: width, // original image width
+          samScale: samScale, // scaling factor for image which has been resized to longest side 1024
         });
         img.width = width;
         img.height = height;
@@ -86,83 +89,32 @@ function ImageSelection({ nextStep, setInitialMasks }: any) {
     }
   };
 
-  // Function to handle preloaded image click
-  const handlePreloadedImageClick = async (image: any) => {
-    handleShowModal();
-    setIsPreloaded(true); // It's a preloaded image
-    setPreloadedImageUrl(image.image); // Store the preloaded image URL
-
-    try {
-      const response = await fetch(image.image);
-      const blob = await response.blob();
-      const file = new File([blob], `${image.name}.jpg`, { type: blob.type });
-
-      const formData = new FormData();
-      formData.append("file", file);
-
-      await loadImage(file);
-
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/image/upload/`,
-        formData
-      );
-
-      setInitialMasks(JSON.parse(res?.data?.yolo_results.replace(/'/g, '"')));
-
-      setTimeout(() => {
-        handleCloseModal();
-        nextStep();
-      }, 1000);
-    } catch (e) {
-      console.error("Error fetching or processing preloaded image:", e);
-      handleCloseModal();
-      setError("Error loading preloaded image. Please try again.");
-      setTimeout(() => {
-        setError(null);
-      }, 2000);
-    }
-  };
 
   const StyledTypography = styled("h1")(({ theme }) => ({
     color: "#323232",
+    fontSize: "2.5rem", // Larger font size
     fontWeight: "bold",
     textTransform: "uppercase",
     letterSpacing: "0.1em",
     textAlign: "center",
     marginBottom: theme.spacing(4),
     padding: theme.spacing(2),
-    background: "linear-gradient(45deg, #719E37, #F7F7F9)",
+    background: "linear-gradient(45deg, #719E37, #F7F7F9)", // Gradient background
     borderRadius: theme.shape.borderRadius,
     boxShadow: theme.shadows[3],
-    fontSize: "1rem", // Default font size for small screens
-    [theme.breakpoints.up("sm")]: {
-      fontSize: "1rem", // Font size for medium screens and up
-      padding: theme.spacing(3),
-    },
-    [theme.breakpoints.up("md")]: {
-      fontSize: "1.5rem", // Font size for large screens and up
-      padding: theme.spacing(4),
-    },
-    [theme.breakpoints.up("lg")]: {
-      fontSize: "1.6rem", // Font size for extra-large screens
-      padding: theme.spacing(5),
-    },
   }));
 
   return (
-    <div className="pt-5">
-      <div className="colorvisualiser__container container">
-        {/* image selection  */}
+    <div className={`${file ? "colorvisualiser" : ""} py-5 pb-5`}>
+      <div className="colorvisualiser__container container py-md-2 py-lg-5">
         <div className="row justify-content-center align-items-center gap-5 gap-lg-0">
-          <div className="col-12 p-0 col-lg-6 colorvisualiser__container__left">
+          <div className="col-12 col-lg-6 colorvisualiser__container__left ">
             <h1 className="text-center mb-4">Visualize your Home</h1>
             <video autoPlay loop muted playsInline className="w-100 img-fluid">
               <source src="/Paint_Visualizer_7becb7495b.mp4" type="video/mp4" />
             </video>
           </div>
-
-          {/* Right section (upload image) */}
-          <div className="col-12 p-0 col-lg-6 colorvisualiser__container__right">
+          <div className="col-12 col-lg-6 colorvisualiser__container__right">
             <FileUpload
               fileInput={fileInput}
               setFile={setFile}
@@ -171,37 +123,40 @@ function ImageSelection({ nextStep, setInitialMasks }: any) {
           </div>
         </div>
 
-        {/* Preloaded Images Section */}
         <Container fluid className={styles.preloadedSection}>
-          <h2 className={`${HowItWorksStyles.sectionTitle} text-center`}>
-            Try One of Our Preloaded Images
-          </h2>
+              {/* Heading */}
+              <StyledTypography>
+                Try One of Our Preloaded Images
+              </StyledTypography>
 
-          <div className={styles.preloadedGrid}>
-            {preloadedImages.map((image, index) => (
-              <div
-                key={index}
-                onClick={() => handlePreloadedImageClick(image)} // Call the function on image click
-                className={styles.preloadedCard}
-              >
-                <div className={styles.preloadedImageWrapper}>
-                  <img
-                    src={image.image}
-                    alt={image.name}
-                    className={styles.preloadedImage}
-                  />
-                </div>
-                <div className={styles.preloadedCardContent}>
-                  <h4 className={styles.preloadedCardTitle}>{image.name}</h4>
-                </div>
-              </div>
-            ))}
+              
+
+              <div className={styles.preloadedGrid}>
+      {preloadedImages.map((image, index) => (
+        <div
+          key={index}
+          onClick={() => getImageEmbedding(image)}
+          className={styles.preloadedCard}
+        >
+          <div className={styles.preloadedImageWrapper}>
+            <img
+              src={image.image}
+              alt={image.name}
+              className={styles.preloadedImage}
+            />
           </div>
-        </Container>
+          <div className={styles.preloadedCardContent}>
+            <h4 className={styles.preloadedCardTitle}>{image.name}</h4>
+          </div>
+        </div>
+      ))}
+    </div>
+
+            </Container>
+
       </div>
 
-      {/* Modal to show while processing */}
-      {showModal && (
+      {showModal && file && (
         <Modal
           show={showModal}
           onHide={handleCloseModal}
@@ -210,27 +165,13 @@ function ImageSelection({ nextStep, setInitialMasks }: any) {
         >
           <Modal.Body style={{ backgroundColor: "white", borderRadius: "5px" }}>
             <div className="d-flex justify-content-between align-items-center ps-3">
-              {/* Show the preloaded image if `isPreloaded` is true */}
-              {isPreloaded ? (
-                <Image
-                  src={preloadedImageUrl}
-                  alt="Preloaded Image"
-                  width={100}
-                  height={100}
-                  className="img-fluid"
-                />
-              ) : (
-                // Show uploaded image if it's not preloaded
-                file && (
-                  <Image
-                    src={URL.createObjectURL(file)}
-                    alt="Uploaded Image"
-                    width={100}
-                    height={100}
-                    className="img-fluid"
-                  />
-                )
-              )}
+              <Image
+                src={URL.createObjectURL(file)}
+                alt="Uploaded Image"
+                width={100}
+                height={100}
+                className="img-fluid"
+              />
               <Image
                 src="https://segment-anything.com/assets/arrow-icn.svg"
                 alt="Uploaded Image"
@@ -264,10 +205,9 @@ function ImageSelection({ nextStep, setInitialMasks }: any) {
                 alt="Stack"
               />
             </div>
-
-            <div className="d-flex justify-content-center align-items-center fw-bold mt-3">
+            <div className="d-flex justify-content-center align-items-center fw-bold mt-2">
               Generating Image Embedding
-              <div className="spinner-border ms-2" role="status">
+              <div className="spinner-border ms-2 " role="status">
                 <span className="visually-hidden">Loading...</span>
               </div>
             </div>

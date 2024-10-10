@@ -4,7 +4,7 @@ import StepProgressBar from "react-step-progress";
 import "react-step-progress/dist/index.css";
 
 // Stepper Component
-const Stepper = ({ stepList, nextStep, prevStep, currentStep }) => {
+const Stepper = ({ stepList, currentStep }) => {
   // Create validators for each step (optional)
   const validators = stepList.map(() => () => true);
 
@@ -15,8 +15,9 @@ const Stepper = ({ stepList, nextStep, prevStep, currentStep }) => {
   }
 
   return (
-    <div className="container mt-2">
+    <div className=" mt-2">
       <StepProgressBar
+        key={currentStep} // Force re-render when currentStep changes
         startingStep={currentStep}
         steps={stepList.map((step, index) => ({
           label: step.label,
@@ -26,23 +27,6 @@ const Stepper = ({ stepList, nextStep, prevStep, currentStep }) => {
         }))}
         onSubmit={navigateToHome}
       />
-
-      {/* <div className="d-flex justify-content-between mt-4">
-        <button
-          onClick={prevStep}
-          disabled={currentStep === 0}
-          className="btn btn-secondary"
-        >
-          Previous
-        </button>
-        <button
-          onClick={nextStep}
-          disabled={currentStep === stepList.length - 1}
-          className="btn btn-primary"
-        >
-          Next
-        </button>
-      </div> */}
     </div>
   );
 };
