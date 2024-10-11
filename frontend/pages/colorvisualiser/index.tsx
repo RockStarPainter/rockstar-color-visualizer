@@ -24,7 +24,8 @@ function ColorVisualizer() {
 
   // Function to move to a specific step
   const moveToStep = (step: number) => {
-    if (currentStep > 0 && currentStep < stepList.length - 1) setCurrentStep(step);
+    if (currentStep > 0 && currentStep < stepList.length - 1)
+      setCurrentStep(step);
   };
 
   const stepList = [
@@ -32,7 +33,11 @@ function ColorVisualizer() {
       label: "Select Image",
       content: (
         <div className="">
-          <ImageSelection nextStep={nextStep} setInitialMasks={setInitialMasks} />
+          <ImageSelection
+            nextStep={nextStep}
+            setInitialMasks={setInitialMasks}
+            setMaskedImageWithColors={setMaskedImageWithColors}
+          />
         </div>
       ),
     },
@@ -54,7 +59,6 @@ function ColorVisualizer() {
       label: "Visualize Room",
       content: (
         <div className="mt-4">
-          
           {/* Add Previous button */}
           <button onClick={prevStep} className="btn btn-secondary mt-4">
             <FaArrowLeft className="me-2" />
@@ -66,14 +70,13 @@ function ColorVisualizer() {
             prevStep={prevStep}
             moveToStep={moveToStep}
             initialMasks={initialMasks}
-            maskedImageWithColors={maskedImageWithColors}
             setMaskedImageWithColors={setMaskedImageWithColors}
           />
         </div>
       ),
     },
     {
-      label: "Order Paint",
+      label: "Book your service",
       content: (
         <div>
           {/* Add Previous button */}
@@ -82,7 +85,10 @@ function ColorVisualizer() {
             Back
           </button>
 
-          <OrderPaints nextStep={nextStep} maskedImageWithColors={maskedImageWithColors} />
+          <OrderPaints
+            nextStep={nextStep}
+            maskedImageWithColors={maskedImageWithColors}
+          />
         </div>
       ),
     },

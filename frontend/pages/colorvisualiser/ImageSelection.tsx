@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Container, Modal } from "react-bootstrap";
 import axios from "axios";
 import AppContext from "../../utils/hooks/createContext";
@@ -12,7 +12,7 @@ import FileUpload from "../../components/FileUpload/FileUpload";
 import Image from "next/image";
 import HowItWorksStyles from "../../styles/HowItWorks.module.css"; // Custom styles
 
-function ImageSelection({ nextStep, setInitialMasks }: any) {
+function ImageSelection({ nextStep, setInitialMasks, setMaskedImageWithColors }: any) {
   const {
     image: [image, setImage],
     error: [error, setError],
@@ -25,6 +25,10 @@ function ImageSelection({ nextStep, setInitialMasks }: any) {
   const [preloadedImageUrl, setPreloadedImageUrl] = useState<string>(""); // Store preloaded image URL
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modelScale, setModelScale] = useState<modelScaleProps | null>(null);
+
+  useEffect(() => {
+    setMaskedImageWithColors(null)
+  }, [])
 
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);

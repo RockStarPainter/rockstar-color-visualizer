@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import AppContext from "../../utils/hooks/createContext";
 import ImageMaskOverlay from "../../components/detection-canvas";
 import {
@@ -21,18 +21,11 @@ import { Share } from "@capacitor/share";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy, faPlus, faUpload } from "@fortawesome/free-solid-svg-icons";
 import texturedata from "../../utils/texturedata.json";
-import {
-  faFacebook,
-  faLinkedin,
-  faTwitter,
-  faWhatsapp,
-} from "@fortawesome/free-brands-svg-icons";
 
 function VisualizeRoom({
   nextStep,
   moveToStep,
   initialMasks,
-  maskedImageWithColors,
   setMaskedImageWithColors,
 }: any) {
   const {
@@ -43,93 +36,14 @@ function VisualizeRoom({
   const [selectedColor, setSelectedColor] = useState("");
   const [clearSignal, setClearSignal] = useState(false);
   const [showOffcanvas, setShowOffcanvas] = useState(false);
-  const [showShareModal, setShowShareModal] = useState<boolean>(false);
-  const [shareURL, setShareURL] = useState<string>("");
-  const [showLoader, setShowLoader] = useState<boolean>(false);
 
   const handleCloseOffCanvas = () => setShowOffcanvas(false);
   const handleShowOffCanvas = () => setShowOffcanvas(true);
-  const handleCloseShareModal = () => setShowShareModal(false);
-  const handleShowShareModal = () => setShowShareModal(true);
 
   // Function to handle clearing the masks
   const handleClearMasks = () => {
     setClearSignal(true);
     setTimeout(() => setClearSignal(false), 100); // Reset the signal after a short delay
-  };
-  const handleShowLoader = () => setShowLoader(true);
-  const handleCloseLoader = () => setShowLoader(false);
-
-  // Function to trigger download of the image using the base64 stored in maskedImageWithColors
-  const downloadImage = () => {
-    if (maskedImageWithColors) {
-      const link = document.createElement("a");
-      link.href = maskedImageWithColors; // Use the base64 image from maskedImageWithColors
-      link.download = "masked_image.png"; // Set the filename for the downloaded image
-      link.click(); // Programmatically click the link to trigger the download
-    } else {
-      console.error("No image available for download");
-    }
-  };
-
-  // Function to share image
-  const shareImage = async () => {
-    // Check if the platform is mobile or web
-    if (
-      Capacitor.getPlatform() === "android" ||
-      Capacitor.getPlatform() === "ios"
-    ) {
-      const formData = new FormData();
-
-      // Convert base64 data to a Blob for Cloudinary upload
-      const blob = await (await fetch(maskedImageWithColors)).blob();
-      formData.append("file", blob); // Append the blob to form data
-      formData.append("upload_preset", "d5mvumcd");
-      formData.append("cloud_name", "dbvxdjjpr");
-
-      // Upload to Cloudinary
-      const res = await axios.post(
-        "https://api.cloudinary.com/v1_1/dbvxdjjpr/image/upload",
-        formData
-      );
-      const data = await res.data;
-
-      // Share the image using native sharing
-      await Share.share({
-        title: "Rockstar Visualizer",
-        text: "Check out this Room Image from rockstar",
-        url: data.url,
-        dialogTitle: "Share with loved ones",
-      })
-        .then(() => {
-          console.log("Share successful");
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-      return;
-    } else if (Capacitor.getPlatform() === "web") {
-      handleShowShareModal();
-      handleShowLoader();
-
-      const formData = new FormData();
-
-      // Convert base64 to Blob
-      const blob = await (await fetch(maskedImageWithColors)).blob();
-      formData.append("file", blob); // Append the blob to form data
-      formData.append("upload_preset", "d5mvumcd");
-      formData.append("cloud_name", "dbvxdjjpr");
-
-      const res = await axios.post(
-        "https://api.cloudinary.com/v1_1/dbvxdjjpr/image/upload",
-        formData
-      );
-      const data = await res.data;
-
-      await handleCloseLoader();
-      await setShareURL(data.url);
-    }
-    // await handleCloseShareModal();
   };
 
   // Function to create the tooltip
@@ -168,7 +82,7 @@ function VisualizeRoom({
             {/* tools section */}
             <div className="colorvisualiser__tools_container mb-4">
               <Card className="border-2 shadow-sm">
-                <Card.Body className="d-flex justify-content-between align-items-center">
+                <Card.Body className="d-flex justify-content-center gap-3 align-items-center">
                   {/* Clear Masks Button */}
                   <OverlayTrigger
                     placement="top"
@@ -195,35 +109,6 @@ function VisualizeRoom({
                       }}
                     >
                       <MdOutlineChangeCircle size={20} />
-                    </Button>
-                  </OverlayTrigger>
-
-                  {/* Download Image */}
-                  <OverlayTrigger
-                    placement="top"
-                    overlay={showTooltip("Download Image")}
-                  >
-                    <Button
-                      className="colorvisualiser__button"
-                      onClick={() => {
-                        downloadImage();
-                        toast.success("Image Downloaded");
-                      }}
-                    >
-                      <IoIosCloudDownload size={20} />
-                    </Button>
-                  </OverlayTrigger>
-
-                  {/* Share Image */}
-                  <OverlayTrigger
-                    placement="top"
-                    overlay={showTooltip("Share Image")}
-                  >
-                    <Button
-                      className="colorvisualiser__button"
-                      onClick={shareImage}
-                    >
-                      <FaShare size={20} />
                     </Button>
                   </OverlayTrigger>
                 </Card.Body>
@@ -305,95 +190,6 @@ function VisualizeRoom({
           </Card>
         </Offcanvas.Body>
       </Offcanvas>
-
-      {/* Share Modal */}
-      <Modal show={showShareModal} centered onHide={handleCloseShareModal}>
-        <Modal.Body style={{ backgroundColor: "white" }}>
-          {/* Show loader */}
-          {showLoader ? (
-            <div className="d-flex justify-content-center align-items-center fw-bold mt-2">
-              Generating Image URL
-              <div className="spinner-border ms-2 " role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            </div>
-          ) : (
-            <>
-              <div className=" d-flex gap-4 justify-content-center align-items-center">
-                <label className="fw-bold " htmlFor="shareURL">
-                  Share URL
-                </label>
-                <div className="colorvisualiser__copylink position-relative">
-                  <input
-                    id="shareURL"
-                    type="text"
-                    alt="Share URL"
-                    className="form-control d-inline"
-                    value={shareURL}
-                    readOnly
-                  />
-                </div>
-              </div>
-              <div className="colorvisualiser__share d-flex gap-2 justify-content-around align-items-center mt-3">
-                <div
-                  className="colorvisualiser__share__icon"
-                  onClick={() => {
-                    window.open(
-                      `https://www.facebook.com/sharer/sharer.php?u=${shareURL}`,
-                      "_blank"
-                    );
-                  }}
-                >
-                  <FontAwesomeIcon icon={faFacebook} size="2x" />
-                </div>
-                <div
-                  className="colorvisualiser__share__icon"
-                  onClick={() => {
-                    window.open(
-                      `https://twitter.com/intent/tweet?url=${shareURL}`,
-                      "_blank"
-                    );
-                  }}
-                >
-                  <FontAwesomeIcon icon={faTwitter} size="2x" />
-                </div>
-                <div
-                  className="colorvisualiser__share__icon"
-                  onClick={() => {
-                    window.open(`tg://msg_url?url=${shareURL}`);
-                  }}
-                >
-                  <FontAwesomeIcon icon={faLinkedin} size="2x" />
-                </div>
-                <div
-                  className="colorvisualiser__share__icon"
-                  onClick={() => {
-                    window.open(
-                      `https://api.whatsapp.com/send?text=${shareURL}`,
-                      "_blank"
-                    );
-                  }}
-                >
-                  <FontAwesomeIcon icon={faWhatsapp} size="2x" />
-                </div>
-                <div className="colorvisualiser__share__clipboard">
-                  <div
-                    className="colorvisualiser__copy_button"
-                    onClick={async () => {
-                      if (navigator.clipboard) {
-                        await navigator.clipboard.writeText(shareURL);
-                        toast.success("Copied to Clipboard");
-                      }
-                    }}
-                  >
-                    <FontAwesomeIcon icon={faCopy} size="2x" />
-                  </div>
-                </div>
-              </div>
-            </>
-          )}
-        </Modal.Body>
-      </Modal>
     </>
   );
 }
