@@ -161,7 +161,7 @@ const OrderPaints = ({ nextStep, maskedImageWithColors }: any) => {
               <Col>
                 <Button
                   variant="primary"
-                  onClick={handleShowModal}
+                  onClick={() => router.push('/book-now')}
                   className="w-100"
                 >
                   Save Your Order <FaLongArrowAltRight className="fs-3 ms-2" />

@@ -31,8 +31,8 @@ function NavBar() {
               HOME
             </Link>
 
-            <Link href="/contact" className={`m-2 ${styles.navlink}`}>
-              CONTACT US
+            <Link href="/book-now" className={`m-2 ${styles.navlink}`}>
+            Book your service
             </Link>
             <Link href="/colorvisualiser" className={`m-2 ${styles.navlink}`}>
               COLOR VISUALISER
