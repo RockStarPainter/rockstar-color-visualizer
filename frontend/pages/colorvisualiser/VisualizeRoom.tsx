@@ -21,15 +21,30 @@ import { Share } from "@capacitor/share";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy, faPlus, faUpload } from "@fortawesome/free-solid-svg-icons";
 import texturedata from "../../utils/texturedata.json";
+import Image from "next/image";
+import {
+  onnxMaskToImage,
+  loadNpyTensor,
+  loadNpyTensor1,
+  convertURLtoFile,
+  convertImageEleToData,
+  imageDataToImage,
+  scaleTexture,
+  downloadImage,
+  processTexture,
+} from "../../utils/helpers/maskUtils";
 
 function VisualizeRoom({
   nextStep,
+  prevStep,
   moveToStep,
   initialMasks,
   setMaskedImageWithColors,
 }: any) {
   const {
     image: [image],
+    texture: [texture, setTexture],
+    color: [color, setColor],
   } = useContext(AppContext)!;
 
   const { selectedColors } = useColorContext();
@@ -50,6 +65,28 @@ function VisualizeRoom({
   const showTooltip = (msg: string) => (
     <Tooltip id="button-tooltip">{msg}</Tooltip>
   );
+
+  const handleTextureClick = (texture: any) => {
+    // load image
+    if (!image) return;
+    try {
+      const img = document.createElement("img"); // create a new image object
+      img.src = texture.url;
+      img.onload = () => {
+        scaleTexture(image, img).then((scaledTexture) => {
+          if (!scaledTexture) return;
+          if (scaledTexture instanceof HTMLImageElement) {
+            setTexture(scaledTexture);
+            toast.success("Texture Selected");
+            handleCloseOffCanvas();
+          }
+          setColor(null);
+        });
+      };
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -149,7 +186,7 @@ function VisualizeRoom({
 
                   <Button
                     className="colorvisualiser__color_addbutton"
-                    onClick={handleShowOffCanvas}
+                    onClick={prevStep}
                     data-intro="You can also add any color from color pallete"
                   >
                     <FontAwesomeIcon icon={faPlus} size="2x" />
@@ -157,6 +194,67 @@ function VisualizeRoom({
                 </Card.Body>
               </Card>
             </div>
+
+            {/* texture selection section  */}
+            {/* <div className="colorvisualiser__texture_container">
+              <Card className="border-2 shadow-sm">
+                <Card.Title className="text-center fw-bold mt-2">
+                  Texture
+                </Card.Title>
+                <Card.Body className="d-flex flex-wrap gap-2 justify-content-center align-items-center">
+                  <Button
+                    className="p-0  border-0"
+                    style={{ backgroundColor: "#fff" }}
+                  >
+                    {texture ? (
+                      <Image
+                        src={texture.src}
+                        className="colorvisualiser__currtexture_button"
+                        alt="Texture"
+                        width={90}
+                        height={90}
+                        data-intro="Selected Texture will be shown here"
+                        data-step="4"
+                      />
+                    ) : (
+                      <IoMdImage
+                        size={90}
+                        style={{ color: "#000" }}
+                        data-intro="Selected Texture will be shown here"
+                        data-step="4"
+                      />
+                    )}
+                  </Button>
+                  {texturedata
+                    .slice(0, 2)
+                    .map((texture: any, index: number) => {
+                      return (
+                        <Button
+                          className="p-0 border-0 colorvisualiser__texture_button"
+                          key={index}
+                          onClick={() => handleTextureClick(texture)}
+                        >
+                          <Image
+                            src={texture.url}
+                            alt="Texture"
+                            width={90}
+                            height={90}
+                          />
+                        </Button>
+                      );
+                    })}
+
+                  <Button
+                    className=" border-0 colorvisualiser__texture_button"
+                    onClick={handleShowOffCanvas}
+                    data-intro="Have any texture in mind ? You can upload it here"
+                    data-step="5"
+                  >
+                    <FontAwesomeIcon icon={faPlus} size="2x" />
+                  </Button>
+                </Card.Body>
+              </Card>
+            </div> */}
           </div>
         </div>
       </div>

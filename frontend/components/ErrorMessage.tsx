@@ -1,7 +1,7 @@
 import React from "react";
 
 // Custom ErrorMessage component
-const ErrorMessage = ({ error }) => {
+const ErrorMessage = ({ error }: any) => {
   if (!error) {
     return null;
   }

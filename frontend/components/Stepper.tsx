@@ -4,7 +4,7 @@ import StepProgressBar from "react-step-progress";
 import "react-step-progress/dist/index.css";
 
 // Stepper Component
-const Stepper = ({ stepList, currentStep }) => {
+const Stepper = ({ stepList, currentStep }:any) => {
   // Create validators for each step (optional)
   const validators = stepList.map(() => () => true);
 
@@ -19,7 +19,7 @@ const Stepper = ({ stepList, currentStep }) => {
       <StepProgressBar
         key={currentStep} // Force re-render when currentStep changes
         startingStep={currentStep}
-        steps={stepList.map((step, index) => ({
+        steps={stepList.map((step:any, index:any) => ({
           label: step.label,
           subtitle: step.subtitle || "", // Optional subtitle
           content: step.content,

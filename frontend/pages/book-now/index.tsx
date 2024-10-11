@@ -1,4 +1,3 @@
-// BookingForm.js
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
@@ -6,9 +5,10 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css"; // Import the CSS for react-phone-input-2
 
 import ErrorMessage from "../../components/ErrorMessage";
-import ExteriorField from "./ExteriorField";
-import InteriorField from "./InteriorField";
-import { exteriorFields, interiorFields } from "./FieldsData";
+import {
+  exteriorFields,
+  interiorFields,
+} from "../../public/order-form-fields/FieldsData";
 
 const BookingForm = () => {
   const {
@@ -20,12 +20,12 @@ const BookingForm = () => {
   const [serviceType, setServiceType] = useState("interior");
   const [phone, setPhone] = useState("");
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: any) => {
     console.log({ ...data, phone });
     // You can process form submission here, like sending it to a server
   };
 
-  const handleServiceTypeChange = (event) => {
+  const handleServiceTypeChange = (event: any) => {
     setServiceType(event.target.value);
   };
 
@@ -78,7 +78,6 @@ const BookingForm = () => {
                       onChange={(phone) => setPhone(phone)}
                       inputStyle={{ width: "100%" }}
                       dropdownStyle={{ color: "#000" }}
-                      required
                     />
                   </Form.Group>
                 </Col>
@@ -196,7 +195,7 @@ const BookingForm = () => {
               {serviceType === "interior" &&
                 interiorFields.map((field) => (
                   <InteriorField
-                    key={field.key}
+                    key={field?.key}
                     field={field}
                     register={register}
                     errors={errors}
@@ -208,12 +207,10 @@ const BookingForm = () => {
               {serviceType === "exterior" &&
                 exteriorFields.map((field) => (
                   <ExteriorField
-                    key={field.key}
+                    key={field?.key}
                     field={field}
                     register={register}
                     errors={errors}
-                    watch={watch}
-                    isSubmitted={isSubmitted}
                   />
                 ))}
 
@@ -284,3 +281,138 @@ const BookingForm = () => {
 };
 
 export default BookingForm;
+
+const InteriorField = ({
+  field,
+  register,
+  errors,
+  watch,
+  isSubmitted,
+}: any) => {
+  // Watch the checkbox values to validate that at least one is selected
+  const paintWall = watch(`paint_${field?.key}_wall`);
+  const paintBase = watch(`paint_${field?.key}_base`);
+  const paintCeiling = watch(`paint_${field?.key}_ceiling`);
+  const paintCloset = watch(`paint_${field?.key}_closet`);
+  const paintDoor = watch(`paint_${field?.key}_door`);
+
+  const isAtLeastOneSelected =
+    paintWall || paintBase || paintCeiling || paintCloset || paintDoor;
+
+  return (
+    <div className="mb-4">
+      <Form.Label className="fw-bold">{field?.name}</Form.Label>
+
+      <Row>
+        {/* First Column for "Include" Yes/No */}
+        <Col md={6}>
+          <p className="p-0 m-0 fw-bold text-secondary">
+            Include ({field?.name})
+          </p>
+          <div>
+            <Form.Check
+              inline
+              label="Yes"
+              type="radio"
+              value="Yes"
+              {...register(`include_${field?.key}`, { required: true })}
+            />
+            <Form.Check
+              inline
+              label="No"
+              type="radio"
+              value="No"
+              {...register(`include_${field?.key}`, { required: true })}
+            />
+            {errors[`include_${field?.key}`] && (
+              <p className="text-danger">Required</p>
+            )}
+          </div>
+        </Col>
+
+        {/* Second Column for "Paint Code" */}
+        <Col md={6}>
+          <p className="p-0 m-0 fw-bold text-secondary">
+            Paint Code ({field?.name})
+          </p>
+          <div>
+            <Form.Check
+              inline
+              label="Wall"
+              type="checkbox"
+              {...register(`paint_${field?.key}_wall`)}
+            />
+            <Form.Check
+              inline
+              label="Base"
+              type="checkbox"
+              {...register(`paint_${field?.key}_base`)}
+            />
+            <Form.Check
+              inline
+              label="Ceiling"
+              type="checkbox"
+              {...register(`paint_${field?.key}_ceiling`)}
+            />
+            <Form.Check
+              inline
+              label="Closet"
+              type="checkbox"
+              {...register(`paint_${field?.key}_closet`)}
+            />
+            <Form.Check
+              inline
+              label="Door"
+              type="checkbox"
+              {...register(`paint_${field?.key}_door`)}
+            />
+          </div>
+          {/* Validation for at least one checkbox selection, only show error after submit */}
+          {!isAtLeastOneSelected && isSubmitted && (
+            <p className="text-danger">
+              Please select at least one Paint Code option.
+            </p>
+          )}
+        </Col>
+      </Row>
+    </div>
+  );
+};
+
+function ExteriorField({ field, register, errors }: any) {
+  return (
+    <div className="mb-4">
+      <Row>
+        {/* first colmun for title  */}
+        <Col md={6}>
+          <Form.Label className="fw-bold text-end">{field?.name}</Form.Label>
+        </Col>
+        {/* second Column for "Include" Yes/No */}
+        <Col md={6}>
+          <p className="p-0 m-0 fw-bold text-secondary">
+            Include ({field?.name})
+          </p>
+          <div>
+            <Form.Check
+              inline
+              label="Yes"
+              type="radio"
+              value="Yes"
+              {...register(`include_${field?.key}`, { required: true })}
+            />
+            <Form.Check
+              inline
+              label="No"
+              type="radio"
+              value="No"
+              {...register(`include_${field?.key}`, { required: true })}
+            />
+            {errors[`include_${field?.key}`] && (
+              <p className="text-danger">Required</p>
+            )}
+          </div>
+        </Col>
+      </Row>
+    </div>
+  );
+}

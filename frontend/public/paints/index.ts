@@ -3,7 +3,7 @@ export const paints = [
     companyName: "Sherwin Williams",
     logo: "/images/sherwin-logo.png",
     paints: {
-      orange: [
+      red: [
         {
           name: "Peach Parfait",
           code: "2175-70",

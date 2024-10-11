@@ -16,18 +16,18 @@ import { useColorContext } from "../../contexts/ColorContext";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 
 const colorCategories = [
-  { name: "Orange", key: "orange" },
+  { name: "Red", key: "red" },
   { name: "Yellow", key: "yellow" },
   { name: "Green", key: "green" },
   { name: "Blue", key: "blue" },
-  { name: "Red", key: "red" },
+  { name: "Orange", key: "orange" },
   { name: "Purple", key: "purple" },
   { name: "Neutral", key: "neutral" },
   { name: "White", key: "white" },
 ];
 
 const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>("orange");
+  const [selectedCategory, setSelectedCategory] = useState<string>("red");
   const [companyPaints, setCompanyPaints] = useState<any>(null);
   const [selectedCompany, setSelectedCompany] = useState<string>("");
   const [selectedLogo, setSelectedLogo] = useState<string>("");
@@ -232,7 +232,7 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
               onClick={nextStep}
               disabled={selectedColors.length === 0}
             >
-              Visualize Room <FaLongArrowAltRight className="fs-3 ms-2"/>
+              Visualize Room <FaLongArrowAltRight className="fs-3 ms-2" />
             </Button>
 
             <h5 className="fw-bold">Saved Colors</h5>

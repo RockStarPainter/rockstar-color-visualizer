@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, { useContext, useState } from "react";
 import {
   Button,
@@ -232,7 +234,7 @@ const OrderPaints = ({ nextStep, maskedImageWithColors }: any) => {
           <div className="image-wrapper">
             {/* Assuming you have a selected image, replace the src with dynamic image source */}
             <Image
-              src={maskedImageWithColors || image} // Replace with dynamic image source
+              src={maskedImageWithColors || image || ''} // Replace with dynamic image source
               alt="Selected Room Design"
               layout="responsive"
               width={700}
