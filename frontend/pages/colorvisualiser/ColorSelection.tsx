@@ -16,18 +16,18 @@ import { useColorContext } from "../../contexts/ColorContext";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 
 const colorCategories = [
-  { name: "Red", key: "red" },
+  { name: "Orange", key: "orange" },
   { name: "Yellow", key: "yellow" },
   { name: "Green", key: "green" },
   { name: "Blue", key: "blue" },
-  { name: "Orange", key: "orange" },
+  { name: "Red", key: "red" },
   { name: "Purple", key: "purple" },
   { name: "Neutral", key: "neutral" },
   { name: "White", key: "white" },
 ];
 
 const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>("red");
+  const [selectedCategory, setSelectedCategory] = useState<string>("orange");
   const [companyPaints, setCompanyPaints] = useState<any>(null);
   const [selectedCompany, setSelectedCompany] = useState<string>("");
   const [selectedLogo, setSelectedLogo] = useState<string>("");
