@@ -12,7 +12,11 @@ import FileUpload from "../../components/FileUpload/FileUpload";
 import Image from "next/image";
 import HowItWorksStyles from "../../styles/HowItWorks.module.css"; // Custom styles
 
-function ImageSelection({ nextStep, setInitialMasks, setMaskedImageWithColors }: any) {
+function ImageSelection({
+  nextStep,
+  setInitialMasks,
+  setMaskedImageWithColors,
+}: any) {
   const {
     image: [image, setImage],
     error: [error, setError],
@@ -27,8 +31,8 @@ function ImageSelection({ nextStep, setInitialMasks, setMaskedImageWithColors }:
   const [modelScale, setModelScale] = useState<modelScaleProps | null>(null);
 
   useEffect(() => {
-    setMaskedImageWithColors(null)
-  }, [])
+    setMaskedImageWithColors(null);
+  }, []);
 
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
@@ -47,7 +51,9 @@ function ImageSelection({ nextStep, setInitialMasks, setMaskedImageWithColors }:
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/image/upload/`,
         formData
       );
-      setInitialMasks(JSON.parse(res?.data?.yolo_results.replace(/'/g, '"')));
+
+      const data = JSON.parse(res?.data?.yolo_results.replace(/'/g, '"'));
+      setInitialMasks(data?.masks);
 
       setTimeout(() => {
         handleCloseModal();
@@ -91,27 +97,66 @@ function ImageSelection({ nextStep, setInitialMasks, setMaskedImageWithColors }:
   };
 
   // Function to handle preloaded image click
+  // const handlePreloadedImageClick = async (image: any) => {
+  //   handleShowModal();
+  //   setIsPreloaded(true); // It's a preloaded image
+  //   setPreloadedImageUrl(image.image); // Store the preloaded image URL
+
+  //   try {
+  //     const response = await fetch(image.image);
+  //     const blob = await response.blob();
+  //     const file = new File([blob], `${image.name}.jpg`, { type: blob.type });
+
+  //     const formData = new FormData();
+  //     formData.append("file", file);
+
+  //     await loadImage(file);
+
+  //     const res = await axios.post(
+  //       `${process.env.NEXT_PUBLIC_BACKEND_URL}/image/upload/`,
+  //       formData
+  //     );
+
+  //     setInitialMasks(JSON.parse(res?.data?.yolo_results.replace(/'/g, '"')));
+
+  //     setTimeout(() => {
+  //       handleCloseModal();
+  //       nextStep();
+  //     }, 1000);
+  //   } catch (e) {
+  //     console.error("Error fetching or processing preloaded image:", e);
+  //     handleCloseModal();
+  //     setError("Error loading preloaded image. Please try again.");
+  //     setTimeout(() => {
+  //       setError(null);
+  //     }, 2000);
+  //   }
+  // };
+
   const handlePreloadedImageClick = async (image: any) => {
     handleShowModal();
     setIsPreloaded(true); // It's a preloaded image
     setPreloadedImageUrl(image.image); // Store the preloaded image URL
 
     try {
+      // Load the image locally
       const response = await fetch(image.image);
       const blob = await response.blob();
       const file = new File([blob], `${image.name}.jpg`, { type: blob.type });
 
-      const formData = new FormData();
-      formData.append("file", file);
-
       await loadImage(file);
 
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/image/upload/`,
-        formData
-      );
+      // Fetch the JSON response from the responsePath field
+      const jsonResponse = await fetch(image.responsePath);
+      const responseData = await jsonResponse.json();
 
-      setInitialMasks(JSON.parse(res?.data?.yolo_results.replace(/'/g, '"')));
+      // Set the initial masks using the fetched response data
+      const data = JSON.parse(responseData?.yolo_results.replace(/'/g, '"'));
+      setInitialMasks(data?.masks);
+
+      console.log("masks loaded in preload: " + data?.masks);
+
+      // setInitialMasks(responseData.yolo_results);
 
       setTimeout(() => {
         handleCloseModal();

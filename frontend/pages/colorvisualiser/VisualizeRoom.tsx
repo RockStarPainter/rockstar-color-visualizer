@@ -96,7 +96,7 @@ function VisualizeRoom({
           <div className="col-12 col-lg-8 colorvisualiser__container__left d-flex justify-content-center">
             <ImageMaskOverlay
               imgSrc={image?.src}
-              maskData={initialMasks}
+              masks={initialMasks}
               selectedColor={selectedColor}
               clearMasksSignal={clearSignal}
               setDownloadableImage={setMaskedImageWithColors} // Ensure this is passed correctly
