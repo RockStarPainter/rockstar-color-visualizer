@@ -50,8 +50,8 @@ input[type="checkbox"],
 input[type="radio"] {
     appearance: none !important; /* Remove default styling */
     -webkit-appearance: none !important; /* For Safari */
-    width: 20px !important; /* Adjust size */
-    height: 20px !important; /* Adjust size */
+    width: 17px !important; /* Adjust size */
+    height: 17px !important; /* Adjust size */
     border: 2px solid #ccc !important; /* Border color */
     border-radius: 5px !important; /* Rounded corners for checkbox (adjust as needed) */
     cursor: pointer !important; /* Pointer cursor on hover */

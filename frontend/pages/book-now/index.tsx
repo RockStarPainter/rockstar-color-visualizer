@@ -169,6 +169,7 @@ const BookingForm = () => {
                 <Form.Check
                   type="checkbox"
                   label="I agree to receive SMS communications from Rockstar Painting Denver"
+                  className="mt-2"
                   {...register("agree", {
                     required: "You must agree to continue",
                   })}
