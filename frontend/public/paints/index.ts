@@ -92,7 +92,7 @@ export const paints = [
         {
           name: "Malibu Peach",
           code: "2169-50",
-          hex: "#FFFFFF",
+          hex: "#FDC8B6",
         },
         {
           name: "Vivid Peach",

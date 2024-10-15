@@ -1,4 +1,91 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+
+.paint_cards {
+  flex: 0 0 calc(100% / 2); /* Default to 2 cards per row for extra small screens */
+  max-width: calc(100% / 2);
+  /* padding: 5px; */
+  box-sizing: border-box;
+  border: 5px solid white;
+  transition: transform 0.3s ease, all 0.3s ease;
+  z-index: 3;
+}
+
+.paint_card:hover {
+  transform: scale(1.05); /* Scale up by 5% */
+  border: 7px solid white;
+  z-index: 15;
+}
+
+
+@media (min-width: 576px) {
+  .paint_cards {
+    flex: 0 0 calc(100% / 3); /* 3 cards per row on small screens */
+    max-width: calc(100% / 3);
+  }
+}
+
+@media (min-width: 768px) {
+  .paint_cards {
+    flex: 0 0 calc(100% / 4); /* 4 cards per row on medium screens */
+    max-width: calc(100% / 4);
+  }
+}
+
+@media (min-width: 992px) {
+  .paint_cards {
+    flex: 0 0 calc(100% / 5); /* 5 cards per row on large screens */
+    max-width: calc(100% / 5);
+  }
+}
+
+@media (min-width: 1200px) {
+  .paint_cards {
+    flex: 0 0 calc(100% / 7); /* 7 cards per row on extra-large screens */
+    max-width: calc(100% / 7);
+  }
+}
+
+
+input[type="checkbox"],
+input[type="radio"] {
+    appearance: none !important; /* Remove default styling */
+    -webkit-appearance: none !important; /* For Safari */
+    width: 20px !important; /* Adjust size */
+    height: 20px !important; /* Adjust size */
+    border: 2px solid #ccc !important; /* Border color */
+    border-radius: 5px !important; /* Rounded corners for checkbox (adjust as needed) */
+    cursor: pointer !important; /* Pointer cursor on hover */
+    position: relative !important; /* For pseudo-elements */
+    background-color: #fff !important; /* Default background color (white) */
+}
+
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
+    background-color: #007bff !important; /* Change background color when checked to blue */
+    border-color: #007bff !important; /* Border color when checked */
+}
+
+input[type="radio"] {
+    border-radius: 50% !important; /* Make radio buttons circular */
+}
+
+input[type="checkbox"]:checked::before,
+input[type="radio"]:checked::before {
+    content: '' !important; /* Create pseudo-element */
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important; /* Center the check or dot */
+    width: 10px !important; /* Size of the check mark or dot */
+    height: 10px !important; /* Size of the check mark or dot */
+    background-color: #fff !important; /* Color of the check mark or dot */
+    border-radius: 50% !important; /* Make the check mark circular for radio buttons */
+}
+
+
+
+
+
 :root {
   --clr-white: rgb(255, 255, 255);
   --clr-black: rgb(0, 0, 0);
@@ -10,7 +97,6 @@
 ._3uApM {
   display: none !important;
 }
-
 
 body {
   font-family: "montserrat" !important;
@@ -286,4 +372,3 @@ body {
 /* Firefox */
 scrollbar-width: thin !important;
 scrollbar-color: #8866 transparent !important;
-

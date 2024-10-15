@@ -84,46 +84,61 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
   );
 
   const renderPaints = () => {
-    return filteredPaints?.map((paint: any, index: number) => (
-      <Col key={index} xs={6} sm={4} md={3} lg={2} className="mb-4">
-        <Card
-          className={`p-2 paint-card position-relative ${
-            selectedColors.some((p) => p.code === paint.code) ? "selected" : ""
-          }`}
-          onClick={() => handlePaintSelection(paint)}
-          style={{ cursor: "pointer" }}
-        >
+    return (
+      <div className="d-flex flex-wrap justify-content-center">
+        {filteredPaints?.map((paint: any, index: number) => (
           <div
+            key={index}
             style={{
-              backgroundColor: paint.hex,
-              height: "60px",
-              width: "100%",
-              borderRadius: "8px",
+              // padding: "5px",
+              boxSizing: "border-box",
             }}
-          ></div>
-          <div className="mt-2 text-center">
-            <span className="fw-bold" style={{ fontSize: ".8rem" }}>
-              {paint.name}
-            </span>
-            <br />
-            <span style={{ fontSize: ".8rem" }}>{paint.code}</span>
-          </div>
-
-          {/* Show tick on selected paints */}
-          {selectedColors.some((p) => p.code === paint.code) && (
-            <FaCheckCircle
-              size={24}
-              color="black"
-              style={{
-                position: "absolute",
-                top: "15px",
-                right: "15px",
+            className="paint_cards"
+          >
+            <Card
+              className={`position-relative paint_card ${
+                selectedColors.some((p) => p.code === paint.code) ? "selected" : ""
+              }`}
+              onClick={() => handlePaintSelection(paint)}
+              style={{ 
+                cursor: "pointer", 
+                border: "none", 
+                boxShadow: "0px 1px 5px rgba(0,0,0,0.1)", 
+                transition: "transform 0.2s ease-in-out" // Smooth transition for scaling
               }}
-            />
-          )}
-        </Card>
-      </Col>
-    ));
+            >
+              <div
+                style={{
+                  backgroundColor: paint.hex,
+                  height: "8rem",
+                  width: "100%",
+                  borderRadius: "3px",
+                }}
+                className="p-2"
+              >
+                <span className="fw-bold" style={{ fontSize: ".9rem" }}>
+                  {paint.name}
+                </span>
+                <br />
+                <span style={{ fontSize: ".8rem" }}>{paint.code}</span>
+              </div>
+  
+              {selectedColors.some((p) => p.code === paint.code) && (
+                <FaCheckCircle
+                  size={24}
+                  color="black"
+                  style={{
+                    position: "absolute",
+                    top: "15px",
+                    right: "15px",
+                  }}
+                />
+              )}
+            </Card>
+          </div>
+        ))}
+      </div>
+    );
   };
 
   return (
@@ -217,69 +232,61 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
         ))}
       </Row>
 
-      <Row>
-        {/* Saved Colors Section - Sticky with its own scroll */}
-        <Col
-          xs={12}
-          md={4}
-          className="custom-scrollbar order-1 order-md-2" // Show this column first on small screens and second on medium+
-        >
-          <div className="saved-colors bg-light p-3 h-100 pt-5">
-            {/* "Paint Your Room" Button inside the saved colors section */}
-            <Button
-              variant="primary"
-              className="w-100 mb-3"
-              onClick={nextStep}
-              disabled={selectedColors.length === 0}
-            >
-              Visualize Room <FaLongArrowAltRight className="fs-3 ms-2" />
-            </Button>
+      {/* Saved Colors Section - Sticky with its own scroll */}
+      <Row
+        className="custom-scrollbar mb-5" // Show this column first on small screens and second on medium+
+      >
+        <div className="saved-colors bg-light p-3 h-100 pt-5">
+          {/* "Paint Your Room" Button inside the saved colors section */}
+          <Button
+            variant="primary"
+            className="w-100 mb-3"
+            onClick={nextStep}
+            disabled={selectedColors.length === 0}
+          >
+            Visualize Room <FaLongArrowAltRight className="fs-3 ms-2" />
+          </Button>
 
-            <h5 className="fw-bold">Saved Colors</h5>
-            <ul className="list-group">
-              {selectedColors.map((paint, index) => (
-                <li
-                  key={index}
-                  className="list-group-item d-flex justify-content-between align-items-center"
-                >
-                  <div className="d-flex items-center pt-2">
-                    <div
-                      style={{
-                        display: "inline-block",
-                        backgroundColor: paint.hex,
-                        width: "20px",
-                        height: "20px",
-                        marginRight: "10px",
-                        borderRadius: "50%",
-                      }}
-                    ></div>
-                    <div
-                      className="fw-bold block pb-2"
-                      style={{ fontSize: ".9rem" }}
-                    >
-                      {paint.name}
-                    </div>
-                  </div>
-                  <Button
-                    variant="danger"
-                    className="rounded-3"
-                    size="sm"
-                    onClick={() => removeColor(paint?.code)}
+          <h5 className="fw-bold">Saved Colors</h5>
+          <ul className="list-group">
+            {selectedColors.map((paint, index) => (
+              <li
+                key={index}
+                className="list-group-item d-flex justify-content-between align-items-center"
+              >
+                <div className="d-flex items-center pt-2">
+                  <div
+                    style={{
+                      display: "inline-block",
+                      backgroundColor: paint.hex,
+                      width: "20px",
+                      height: "20px",
+                      marginRight: "10px",
+                      borderRadius: "50%",
+                    }}
+                  ></div>
+                  <div
+                    className="fw-bold block pb-2"
+                    style={{ fontSize: ".9rem" }}
                   >
-                    <MdOutlineDeleteOutline />
-                  </Button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Col>
-
-        {/* Main Paints Grid that scrolls with the page */}
-        <Col xs={12} md={8} className="px-2 py-3 order-2 order-md-1">
-          {/* Paint Grid */}
-          <Row>{renderPaints()}</Row>
-        </Col>
+                    {paint.name}
+                  </div>
+                </div>
+                <Button
+                  variant="danger"
+                  className="rounded-3"
+                  size="sm"
+                  onClick={() => removeColor(paint?.code)}
+                >
+                  <MdOutlineDeleteOutline />
+                </Button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </Row>
+      {/* Paint Grid */}
+      <Row>{renderPaints()}</Row>
     </Container>
   );
 };
