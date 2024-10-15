@@ -233,58 +233,59 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
       </Row>
 
       {/* Saved Colors Section - Sticky with its own scroll */}
-      <Row
-        className="custom-scrollbar mb-5" // Show this column first on small screens and second on medium+
-      >
-        <div className="saved-colors bg-light p-3 h-100 pt-5">
-          {/* "Paint Your Room" Button inside the saved colors section */}
-          <Button
-            variant="primary"
-            className="w-100 mb-3"
-            onClick={nextStep}
-            disabled={selectedColors.length === 0}
-          >
-            Visualize Room <FaLongArrowAltRight className="fs-3 ms-2" />
-          </Button>
+      <Row className="custom-scrollbar mb-5">
+  <div className="saved-colors bg-light p-3 h-100 pt-5">
+    {/* "Paint Your Room" Button inside the saved colors section */}
+    <Button
+      variant="primary"
+      className="w-100 mb-3"
+      onClick={nextStep}
+      disabled={selectedColors.length === 0}
+    >
+      Visualize Room <FaLongArrowAltRight className="fs-3 ms-2" />
+    </Button>
 
-          <h5 className="fw-bold">Saved Colors</h5>
-          <ul className="list-group">
-            {selectedColors.map((paint, index) => (
-              <li
-                key={index}
-                className="list-group-item d-flex justify-content-between align-items-center"
+    <h5 className="fw-bold">Saved Colors</h5>
+    <div className="row">
+      {selectedColors.map((paint, index) => (
+        <div key={index} className="col-12 col-sm-6 mb-2">
+          <li className="list-group-item d-flex justify-content-between align-items-center bg-white p-1 rounded border">
+            <div className="d-flex align-items-center pt-2">
+              <div
+                style={{
+                  display: "inline-block",
+                  backgroundColor: paint.hex,
+                  width: "2rem",
+                  height: "2rem",
+                  marginRight: "10px",
+                  borderRadius: "10%",
+                }}
+                className="ms-3 mb-1"
+              ></div>
+              <div
+                className="fw-bold block pb-2"
+                style={{ fontSize: ".9rem" }}
               >
-                <div className="d-flex items-center pt-2">
-                  <div
-                    style={{
-                      display: "inline-block",
-                      backgroundColor: paint.hex,
-                      width: "20px",
-                      height: "20px",
-                      marginRight: "10px",
-                      borderRadius: "50%",
-                    }}
-                  ></div>
-                  <div
-                    className="fw-bold block pb-2"
-                    style={{ fontSize: ".9rem" }}
-                  >
-                    {paint.name}
-                  </div>
-                </div>
-                <Button
-                  variant="danger"
-                  className="rounded-3"
-                  size="sm"
-                  onClick={() => removeColor(paint?.code)}
-                >
-                  <MdOutlineDeleteOutline />
-                </Button>
-              </li>
-            ))}
-          </ul>
+                {paint.name}
+              </div>
+            </div>
+            <Button
+              variant="danger"
+              className="rounded-3 me-5"
+              size="sm"
+              onClick={() => removeColor(paint?.code)}
+            >
+              <MdOutlineDeleteOutline />
+            </Button>
+          </li>
         </div>
-      </Row>
+      ))}
+    </div>
+  </div>
+</Row>
+
+
+      
       {/* Paint Grid */}
       <Row>{renderPaints()}</Row>
     </Container>
