@@ -22,6 +22,7 @@ const colorCategories = [
   { name: "Blue", key: "blue" },
   { name: "Red", key: "red" },
   { name: "Purple", key: "purple" },
+  { name: "Gray", key: "gray" },
   { name: "Neutral", key: "neutral" },
   { name: "White", key: "white" },
 ];
