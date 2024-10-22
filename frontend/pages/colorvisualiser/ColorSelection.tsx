@@ -16,11 +16,11 @@ import { useColorContext } from "../../contexts/ColorContext";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 
 const colorCategories = [
+  { name: "Red", key: "red" },
   { name: "Orange", key: "orange" },
   { name: "Yellow", key: "yellow" },
   { name: "Green", key: "green" },
   { name: "Blue", key: "blue" },
-  { name: "Red", key: "red" },
   { name: "Purple", key: "purple" },
   { name: "Gray", key: "gray" },
   { name: "Neutral", key: "neutral" },
@@ -28,7 +28,7 @@ const colorCategories = [
 ];
 
 const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>("orange");
+  const [selectedCategory, setSelectedCategory] = useState<string>("red");
   const [companyPaints, setCompanyPaints] = useState<any>(null);
   const [selectedCompany, setSelectedCompany] = useState<string>("");
   const [selectedLogo, setSelectedLogo] = useState<string>("");
@@ -117,11 +117,20 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
                 }}
                 className="p-2"
               >
-                <span className="fw-bold" style={{ fontSize: ".9rem" }}>
+                <span className="fw-semibold" style={{ fontSize: ".9rem" }}>
                   {paint.name}
                 </span>
                 <br />
                 <span style={{ fontSize: ".8rem" }}>{paint.code}</span>
+
+
+                {/* for testing  */}
+
+                <br />
+                <br />
+                <span className="fw-semibold " style={{ fontSize: ".8rem" }}>{paint.hex}</span>
+
+
               </div>
   
               {selectedColors.some((p) => p.code === paint.code) && (
