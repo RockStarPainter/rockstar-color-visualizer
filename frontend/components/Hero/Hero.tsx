@@ -68,9 +68,21 @@ const Hero: React.FC<HeroProps> = ({ topRef }) => {
         variants={containerVariants}
       >
         <motion.h2 className={styles.title} variants={itemVariants}>
-          WELCOME TO{" "}
-          <span className="font-petit" style={{ color: "#58ab05" }}>Rockstar Color Visualiser</span>
 
+        <span className="font-petit" style={{ color: "#ffc022" }}>
+        WELCOME TO{" "}
+          </span>
+          
+          <span className="font-petit" style={{ color: "#059f41" }}>
+            <span style={{ color: "#d20609" }}>Rock</span>
+            star{" "}
+          </span>
+          <span className="font-petit p-1 rounded" style={{ color:'#022e97' }}>
+            Color Visualiser
+          </span>
+          {/* <span className="font-petit" style={{ color: "#022e97" }}>
+            Visualiser
+          </span> */}
         </motion.h2>
         <motion.p
           className="text-gray-600 leading-relaxed"
@@ -86,8 +98,7 @@ const Hero: React.FC<HeroProps> = ({ topRef }) => {
         </motion.p>
         <motion.div className="mt-8" variants={itemVariants}>
           <Link href="/colorvisualiser">
-            <button className={styles.button}>
-            COLOR VISUALISER</button>
+            <button className={styles.button}>COLOR VISUALISER</button>
           </Link>
         </motion.div>
       </motion.div>

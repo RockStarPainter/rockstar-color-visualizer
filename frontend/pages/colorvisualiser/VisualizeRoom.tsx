@@ -112,7 +112,7 @@ function VisualizeRoom({
                 type="button"
                 onClick={nextStep}
               >
-                Order Paints <FaLongArrowAltRight className="fs-3 ms-2" />
+                Book your service <FaLongArrowAltRight className="fs-3 ms-2" />
               </button>
             </div>
 

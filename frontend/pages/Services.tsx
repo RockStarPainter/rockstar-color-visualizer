@@ -30,10 +30,11 @@ const Services = () => {
   fontSize: '2.5rem', 
   fontWeight: 'bold', 
   marginBottom: '40px', 
-  color: '#323232',
+  color: '#022e97',
   textAlign: 'center',
   backgroundColor: '#f9f9f9'  // camelCase and no semicolon
-}}>
+}}
+>
   Our Services
 </h2>
       <Row>

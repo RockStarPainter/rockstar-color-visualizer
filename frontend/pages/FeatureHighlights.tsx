@@ -6,13 +6,13 @@ import EasyToUseIcon from "../public/images/easy-to-use.svg";
 import Ai from "../public/images/ai-powered.svg"; 
 import Paint from "../public/images/paint-palette.svg"; 
 import Interactive from "../public/images/interactive-display.svg"; 
-import Customize from "../public/images/customizable.svg"; 
-import Eye from "../public/images/view-focus.svg"; 
+import Customize from "../public/images/customizable-orders.svg"; 
+import Eye from "../public/images/real-time-analytics.svg"; 
 
 const FeatureHighlights = () => {
   return (
     <section className={styles.featureHighlightsSection}>
-      <h2 className={styles.sectionTitle}>Key Features</h2>
+      <h2 className={styles.sectionTitle} style={{color:"#022e97"}}>Key Features</h2>
       <div className={styles.stepsContainer}>
         {/* Step 1 - Easy-to-use */}
         <div className={styles.step}>

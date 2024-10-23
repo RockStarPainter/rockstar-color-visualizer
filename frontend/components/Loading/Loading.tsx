@@ -11,7 +11,7 @@ const Loading: React.FC = () => {
         className={styles.loadingGif} // Add any styles you need for the GIF
       />
       {/* Heading below the GIF */}
-      <h1 className={styles.heading} style={{ color: '#58AB05' }}>
+      <h1 className={styles.heading} style={{ color: '#0A9F41' }}>
         Rockstar Color Visualiser
       </h1>
     </div>

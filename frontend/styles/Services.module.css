@@ -8,7 +8,7 @@
 }
 
 .serviceCard {
-  border: 2px solid #58AB05; /* Adds a green border to the cards */
+  border: 2px solid #0A9F41; /* Adds a green border to the cards */
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -38,7 +38,7 @@
 
 /* Background color added to the text area */
 .serviceCardBody {
-  background-color: #58AB05; /* Green background for the text section */
+  background-color: #0A9F41; /* Green background for the text section */
   padding: 20px;
   /* border-radius: 0 0 15px 15px; Rounded corners for the bottom of the card */
 }

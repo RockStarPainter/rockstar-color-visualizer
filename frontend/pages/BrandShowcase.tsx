@@ -1,4 +1,4 @@
-import React from "react";
+ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Image from "next/image";
 import styles from "../styles/BrandShowcase.module.css"; // Import the CSS for styling
@@ -7,7 +7,7 @@ const BrandShowcase = () => {
   return (
     <section className={styles.brandSection}>
       <Container>
-        <h2 className={styles.title}>Our Trusted Brands</h2>
+        <h2 className={styles.title} style={{color:"#022e97"}}>Our Trusted Brands</h2>
         <p className={styles.description}>
           We collaborate with the top industry brands to bring you high-quality colors and finishes.
         </p>

@@ -49,7 +49,7 @@ const AboutUs: React.FC = () => {
 
   return (
     <section ref={sectionRef} className={styles.section}>
-      <h2 className={styles.AboutUsHeading}>About Us</h2>
+      <h2 className={styles.AboutUsHeading} style={{color:"#022e97"}}>About Us</h2>
       <div className={styles.container}>
         {/* Text Section */}
         <motion.div
