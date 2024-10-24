@@ -8,7 +8,18 @@
 }
 
 .serviceCard {
-  border: 2px solid #0A9F41; /* Adds a green border to the cards */
+   /* Create gradient border effect */
+   background-image: linear-gradient(45deg, 
+   rgba(255, 0, 0, 0.3) 0%,    /* Light Red */
+   rgba(255, 255, 0, 0.3) 25%, /* Light Yellow */
+   rgba(0, 0, 255, 0.3) 50%,   /* Light Blue */
+   rgba(0, 128, 0, 0.3) 75%    /* Light Green */
+ );
+ background-origin: border-box;
+ background-clip: padding-box, border-box;
+ padding: 10px; /* Adjust padding for inner content */
+ border: 2px solid transparent;
+ border-radius: 10px; /* Ensure the border radius matches */
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -38,7 +49,7 @@
 
 /* Background color added to the text area */
 .serviceCardBody {
-  background-color: #0A9F41; /* Green background for the text section */
+  background-color: transparent;
   padding: 20px;
   /* border-radius: 0 0 15px 15px; Rounded corners for the bottom of the card */
 }
@@ -47,10 +58,20 @@
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 10px;
-  color: white; /* Change text color to white for contrast */
+  /* Gradient Text Color */
+  background: linear-gradient(45deg, 
+  rgba(255, 255, 0, 0.8) 0%, /* Light Yellow */
+    rgba(255, 0, 0, 0.8) 25%,    /* Light Red */
+    rgba(0, 0, 255, 0.8) 50%,   /* Light Blue */
+    rgba(0, 128, 0, 0.8) 75%    /* Light Green */
+  );
+  background-clip: text;
+  -webkit-background-clip: text; /* WebKit browsers */
+  color: transparent; /* Hide the original color */
+  -webkit-text-fill-color: transparent; /* WebKit browsers */
 }
 
 .serviceDescription {
   font-size: 1rem;
-  color: white; /* Change text color to white for contrast */
+  color: black; /* Change text color to white for contrast */
 }

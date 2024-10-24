@@ -26,13 +26,15 @@
 /* Navbar Links */
 .navlink {
   font-family: "Montserrat", sans-serif;
-  color: #022e97; /* Black to match the logo */
+  color: #022e97; 
   font-weight: bold;
   text-decoration: none;
   font-size: 1.1rem;
   padding: 0.5rem 1rem;
   border-radius: 8px;
   transition: color 0.3s ease, background-color 0.3s ease;
+
+  
 }
 
 .navlink:hover {
