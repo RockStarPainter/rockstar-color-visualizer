@@ -126,10 +126,10 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
 
                 {/* for testing  */}
 
-                {/* <br />
+                <br />
                 <br />
                 <span className="fw-semibold " style={{ fontSize: ".8rem" }}>{paint.hex}</span>
- */}
+
 
               </div>
   
