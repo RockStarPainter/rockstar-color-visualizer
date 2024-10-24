@@ -1,5 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
 
+
+canvas {
+  width: 100%;  /* Ensure the canvas fits its container */
+  max-width: 640px;  /* Set a max width to match the fixed width */
+  height: auto;  /* Maintain the aspect ratio */
+  display: block;  /* Avoid extra margins or padding */
+}
+
+
+
+
 .paint_cards {
   flex: 0 0 calc(100% / 2); /* Default to 2 cards per row for extra small screens */
   max-width: calc(100% / 2);

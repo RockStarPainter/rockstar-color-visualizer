@@ -74,29 +74,56 @@ function ImageSelection({
   };
 
   // Function to handle loading the image (same for both uploaded and preloaded)
+  // const loadImage = async (imageFile: any) => {
+  //   try {
+  //     const img = document.createElement("img");
+  //     img.src = URL.createObjectURL(imageFile);
+  //     img.onload = () => {
+  //       const { height, width, samScale } = handleImageScale(img);
+  //       setModelScale({
+  //         height: height,
+  //         width: width,
+  //         samScale: samScale,
+  //       });
+  //       img.width = width;
+  //       img.height = height;
+  //       setImage(img);
+  //       undoRedo.setImage(img);
+  //       setInitialImage(img);
+  //     };
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   const loadImage = async (imageFile: any) => {
     try {
       const img = document.createElement("img");
       img.src = URL.createObjectURL(imageFile);
+  
       img.onload = () => {
+        // Get scaled dimensions from `handleImageScale`
         const { height, width, samScale } = handleImageScale(img);
-        setModelScale({
-          height: height,
-          width: width,
-          samScale: samScale,
-        });
+  
+        console.log('Using Scaled Dimensions: Width:', width, 'Height:', height);
+  
+        // Set image dimensions for consistent rendering
         img.width = width;
         img.height = height;
-        setImage(img);
+  
+        // Update state with scaled dimensions
+        setModelScale({ height, width, samScale });
+        setImage(img);  // Store the scaled image
         undoRedo.setImage(img);
         setInitialImage(img);
       };
     } catch (error) {
-      console.log(error);
+      console.error('Error loading image:', error);
     }
   };
+  
 
-  // Function to handle preloaded image click
+  // for live api 
   // const handlePreloadedImageClick = async (image: any) => {
   //   handleShowModal();
   //   setIsPreloaded(true); // It's a preloaded image
@@ -133,70 +160,68 @@ function ImageSelection({
   //   }
   // };
 
-  const handlePreloadedImageClick = async (image: any) => {
+  // for hardcoded version
+  // const handlePreloadedImageClick = async (image: any) => {
+  //   handleShowModal();
+  //   setIsPreloaded(true); // It's a preloaded image
+  //   setPreloadedImageUrl(image.image); // Store the preloaded image URL
+
+  //   try {
+  //     // Load the image locally
+  //     const response = await fetch(image.image);
+  //     const blob = await response.blob();
+  //     const file = new File([blob], `${image.name}.jpg`, { type: blob.type });
+
+  //     await loadImage(file);
+
+  //     // Fetch the JSON response from the responsePath field
+  //     const jsonResponse = await fetch(image.responsePath);
+  //     const responseData = await jsonResponse.json();
+
+  //     // Set the initial masks using the fetched response data
+  //     const data = JSON.parse(responseData?.yolo_results.replace(/'/g, '"'));
+  //     setInitialMasks(data?.masks);
+
+  //     console.log("masks loaded in preload: " + data?.masks);
+
+  //     // setInitialMasks(responseData.yolo_results);
+
+  //     setTimeout(() => {
+  //       handleCloseModal();
+  //       nextStep();
+  //     }, 1000);
+  //   } catch (e) {
+  //     console.error("Error fetching or processing preloaded image:", e);
+  //     handleCloseModal();
+  //     setError("Error loading preloaded image. Please try again.");
+  //     setTimeout(() => {
+  //       setError(null);
+  //     }, 2000);
+  //   }
+  // };
+
+  const handlePreloadedImageClick = async (image) => {
     handleShowModal();
-    setIsPreloaded(true); // It's a preloaded image
+    setIsPreloaded(true); // Mark as preloaded
     setPreloadedImageUrl(image.image); // Store the preloaded image URL
 
+  
     try {
-      // Load the image locally
       const response = await fetch(image.image);
       const blob = await response.blob();
       const file = new File([blob], `${image.name}.jpg`, { type: blob.type });
-
-      await loadImage(file);
-
-      // Fetch the JSON response from the responsePath field
-      const jsonResponse = await fetch(image.responsePath);
-      const responseData = await jsonResponse.json();
-
-      // Set the initial masks using the fetched response data
-      const data = JSON.parse(responseData?.yolo_results.replace(/'/g, '"'));
-      setInitialMasks(data?.masks);
-
-      console.log("masks loaded in preload: " + data?.masks);
-
-      // setInitialMasks(responseData.yolo_results);
-
+  
+      await loadImage(file); // Use the same loadImage function for consistency
+  
       setTimeout(() => {
         handleCloseModal();
-        nextStep();
+        nextStep(); // Move to the next step after loading
       }, 1000);
     } catch (e) {
-      console.error("Error fetching or processing preloaded image:", e);
-      handleCloseModal();
-      setError("Error loading preloaded image. Please try again.");
-      setTimeout(() => {
-        setError(null);
-      }, 2000);
+      console.error("Error loading preloaded image:", e);
     }
   };
-
-  const StyledTypography = styled("h1")(({ theme }) => ({
-    color: "#323232",
-    fontWeight: "bold",
-    textTransform: "uppercase",
-    letterSpacing: "0.1em",
-    textAlign: "center",
-    marginBottom: theme.spacing(4),
-    padding: theme.spacing(2),
-    background: "linear-gradient(45deg, #719E37, #F7F7F9)",
-    borderRadius: theme.shape.borderRadius,
-    boxShadow: theme.shadows[3],
-    fontSize: "1rem", // Default font size for small screens
-    [theme.breakpoints.up("sm")]: {
-      fontSize: "1rem", // Font size for medium screens and up
-      padding: theme.spacing(3),
-    },
-    [theme.breakpoints.up("md")]: {
-      fontSize: "1.5rem", // Font size for large screens and up
-      padding: theme.spacing(4),
-    },
-    [theme.breakpoints.up("lg")]: {
-      fontSize: "1.6rem", // Font size for extra-large screens
-      padding: theme.spacing(5),
-    },
-  }));
+  
 
   return (
     <div className="pt-5">

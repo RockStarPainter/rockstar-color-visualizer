@@ -123,43 +123,93 @@ const ImageMaskOverlay = ({
   };
 
   // Draw the image and masks on the canvas
+  // const drawImageAndMasks = () => {
+  //   const canvas = canvasRef.current;
+  //   const ctx = canvas!.getContext("2d");
+  //   const image = new Image();
+
+  //   // Load the uploaded image into the canvas
+  //   image.src = imgSrc;
+
+  //   image.onload = () => {
+  //     // Set canvas size based on image dimensions
+  //     const aspectRatio = image.width / image.height;
+  //     canvas!.width = 640; // Fixed width
+  //     canvas!.height = 670 / aspectRatio; // Adjust height to maintain aspect ratio
+  //     ctx!.drawImage(image, 0, 0, canvas!.width, canvas!.height); // Draw the image on the canvas
+
+  //     // Ensure mask data is available
+  //     if (masks?.length) {
+  //       // Draw each mask segment
+  //       masks.forEach((maskSegment: any, segmentIndex: any) => {
+  //         const segmentColor = getSegmentColor(segmentIndex); // Get color based on the segment
+  //         ctx!.fillStyle = segmentColor;
+
+  //         maskSegment.forEach(([x, y]: [number, number]) => {
+  //           // Ensure the point is within canvas bounds
+  //           if (x >= 0 && y >= 0 && x < canvas!.width && y < canvas!.height) {
+  //             ctx!.fillRect(x, y, 1, 1); // Draw small mask pixels for clarity
+  //           }
+  //         });
+  //       });
+  //     } else {
+  //       console.error("No valid mask data available.");
+  //     }
+
+  //     // Export the image whenever it's redrawn
+  //     exportImage(); // Export the canvas as an image and pass to parent
+  //   };
+  // };
+
+  let fixedHeight
   const drawImageAndMasks = () => {
-    const canvas = canvasRef.current;
-    const ctx = canvas!.getContext("2d");
-    const image = new Image();
+  const canvas = canvasRef.current;
+  const ctx = canvas!.getContext("2d");
+  const image = new Image();
 
-    // Load the uploaded image into the canvas
-    image.src = imgSrc;
+  image.src = imgSrc; // Use the same source for both preloaded and uploaded images
 
-    image.onload = () => {
-      // Set canvas size based on image dimensions
-      const aspectRatio = image.width / image.height;
-      canvas!.width = 640; // Fixed width
-      canvas!.height = 670 / aspectRatio; // Adjust height to maintain aspect ratio
-      ctx!.drawImage(image, 0, 0, canvas!.width, canvas!.height); // Draw the image on the canvas
+  image.onload = () => {
+    // Calculate the aspect ratio and set consistent dimensions
+    const aspectRatio = image.width / image.height;
+    const fixedWidth = 640; // Fixed canvas width
+    fixedHeight = fixedWidth / aspectRatio; // Adjust height based on aspect ratio
 
-      // Ensure mask data is available
-      if (masks?.length) {
-        // Draw each mask segment
-        masks.forEach((maskSegment: any, segmentIndex: any) => {
-          const segmentColor = getSegmentColor(segmentIndex); // Get color based on the segment
-          ctx!.fillStyle = segmentColor;
+    console.log('Image Width:', image.width, 'Image Height:', image.height);
+    console.log('Canvas Width:', fixedWidth, 'Canvas Height:', fixedHeight);
 
-          maskSegment.forEach(([x, y]: [number, number]) => {
-            // Ensure the point is within canvas bounds
-            if (x >= 0 && y >= 0 && x < canvas!.width && y < canvas!.height) {
-              ctx!.fillRect(x, y, 1, 1); // Draw small mask pixels for clarity
-            }
-          });
+    // Set canvas dimensions
+    canvas!.width = fixedWidth;
+    canvas!.height = fixedHeight;
+
+    // Draw the image on the canvas
+    ctx!.drawImage(image, 0, 0, fixedWidth, fixedHeight);
+
+    // Check if masks are available
+    if (masks?.length) {
+      masks.forEach((maskSegment: any, segmentIndex: any) => {
+        const segmentColor = getSegmentColor(segmentIndex); // Get color for mask segment
+        ctx!.fillStyle = segmentColor;
+
+        maskSegment.forEach(([x, y]: [number, number]) => {
+          // Scale the mask coordinates to fit the canvas dimensions
+          const scaledX = (x / image.width) * fixedWidth;
+          const scaledY = (y / image.height) * fixedHeight;
+
+          if (scaledX >= 0 && scaledY >= 0 && scaledX < fixedWidth && scaledY < fixedHeight) {
+            ctx!.fillRect(scaledX, scaledY, 1, 1); // Draw mask segment
+          }
         });
-      } else {
-        console.error("No valid mask data available.");
-      }
+      });
+    } else {
+      console.error("No valid mask data available.");
+    }
 
-      // Export the image whenever it's redrawn
-      exportImage(); // Export the canvas as an image and pass to parent
-    };
+    // Export the image after rendering
+    exportImage(); // Export the canvas content as an image
   };
+};
+
 
   // Redraw the image and masks whenever mask data, imgSrc, or currentMaskColors changes
   useEffect(() => {
@@ -175,7 +225,7 @@ const ImageMaskOverlay = ({
         ref={canvasRef}
         onClick={handleClick} // Handle click events
         onMouseMove={handleMouseMove} // Handle mouse move events
-        style={{ border: "1px solid black", width: "100%", height: "100%" }}
+        style={{ width: "100%", height: fixedHeight }}
       />
     </div>
   );
