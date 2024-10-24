@@ -49,7 +49,7 @@ const AboutUs: React.FC = () => {
 
   return (
     <section ref={sectionRef} className={styles.section}>
-      <h2 className={styles.AboutUsHeading}>About Us</h2>
+      <h2 className={styles.AboutUsHeading} style={{color:"#022e97"}}>About Us</h2>
       <div className={styles.container}>
         {/* Text Section */}
         <motion.div
@@ -64,7 +64,7 @@ const AboutUs: React.FC = () => {
             className={styles.paragraph}
             initial={{ x: -100, opacity: 0 }}
             animate={inView ? { x: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }} // Faster transition and reduced delay
+            transition={{ duration: 0.3, delay: 0.1 }} // Faster transition and reduced delay
           >
             To elevate and enhance every space we touch, bringing beauty and
             inspiration to homes and communities, one expertly crafted project
@@ -77,7 +77,7 @@ const AboutUs: React.FC = () => {
             className={styles.paragraph}
             initial={{ x: -100, opacity: 0 }}
             animate={inView ? { x: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.2 }} // Faster transition and reduced delay
+            transition={{ duration: 0.3, delay: 0.2 }} // Faster transition and reduced delay
           >
             Rockstar Painting is a Denver-based painting company known for our
             attention to detail, commitment to quality, and exceptional customer
@@ -95,7 +95,7 @@ const AboutUs: React.FC = () => {
             className={styles.paragraph}
             initial={{ x: -100, opacity: 0 }}
             animate={inView ? { x: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.3 }} // Faster transition and reduced delay
+            transition={{ duration: 0.3, delay: 0.3 }} // Faster transition and reduced delay
           >
             Rooted in craftsmanship, Rockstar Painting Denver has built a
             reputation for reliability and excellence, consistently enhancing

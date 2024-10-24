@@ -26,16 +26,19 @@
 /* Navbar Links */
 .navlink {
   font-family: "Montserrat", sans-serif;
-  color: #000000; /* Black to match the logo */
+  color: #022e97; 
+  font-weight: bold;
   text-decoration: none;
   font-size: 1.1rem;
   padding: 0.5rem 1rem;
   border-radius: 8px;
   transition: color 0.3s ease, background-color 0.3s ease;
+
+  
 }
 
 .navlink:hover {
-  background-color: #A5D37E; /* Green on hover to match the logo */
+  background-color: #0A9F41; /* Green on hover to match the logo */
   color: #ffffff;
   transform: translateY(-3px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);

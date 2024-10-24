@@ -223,7 +223,7 @@ function ImageSelection({
         {/* Preloaded Images Section */}
         <Container fluid className={styles.preloadedSection}>
           <h2 className={`${HowItWorksStyles.sectionTitle} text-center`}>
-            Try One of Our Preloaded Images
+            Try Sample Images
           </h2>
 
           <div className={styles.preloadedGrid}>
@@ -241,7 +241,7 @@ function ImageSelection({
                   />
                 </div>
                 <div className={styles.preloadedCardContent}>
-                  <h4 className={styles.preloadedCardTitle}>{image.name}</h4>
+                  <h4 className={`${styles.preloadedCardTitle} text-capitalize`}>{image.name}</h4>
                 </div>
               </div>
             ))}

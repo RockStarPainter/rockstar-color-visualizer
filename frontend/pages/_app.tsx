@@ -13,7 +13,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { ColorProvider } from "../contexts/ColorContext";
 import NavBar from "../components/NavBar/NavBar";
 import Footer from "../components/Footer/Footer";
- // Import the Loading component
+// Import the Loading component
 import { useRouter } from "next/router"; // Import the useRouter hook
 import Loading from "../components/Loading/Loading";
 
@@ -27,7 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
     const initmodel = async () => {
       try {
         // Artificial delay for demonstration purposes
-        await new Promise((resolve) => setTimeout(resolve, 3000));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
         // Load models
         const session = await ort.InferenceSession.create(
@@ -77,22 +77,26 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      {loading && <Loading />} {/* Show loading screen during initial load and route changes */}
-      <AppContextProvider>
-        <ColorProvider>
-          <>
-            <ToastContainer
-              position="bottom-left"
-              progressStyle={{ visibility: "hidden" }}
-              autoClose={1000}
-            />
-            <NavBar />
-            <Component {...pageProps} model={model} vithModel={vithModel} />
-            <Analytics />
-            <Footer />
-          </>
-        </ColorProvider>
-      </AppContextProvider>
+      {loading ? (
+        <Loading />
+      ) : (
+        <AppContextProvider>
+          <ColorProvider>
+            <>
+              <ToastContainer
+                position="bottom-left"
+                progressStyle={{ visibility: "hidden" }}
+                autoClose={1000}
+              />
+              <NavBar />
+              <Component {...pageProps} model={model} vithModel={vithModel} />
+              <Analytics />
+              <Footer />
+            </>
+          </ColorProvider>
+        </AppContextProvider>
+      )}{" "}
+      {/* Show loading screen during initial load and route changes */}
     </>
   );
 }

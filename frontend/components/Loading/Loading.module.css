@@ -16,4 +16,5 @@
   margin-top: 20px; /* Space between GIF and heading */
   font-size: 2rem; /* Font size */
   text-align: center; /* Center the heading */
+  color: '#0A9F41' !important
 }

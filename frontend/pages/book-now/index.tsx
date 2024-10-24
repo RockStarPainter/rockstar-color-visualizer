@@ -49,6 +49,7 @@ const BookingForm = () => {
                       {...register("firstName", {
                         required: "First Name is required",
                       })}
+                      style={{ backgroundColor: "white" }}
                     />
                     <ErrorMessage error={errors.firstName} />
                   </Form.Group>
@@ -59,6 +60,7 @@ const BookingForm = () => {
                     <Form.Control
                       type="text"
                       placeholder="Last Name"
+                      style={{ backgroundColor: "white" }}
                       {...register("lastName", {
                         required: "Last Name is required",
                       })}
@@ -87,6 +89,7 @@ const BookingForm = () => {
                     <Form.Control
                       type="email"
                       placeholder="Your Email"
+                      style={{ backgroundColor: "white" }}
                       {...register("email", {
                         required: "Email is required",
                         pattern: {
@@ -105,6 +108,7 @@ const BookingForm = () => {
                 <Form.Control
                   type="text"
                   placeholder="Your Address"
+                  style={{ backgroundColor: "white" }}
                   {...register("address", { required: "Address is required" })}
                 />
                 <ErrorMessage error={errors.address} />
@@ -115,6 +119,7 @@ const BookingForm = () => {
                 <Form.Control
                   type="text"
                   placeholder="Project Address (If Different)"
+                  style={{ backgroundColor: "white" }}
                   {...register("projectAddress")}
                 />
               </Form.Group>
@@ -126,6 +131,7 @@ const BookingForm = () => {
                     <Form.Control
                       type="text"
                       placeholder="Your City"
+                      style={{ backgroundColor: "white" }}
                       {...register("city", { required: "City is required" })}
                     />
                     <ErrorMessage error={errors.city} />
@@ -137,6 +143,7 @@ const BookingForm = () => {
                     <Form.Control
                       type="text"
                       placeholder="Your State / Province / Region"
+                      style={{ backgroundColor: "white" }}
                       {...register("state", { required: "State is required" })}
                     />
                     <ErrorMessage error={errors.state} />
@@ -148,6 +155,7 @@ const BookingForm = () => {
                     <Form.Control
                       type="text"
                       placeholder="Your ZIP / Postal"
+                      style={{ backgroundColor: "white" }}
                       {...register("zip", {
                         required: "ZIP / Postal is required",
                       })}
@@ -161,6 +169,7 @@ const BookingForm = () => {
                 <Form.Check
                   type="checkbox"
                   label="I agree to receive SMS communications from Rockstar Painting Denver"
+                  className="mt-2"
                   {...register("agree", {
                     required: "You must agree to continue",
                   })}
@@ -264,6 +273,7 @@ const BookingForm = () => {
                 <Form.Control
                   as="textarea"
                   rows={4}
+                  style={{ backgroundColor: "white" }}
                   {...register("note")}
                   placeholder="Add additional information here"
                 />

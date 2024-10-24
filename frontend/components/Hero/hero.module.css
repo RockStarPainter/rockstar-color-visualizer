@@ -22,6 +22,7 @@
     max-height: 70vh;
     /* object-fit: cover; */
     border-radius: 0.5rem;
+    margin-right: 7%;
   }
   
   /* Text wrapper */
@@ -30,14 +31,32 @@
     flex-direction: column;
     justify-content: center;
     flex: 1; /* Ensures the video and text share the available space equally */
+    margin: 0 5%;
   }
   
   /* Title styling */
+.title {
+  font-weight: bold;
+  font-size: 6vw; /* Responsive font size based on viewport width */
+  color: #333; /* Text color */
+}
+
+/* For medium devices (tablets) */
+@media (min-width: 768px) {
   .title {
-    font-weight: bold;
-    font-size: 3rem; /* Customize size for better visibility */
-    color: #333; /* Text color */
+    font-size: 4rem; /* Adjust font size for tablets */
   }
+}
+
+/* For large devices (desktops) */
+@media (min-width: 1024px) {
+  .title {
+    font-size: 3rem; /* Adjust font size for desktops */
+  }
+}
+
+
+  
   
   /* Button styling */
   .button {
@@ -45,16 +64,25 @@
     padding: 1rem 2rem;
     font-size: 1rem;
     font-weight: 600;
-    color: black;
-    background-color: #58AB05;
+    
+    background: linear-gradient(45deg, 
+    rgba(255, 0, 0, 0.5) 0%,    /* Light Red */
+    rgba(255, 255, 0, 0.5) 25%, /* Light Yellow */
+    rgba(0, 0, 255, 0.5) 50%,   /* Light Blue */
+    rgba(0, 128, 0, 0.5) 75%    /* Light Green */
+  ); /* Softer gradient for a professional look */
+  background-color: #059f41;
+
+    color: white;
+    opacity: .8;
     border: none;
     border-radius: 0.5rem;
     transition: background-color 0.3s ease;
   }
   
   .button:hover {
-    background-color: black;
-    color: #58AB05;
+    color: white;
+    background-color: #d20609;
   }
   
   /* Responsive design: stack text and video vertically on small screens */
