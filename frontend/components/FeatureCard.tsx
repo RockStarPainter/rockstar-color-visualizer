@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../styles/FeatureHighlights.module.css";
 
-function FeatureCard({ icon, title, description }) {
+function FeatureCard({ icon, title, description }: any) {
   return (
     <div className={`${styles.step} border shadow-sm rounded-3`}>
       {icon}
