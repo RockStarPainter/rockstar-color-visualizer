@@ -52,6 +52,8 @@ function ImageSelection({
         formData
       );
 
+      console.log("live api masks: " + JSON.stringify(res.data));
+
       const data = JSON.parse(res?.data?.yolo_results.replace(/'/g, '"'));
       setInitialMasks(data?.masks);
 
@@ -96,6 +98,7 @@ function ImageSelection({
     }
   };
 
+  // for live  api hit
   // Function to handle preloaded image click
   // const handlePreloadedImageClick = async (image: any) => {
   //   handleShowModal();
@@ -143,18 +146,19 @@ function ImageSelection({
       const response = await fetch(image.image);
       const blob = await response.blob();
       const file = new File([blob], `${image.name}.jpg`, { type: blob.type });
-
       await loadImage(file);
 
       // Fetch the JSON response from the responsePath field
       const jsonResponse = await fetch(image.responsePath);
       const responseData = await jsonResponse.json();
 
+      console.log("preloaded masks: " + JSON.stringify(responseData));
+
       // Set the initial masks using the fetched response data
       const data = JSON.parse(responseData?.yolo_results.replace(/'/g, '"'));
       setInitialMasks(data?.masks);
 
-      console.log("masks loaded in preload: " + data?.masks);
+      // console.log("masks loaded in preload: " + data?.masks);
 
       // setInitialMasks(responseData.yolo_results);
 
@@ -171,32 +175,6 @@ function ImageSelection({
       }, 2000);
     }
   };
-
-  const StyledTypography = styled("h1")(({ theme }) => ({
-    color: "#323232",
-    fontWeight: "bold",
-    textTransform: "uppercase",
-    letterSpacing: "0.1em",
-    textAlign: "center",
-    marginBottom: theme.spacing(4),
-    padding: theme.spacing(2),
-    background: "linear-gradient(45deg, #719E37, #F7F7F9)",
-    borderRadius: theme.shape.borderRadius,
-    boxShadow: theme.shadows[3],
-    fontSize: "1rem", // Default font size for small screens
-    [theme.breakpoints.up("sm")]: {
-      fontSize: "1rem", // Font size for medium screens and up
-      padding: theme.spacing(3),
-    },
-    [theme.breakpoints.up("md")]: {
-      fontSize: "1.5rem", // Font size for large screens and up
-      padding: theme.spacing(4),
-    },
-    [theme.breakpoints.up("lg")]: {
-      fontSize: "1.6rem", // Font size for extra-large screens
-      padding: theme.spacing(5),
-    },
-  }));
 
   return (
     <div className="pt-5">
@@ -241,7 +219,11 @@ function ImageSelection({
                   />
                 </div>
                 <div className={styles.preloadedCardContent}>
-                  <h4 className={`${styles.preloadedCardTitle} text-capitalize`}>{image.name}</h4>
+                  <h4
+                    className={`${styles.preloadedCardTitle} text-capitalize`}
+                  >
+                    {image.name}
+                  </h4>
                 </div>
               </div>
             ))}

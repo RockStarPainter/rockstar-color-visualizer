@@ -15,7 +15,6 @@ const ImageMaskOverlay = ({
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [currentMaskColors, setCurrentMaskColors] = useState<string[]>([]); // Array to store mask colors
-  
 
   // Function to map segment index to color or selectedColor if clicked
   const getSegmentColor = (segmentIndex: any) => {
@@ -133,9 +132,14 @@ const ImageMaskOverlay = ({
 
     image.onload = () => {
       // Set canvas size based on image dimensions
-      const aspectRatio = image.width / image.height;
-      canvas!.width = 640; // Fixed width
-      canvas!.height = 670 / aspectRatio; // Adjust height to maintain aspect ratio
+      // const aspectRatio = image.width / image.height;
+      // canvas!.width = 640; // Fixed width
+      // canvas!.height = 670 / aspectRatio; // Adjust height to maintain aspect ratio
+
+      canvas!.width =640
+      canvas!.height = 450
+
+
       ctx!.drawImage(image, 0, 0, canvas!.width, canvas!.height); // Draw the image on the canvas
 
       // Ensure mask data is available
@@ -166,6 +170,8 @@ const ImageMaskOverlay = ({
     if (masks && imgSrc) {
       drawImageAndMasks();
     }
+
+    console.log("masks: ", masks);
   }, [masks, imgSrc, currentMaskColors]);
 
   return (
