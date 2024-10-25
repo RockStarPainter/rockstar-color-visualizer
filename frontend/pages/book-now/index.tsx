@@ -9,6 +9,8 @@ import {
   exteriorFields,
   interiorFields,
 } from "../../public/order-form-fields/FieldsData";
+import styles from "../../components/Hero/hero.module.css";
+
 
 const BookingForm = () => {
   const {
@@ -35,9 +37,18 @@ const BookingForm = () => {
         <Col md={10}>
           <div
             className="p-4 rounded booking-form"
-            style={{ backgroundColor: "#7ced4a" }}
+            style={{
+              background: `linear-gradient(45deg, 
+              rgba(255, 0, 0, 0.3) 0%,    
+              rgba(255, 255, 0, 0.3) 25%, 
+              rgba(0, 0, 255, 0.3) 50%,   
+              rgba(0, 128, 0, 0.3) 75%    
+            )`,
+            }}
           >
-            <h2 className="text-center mb-4">Book Your Service Now</h2>
+            <h2 className="text-center mb-4 fw-bold" style={{ color: "black" }}>
+              Book Your Service Now
+            </h2>
             <Form onSubmit={handleSubmit(onSubmit)}>
               <Row>
                 <Col md={6}>
@@ -279,7 +290,7 @@ const BookingForm = () => {
                 />
               </Form.Group>
 
-              <Button variant="primary" type="submit" className="mt-4 w-100">
+              <Button className={`${styles.button} mt-4 w-100 py-2`} type="submit" >
                 Submit
               </Button>
             </Form>

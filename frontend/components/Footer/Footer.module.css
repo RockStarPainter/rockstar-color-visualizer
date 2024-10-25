@@ -7,7 +7,7 @@
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr; /* Three equal sections for larger screens */
-  gap: 19rem;
+  gap: 10rem;
   align-items: start;
 }
 
@@ -150,6 +150,7 @@
   display: flex;
   gap: 1rem;  /* Adjust the space between icons */
   margin-top: 1rem;
+  margin-left: 0rem;
 }
 
 .socialIcons a {

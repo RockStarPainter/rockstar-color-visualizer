@@ -188,7 +188,7 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
                 border:
                   selectedCompany === company.companyName
                     ? "3px solid #007bff"
-                    : "none",
+                    : "3px solid lightgray",
                 borderRadius: "5%",
                 padding: "10px",
                 background:

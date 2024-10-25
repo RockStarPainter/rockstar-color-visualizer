@@ -18,6 +18,9 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons"; // Removed faInfoCircle and faCog
 import styles from "./Footer.module.css";
+import { PiGlobeBold } from "react-icons/pi";
+import { FaXTwitter } from "react-icons/fa6";
+import { SiGooglemaps } from "react-icons/si";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -72,7 +75,7 @@ const Footer = () => {
         className={`${styles.footer} bg-black/25 mt-5`}
       >
         <div className={styles.container}>
-          {/* Left Section: Logo */}
+          {/* Logo */}
           <motion.div
             variants={itemVariants}
             className={styles.logo}
@@ -88,59 +91,6 @@ const Footer = () => {
                 quality={100}
               />
             </Link>
-          </motion.div>
-
-          {/* Center Section: Features */}
-          <motion.div variants={itemVariants} className={styles.features}>
-            <h3 className={styles.heading} style={{ color: "#022e97" }}>
-              Features
-            </h3>
-            <Link href="/" style={{ textDecoration: "none" }}>
-              <p className={styles.link}>
-                <FontAwesomeIcon icon={faHome} className={styles.icon} />{" "}
-                <span> Home</span>
-              </p>
-            </Link>
-            <Link href="/contact" style={{ textDecoration: "none" }}>
-              <p className={styles.link}>
-                <FaEnvelope className={styles.icon} /> <span>Contact Us</span>
-              </p>
-            </Link>
-            <Link href="/colorvisualiser" style={{ textDecoration: "none" }}>
-              <p className={styles.link}>
-                <FaPalette className={styles.icon} />{" "}
-                <span>Color Visualizer</span>
-              </p>
-            </Link>
-          </motion.div>
-
-          {/* Right Section: Contact Us */}
-          <motion.div variants={itemVariants} className={styles.contact}>
-            <h3 className={styles.heading} style={{ color: "#022e97" }}>
-              Contact Us
-            </h3>
-            <div className={styles.contactItem}>
-              <FaPhone className={styles.icon} />
-              <a href="tel:+7207715791"> (720) 771-5791</a>
-            </div>
-            <div className={styles.contactItem}>
-              <FaEnvelope className={styles.icon} />
-              <a href="mailto:rockstarpainting33@gmail.com">
-                rockstarpainting33@gmail.com
-              </a>
-            </div>
-            <div className={styles.contactItem}>
-              <FaClock className={styles.icon} />
-              <span>Mon to Sat (8AM - 7PM)</span>
-            </div>
-            <div className={styles.contactItem}>
-              <FaClock className={styles.icon} />
-              <span>Sunday Off</span>
-            </div>
-            <div className={styles.contactItem}>
-              <FaMapMarkerAlt className={styles.icon} />
-              <span>Denver, CO 80247</span>
-            </div>
 
             <div className={styles.socialIcons}>
               <a
@@ -178,10 +128,112 @@ const Footer = () => {
               >
                 <FaPinterest style={{ color: "#d20609" }} />
               </a>
+              <a
+                href="https://www.bbb.org/us/co/denver/profile/painting-contractors/rockstar-painting-inc-1296-90266965"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <PiGlobeBold style={{ color: "gray" }} />
+              </a>
+              <a
+                href="https://twitter.com/rockstar_paint"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaXTwitter style={{ color: "gblackray" }} />
+              </a>
+              <a
+                href="https://www.google.com/maps/place/Rockstar+Painting/@39.6940586,-104.8907077,15z/data=!4m6!3m5!1s0x876c7d136701949d:0x257ec56bc0820c23!8m2!3d39.6940586!4d-104.8907077!16s%2Fg%2F11j8z2k2p2?hl=en&entry=ttu&g_ep=EgoyMDI0MTAyMy4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <SiGooglemaps style={{ color: "gblackray" }} />
+              </a>
             </div>
           </motion.div>
+
+          {/* Contact Us */}
+          <motion.div variants={itemVariants} className={styles.contact}>
+            <h3 className={styles.heading} style={{ color: "#022e97" }}>
+              Contact Us
+            </h3>
+            <div className={styles.contactItem}>
+              <FaPhone className={styles.icon} />
+              <a href="tel:+7207715791"> (720) 771-5791</a>
+            </div>
+            <div className={styles.contactItem}>
+              <FaEnvelope className={styles.icon} />
+              <a href="mailto:rockstarpainting33@gmail.com">
+                rockstarpainting33@gmail.com
+              </a>
+            </div>
+            <div className={styles.contactItem}>
+              <FaClock className={styles.icon} />
+              <span>Mon to Sat (8AM - 7PM)</span>
+            </div>
+            <div className={styles.contactItem}>
+              <FaClock className={styles.icon} />
+              <span>Sunday Off</span>
+            </div>
+            <div className={styles.contactItem}>
+              <FaMapMarkerAlt className={styles.icon} />
+              <span>Denver, CO 80247</span>
+            </div>
+          </motion.div>
+
+          {/* features section */}
+          <motion.div variants={itemVariants} className={styles.features}>
+            <h3 className={styles.heading} style={{ color: "#022e97" }}>
+              Features
+            </h3>
+            <Link href="/" style={{ textDecoration: "none" }}>
+              <p className={styles.link}>
+                <FontAwesomeIcon icon={faHome} className={styles.icon} />{" "}
+                <span> Home</span>
+              </p>
+            </Link>
+            <Link href="/contact" style={{ textDecoration: "none" }}>
+              <p className={styles.link}>
+                <FaEnvelope className={styles.icon} /> <span>Contact Us</span>
+              </p>
+            </Link>
+            <Link href="/colorvisualiser" style={{ textDecoration: "none" }}>
+              <p className={styles.link}>
+                <FaPalette className={styles.icon} />{" "}
+                <span>Color Visualizer</span>
+              </p>
+            </Link>
+            <Link
+              href="https://rockstarpaintingdenver.com/"
+              target="_blank"
+              style={{ textDecoration: "none" }}
+            >
+              <p className={styles.link}>
+                <FontAwesomeIcon icon={faHome} className={styles.icon} />{" "}
+                <span> RockstarPainting</span>
+              </p>
+            </Link>
+          </motion.div>
+
+          {/* website section */}
+          {/* <motion.div variants={itemVariants} className={styles.features}>
+            <h3 className={styles.heading} style={{ color: "#022e97" }}>
+              Website
+            </h3>
+            <Link
+              href="https://rockstarpaintingdenver.com/"
+              target="_blank"
+              style={{ textDecoration: "none" }}
+            >
+              <p className={styles.link}>
+                <FontAwesomeIcon icon={faHome} className={styles.icon} />{" "}
+                <span> RockstarPainting</span>
+              </p>
+            </Link>
+          </motion.div> */}
         </div>
 
+        {/* Footer Bottom with Animation */}
         <div className={styles.footerBottom}>
           <motion.div
             className={styles.footerAnimation}
