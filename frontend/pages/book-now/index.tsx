@@ -49,126 +49,59 @@ const BookingForm = () => {
 
   const generatePdfAndSendEmail = async (formData) => {
     try {
-      const pdf = new jsPDF("p", "mm", "a4");
-      let yPosition = 10; // Vertical position on the PDF
-
-      // Add a colorful header
-      pdf.setFontSize(22);
-      pdf.setTextColor(255, 0, 0); // Red color
-      pdf.text("Service Booking Confirmation", 10, yPosition);
-      yPosition += 10;
-
-      pdf.setTextColor(0, 0, 0); // Reset to black
-      pdf.setFontSize(12);
-
-      // Add customer information
-      pdf.text(`Customer Name: ${formData.firstName} ${formData.lastName}`, 10, yPosition);
-      yPosition += 10;
-      pdf.text(`Phone: ${formData.phone}`, 10, yPosition);
-      yPosition += 10;
-      pdf.text(`Email: ${formData.email}`, 10, yPosition);
-      yPosition += 10;
-      pdf.text(`Address: ${formData.address}`, 10, yPosition);
-      yPosition += 10;
-
-      if (formData.projectAddress) {
-        pdf.text(`Project Address: ${formData.projectAddress}`, 10, yPosition);
-        yPosition += 10;
-      }
-
-      pdf.text(`City: ${formData.city}`, 10, yPosition);
-      yPosition += 10;
-      pdf.text(`State: ${formData.state}`, 10, yPosition);
-      yPosition += 10;
-      pdf.text(`ZIP: ${formData.zip}`, 10, yPosition);
-      yPosition += 10;
-
-      pdf.setFontSize(16);
-      pdf.setTextColor(0, 128, 255); // Blue color
-      pdf.text(`Selected Service: ${formData.serviceType}`, 10, yPosition);
-      yPosition += 10;
-
-      // Conditional rendering for interior and exterior services
-      if (formData.serviceType === "interior") {
-        pdf.setFontSize(14);
-        pdf.setTextColor(0, 0, 0); // Black color
-        pdf.text("Interior Services Selected:", 10, yPosition);
-        yPosition += 10;
-
-        interiorFields.forEach((field) => {
-          const includeField = formData[`include_${field.key}`];
-          const paintOptions = [];
-
-          if (formData[`paint_${field.key}_wall`]) paintOptions.push("Wall");
-          if (formData[`paint_${field.key}_base`]) paintOptions.push("Base");
-          if (formData[`paint_${field.key}_ceiling`]) paintOptions.push("Ceiling");
-          if (formData[`paint_${field.key}_closet`]) paintOptions.push("Closet");
-          if (formData[`paint_${field.key}_door`]) paintOptions.push("Door");
-
-          pdf.text(`${field.name}: ${includeField}`, 10, yPosition);
-          yPosition += 10;
-          pdf.text(`Paint Options: ${paintOptions.join(", ")}`, 10, yPosition);
-          yPosition += 10;
-        });
-      } else if (formData.serviceType === "exterior") {
-        pdf.setFontSize(14);
-        pdf.setTextColor(0, 0, 0); // Black color
-        pdf.text("Exterior Services Selected:", 10, yPosition);
-        yPosition += 10;
-
-        exteriorFields.forEach((field) => {
-          const includeField = formData[`include_${field.key}`];
-          pdf.text(`${field.name}: ${includeField}`, 10, yPosition);
-          yPosition += 10;
-        });
-
-        // Add repair options if selected
-        pdf.text("Repair Options:", 10, yPosition);
-        yPosition += 10;
-        const repairs = [];
-        if (formData.repair_siding) repairs.push("Siding");
-        if (formData.repair_facial) repairs.push("Facial");
-        if (formData.repair_trim) repairs.push("Trim");
-        if (formData.repair_soffits) repairs.push("Soffits");
-        if (formData.repair_na) repairs.push("N/A");
-
-        pdf.text(repairs.join(", "), 10, yPosition);
-        yPosition += 10;
-      }
-
-      // Add the note field, if available
-      if (formData.note) {
-        pdf.setFontSize(14);
-        pdf.setTextColor(0, 128, 0); // Green color
-        pdf.text("Additional Notes:", 10, yPosition);
-        yPosition += 10;
-
-        pdf.setFontSize(12);
-        pdf.setTextColor(0, 0, 0); // Black color
-        pdf.text(formData.note, 10, yPosition);
-        yPosition += 10;
-      }
-
-      // Generate the PDF Blob
-      const pdfBlob = pdf.output("blob");
-
+      // Generate PDF using HTML sections
+      const generatePdf = async () => {
+        if (typeof window === "undefined") return;
+  
+        const pdf = new jsPDF("p", "mm", "a4");
+        const pdfWidth = 210; // A4 width in mm
+        const pdfHeight = 297; // A4 height in mm
+        const screenWidth = 1500;
+        const screenHeight = (pdfHeight / pdfWidth) * screenWidth;
+  
+        const addSectionToPdf = async (section: any, pdf: any, html?: any, doHtml = false) => {
+          const canvas = await html2canvas(
+            section,
+            doHtml
+              ? { scale: 2, useCORS: true, width: screenWidth, windowWidth: screenWidth }
+              : { scale: 2, useCORS: true, width: screenWidth, height: screenHeight, windowWidth: screenWidth }
+          );
+  
+          const imgData = canvas.toDataURL("image/jpeg", 0.5);
+          const imgWidth = pdfWidth;
+          const imgHeight = (pdf.getImageProperties(imgData).height * pdfWidth) / pdf.getImageProperties(imgData).width;
+  
+          await pdf.insertPage(1).addImage(imgData, "JPEG", 6, 5, imgWidth, imgHeight, undefined, "FAST");
+        };
+  
+        // Example sections based on your new logic
+        await addSectionToPdf(document.getElementById("additional-notes"), pdf);
+        await addSectionToPdf(document.getElementById("exterior-services"), pdf);
+        await addSectionToPdf(document.getElementById("interior-services"), pdf);
+        await addSectionToPdf(document.getElementById("personal-details"), pdf);
+        
+        return pdf.output("blob");
+      };
+  
+      const pdfBlob = await generatePdf();
+  
       // Upload the PDF to Cloudinary
       const pdfUrl = await uploadPdfToCloudinary(pdfBlob);
-
+  
       if (!pdfUrl) {
         toast.error("Failed to upload PDF.");
         return;
       }
-
-      console.log("PDF uploaded to Cloudinary:", pdfUrl); // Confirm the upload
-
+  
+      console.log("PDF uploaded to Cloudinary:", pdfUrl);
+  
       // Prepare email template parameters
       const templateParams = {
         customer_name: formData.firstName,
         to_email: formData.email,
-        pdf_url: pdfUrl, // Include the uploaded PDF URL
+        pdf_url: pdfUrl,
       };
-
+  
       // Send email with the PDF URL
       await sendEmail(templateParams);
     } catch (error) {
@@ -176,6 +109,8 @@ const BookingForm = () => {
       toast.error("Failed to send the PDF.");
     }
   };
+  
+
 
   return (
     <Container className="my-5" ref={pageRef}>
