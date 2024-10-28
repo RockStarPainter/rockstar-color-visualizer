@@ -84,7 +84,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <ColorProvider>
             <>
               <ToastContainer
-                position="bottom-left"
+                position="top-right"
                 progressStyle={{ visibility: "hidden" }}
                 autoClose={1000}
               />
