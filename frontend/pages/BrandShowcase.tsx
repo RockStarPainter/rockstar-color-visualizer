@@ -26,7 +26,7 @@ const BrandShowcase = () => {
               src="/images/sherwin.png"
               alt="Sherwin-Williams Logo"
               className={styles.brandLogo}
-              width={200}
+              width={265}
               height={150}
             />
           </Col>
