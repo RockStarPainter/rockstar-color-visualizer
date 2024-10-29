@@ -1,9 +1,8 @@
 export const preloadedImages = [
   {
     id: 1,
-    name: "Image 1",
-    image:
-      "/preloaded-images/outdoor_hardcoded_samples/1d1547838c_jpg.rf.4347d4cbb501bb35b14aa9c5e110b6b0.jpg",
+    name: "saeed_sample_img1",
+    image: "/preloaded-images/outdoor_hardcoded_samples/saeed_sample_img1.jpg",
     responsePath:
       "/preloaded-images/outdoor_hardcoded_samples/1d1547838c_jpg.rf.4347d4cbb501bb35b14aa9c5e110b6b0.json", // Add the path to the response file
   },
@@ -34,9 +33,8 @@ export const preloadedImages = [
   // },
   {
     id: 5,
-    name: "Image 2",
-    image:
-      "/preloaded-images/outdoor_hardcoded_samples/42d24e406c_jpg.rf.bd051e14af1e5a3c6a8477c57436ecc0.jpg",
+    name: "saeed_sample_img2",
+    image: "/preloaded-images/outdoor_hardcoded_samples/saeed_sample_img2.jpg",
     responsePath:
       "/preloaded-images/outdoor_hardcoded_samples/42d24e406c_jpg.rf.bd051e14af1e5a3c6a8477c57436ecc0.json",
   },
@@ -59,9 +57,8 @@ export const preloadedImages = [
   // },
   {
     id: 8,
-    name: "Image 3",
-    image:
-      "/preloaded-images/outdoor_hardcoded_samples/a70391178e_jpg.rf.4d2e1191d49ae19daf0b9cee3c97a393.jpg",
+    name: "saeed_sample_img3",
+    image: "/preloaded-images/outdoor_hardcoded_samples/saeed_sample_img3.jpg",
     responsePath:
       "/preloaded-images/outdoor_hardcoded_samples/a70391178e_jpg.rf.4d2e1191d49ae19daf0b9cee3c97a393.json",
   },

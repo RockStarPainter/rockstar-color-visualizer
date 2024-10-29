@@ -1,18 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const ImageMaskOverlay = ({
+const DrawMasksOnLiveImage = ({
   imgSrc,
   masks,
   selectedColor,
   clearMasksSignal,
   setDownloadableImage, // New prop to pass the canvas image data
-}: {
-  imgSrc: any;
-  masks: any;
-  selectedColor: string;
-  clearMasksSignal: boolean;
-  setDownloadableImage: (imageData: string) => void; // Add this prop to pass image data
-}) => {
+}: any) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [currentMaskColors, setCurrentMaskColors] = useState<string[]>([]); // Array to store mask colors
 
@@ -136,9 +130,8 @@ const ImageMaskOverlay = ({
       // canvas!.width = 640; // Fixed width
       // canvas!.height = 670 / aspectRatio; // Adjust height to maintain aspect ratio
 
-      canvas!.width =640
-      canvas!.height = 450
-
+      canvas!.width = 640;
+      canvas!.height = 450;
 
       ctx!.drawImage(image, 0, 0, canvas!.width, canvas!.height); // Draw the image on the canvas
 
@@ -168,6 +161,8 @@ const ImageMaskOverlay = ({
   // Redraw the image and masks whenever mask data, imgSrc, or currentMaskColors changes
   useEffect(() => {
     if (masks && imgSrc) {
+      console.log("masks in the overlay:", JSON.stringify(masks));
+
       drawImageAndMasks();
     }
 
@@ -181,10 +176,15 @@ const ImageMaskOverlay = ({
         ref={canvasRef}
         onClick={handleClick} // Handle click events
         onMouseMove={handleMouseMove} // Handle mouse move events
-        style={{ border: "1px solid black", width: "100%", height: "100%" }}
+        style={{
+          // border: "1px solid black",
+          width: "100%",
+          height: "100%",
+          objectFit: "contain",
+        }}
       />
     </div>
   );
 };
 
-export default ImageMaskOverlay;
+export default DrawMasksOnLiveImage;

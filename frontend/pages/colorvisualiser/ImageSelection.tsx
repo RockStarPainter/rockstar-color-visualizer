@@ -16,6 +16,8 @@ function ImageSelection({
   nextStep,
   setInitialMasks,
   setMaskedImageWithColors,
+  isPreloaded,
+  setIsPreloaded,
 }: any) {
   const {
     image: [image, setImage],
@@ -25,7 +27,7 @@ function ImageSelection({
 
   const fileInput = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<any>(null);
-  const [isPreloaded, setIsPreloaded] = useState<boolean>(false); // To track preloaded images
+  // const [isPreloaded, setIsPreloaded] = useState<boolean>(false); // To track preloaded images
   const [preloadedImageUrl, setPreloadedImageUrl] = useState<string>(""); // Store preloaded image URL
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modelScale, setModelScale] = useState<modelScaleProps | null>(null);
@@ -40,9 +42,10 @@ function ImageSelection({
   // Function to handle file upload (uploaded image)
   const getImageEmbedding = async (file: any) => {
     handleShowModal();
-    setIsPreloaded(false); // It's not a preloaded image
+    setIsPreloaded(() => false); // It's not a preloaded image
     const formData = new FormData();
     formData.append("file", file);
+    formData.append("sample_prediction", "false");
     await loadImage(file);
     await scrollTo(0, 0);
 
@@ -98,69 +101,30 @@ function ImageSelection({
     }
   };
 
-  // for live  api hit
-  // Function to handle preloaded image click
-  // const handlePreloadedImageClick = async (image: any) => {
-  //   handleShowModal();
-  //   setIsPreloaded(true); // It's a preloaded image
-  //   setPreloadedImageUrl(image.image); // Store the preloaded image URL
-
-  //   try {
-  //     const response = await fetch(image.image);
-  //     const blob = await response.blob();
-  //     const file = new File([blob], `${image.name}.jpg`, { type: blob.type });
-
-  //     const formData = new FormData();
-  //     formData.append("file", file);
-
-  //     await loadImage(file);
-
-  //     const res = await axios.post(
-  //       `${process.env.NEXT_PUBLIC_BACKEND_URL}/image/upload/`,
-  //       formData
-  //     );
-
-  //     setInitialMasks(JSON.parse(res?.data?.yolo_results.replace(/'/g, '"')));
-
-  //     setTimeout(() => {
-  //       handleCloseModal();
-  //       nextStep();
-  //     }, 1000);
-  //   } catch (e) {
-  //     console.error("Error fetching or processing preloaded image:", e);
-  //     handleCloseModal();
-  //     setError("Error loading preloaded image. Please try again.");
-  //     setTimeout(() => {
-  //       setError(null);
-  //     }, 2000);
-  //   }
-  // };
-
+  // for live  api hit Function to handle preloaded image click
   const handlePreloadedImageClick = async (image: any) => {
     handleShowModal();
-    setIsPreloaded(true); // It's a preloaded image
+    setIsPreloaded(() => true); // It's a preloaded image
     setPreloadedImageUrl(image.image); // Store the preloaded image URL
 
     try {
-      // Load the image locally
       const response = await fetch(image.image);
       const blob = await response.blob();
       const file = new File([blob], `${image.name}.jpg`, { type: blob.type });
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("sample_prediction", "true");
+
       await loadImage(file);
 
-      // Fetch the JSON response from the responsePath field
-      const jsonResponse = await fetch(image.responsePath);
-      const responseData = await jsonResponse.json();
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/image/upload/`,
+        formData
+      );
 
-      console.log("preloaded masks: " + JSON.stringify(responseData));
-
-      // Set the initial masks using the fetched response data
-      const data = JSON.parse(responseData?.yolo_results.replace(/'/g, '"'));
+      const data = JSON.parse(res?.data?.yolo_results.replace(/'/g, '"'));
       setInitialMasks(data?.masks);
-
-      // console.log("masks loaded in preload: " + data?.masks);
-
-      // setInitialMasks(responseData.yolo_results);
 
       setTimeout(() => {
         handleCloseModal();
@@ -222,7 +186,7 @@ function ImageSelection({
                   <h4
                     className={`${styles.preloadedCardTitle} text-capitalize`}
                   >
-                    {image.name}
+                    {`image ${index + 1}`}
                   </h4>
                 </div>
               </div>

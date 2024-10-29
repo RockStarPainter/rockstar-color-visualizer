@@ -10,6 +10,8 @@ function ColorVisualizer() {
   const [currentStep, setCurrentStep] = useState(0);
   const [initialMasks, setInitialMasks] = useState<any>(); // State to trigger mask reset
   const [maskedImageWithColors, setMaskedImageWithColors] = useState<any>(); // State to trigger mask reset
+  const [isPreloaded, setIsPreloaded] = useState<boolean>(false); // To track preloaded images
+
 
   // Function to move to the next step
   const nextStep = () => {
@@ -37,6 +39,8 @@ function ColorVisualizer() {
             nextStep={nextStep}
             setInitialMasks={setInitialMasks}
             setMaskedImageWithColors={setMaskedImageWithColors}
+            isPreloaded={isPreloaded}
+            setIsPreloaded={setIsPreloaded}
           />
         </div>
       ),
@@ -71,6 +75,7 @@ function ColorVisualizer() {
             moveToStep={moveToStep}
             initialMasks={initialMasks}
             setMaskedImageWithColors={setMaskedImageWithColors}
+            isPreloaded={isPreloaded}
           />
         </div>
       ),
