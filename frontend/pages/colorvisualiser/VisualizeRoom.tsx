@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import AppContext from "../../utils/hooks/createContext";
-import ImageMaskOverlay from "../../components/detection-canvas";
 import DrawMasksOnLiveImage from "../../components/detection-canvas/DrawMasksOnLiveImage";
 import DrawMasksOnPreloadedImage from "../../components/detection-canvas/DrawMasksOnPreloadedImage";
 import {
@@ -97,14 +96,6 @@ function VisualizeRoom({
         <div className="row m-0 p-0 align-items-center">
           {/* left side */}
           <div className="col-12 col-lg-8 colorvisualiser__container__left d-flex justify-content-center">
-            {/* <ImageMaskOverlay
-              imgSrc={image?.src}
-              masks={initialMasks}
-              selectedColor={selectedColor}
-              clearMasksSignal={clearSignal}
-              setDownloadableImage={setMaskedImageWithColors} // Ensure this is passed correctly
-            /> */}
-
             {isPreloaded ? (
               <DrawMasksOnPreloadedImage
                 imgSrc={image?.src}

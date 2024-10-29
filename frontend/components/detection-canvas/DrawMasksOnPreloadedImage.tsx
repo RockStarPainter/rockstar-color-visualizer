@@ -7,9 +7,9 @@ const DrawMasksOnPreloadedImage = ({
   clearMasksSignal,
   setDownloadableImage,
 }: any) => {
-  const canvasRef = useRef(null);
-  const imageRef = useRef(null);
-  const [currentMaskColors, setCurrentMaskColors] = useState([]);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const imageRef = useRef<HTMLImageElement | null>(null);
+  const [currentMaskColors, setCurrentMaskColors] = useState<string[]>([]);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageDimensions, setImageDimensions] = useState({
     width: 0,
@@ -17,10 +17,11 @@ const DrawMasksOnPreloadedImage = ({
   });
 
   const getSegmentColor = (segmentIndex: number) => {
-    const defaultColors = {
+    const defaultColors: { [key: number]: string } = {
       0: "rgba(255, 0, 0, 0.5)", // Red for walls
       1: "rgba(0, 255, 0, 0.5)", // Green for ceiling
     };
+
     return (
       currentMaskColors[segmentIndex] ||
       defaultColors[segmentIndex] ||
@@ -28,8 +29,11 @@ const DrawMasksOnPreloadedImage = ({
     );
   };
 
-  const calculateCoordinates = (clientX, clientY) => {
+  const calculateCoordinates = (clientX: number, clientY: number) => {
     const canvas = canvasRef.current;
+
+    if (!canvas) return { x: 0, y: 0, scaleX: 1, scaleY: 1 };
+
     const rect = canvas.getBoundingClientRect();
 
     // Calculate scale factors based on original image dimensions
@@ -43,7 +47,7 @@ const DrawMasksOnPreloadedImage = ({
     return { x, y, scaleX, scaleY };
   };
 
-  const handleClick = (event) => {
+  const handleClick = (event: any) => {
     if (!imageLoaded || !masks?.length) return;
 
     const { x, y, scaleX, scaleY } = calculateCoordinates(
@@ -51,7 +55,7 @@ const DrawMasksOnPreloadedImage = ({
       event.clientY
     );
 
-    masks.forEach((maskSegment, segmentIndex) => {
+    masks.forEach((maskSegment: any, segmentIndex: any) => {
       if (isPointInMask(x, y, maskSegment, scaleX, scaleY)) {
         const updatedColors = [...currentMaskColors];
         updatedColors[segmentIndex] = selectedColor;
@@ -60,10 +64,22 @@ const DrawMasksOnPreloadedImage = ({
     });
   };
 
-  const isPointInMask = (x, y, maskSegment, scaleX, scaleY) => {
+  const isPointInMask = (
+    x: number,
+    y: number,
+    maskSegment: [number, number][],
+    scaleX: number,
+    scaleY: number
+  ): boolean => {
     if (!maskSegment?.length) return false;
 
-    const ctx = canvasRef.current.getContext("2d");
+    const ctx = canvasRef.current?.getContext("2d");
+
+    if (!ctx) {
+      console.error("Canvas context is not available.");
+      return false;
+    }
+
     ctx.save();
     ctx.beginPath();
 
@@ -71,7 +87,7 @@ const DrawMasksOnPreloadedImage = ({
     const [firstY, firstX] = maskSegment[0];
     ctx.moveTo(firstX * scaleX, firstY * scaleY);
 
-    maskSegment.forEach(([pointY, pointX]) => {
+    maskSegment.forEach(([pointY, pointX]: [number, number]) => {
       ctx.lineTo(pointX * scaleX, pointY * scaleY);
     });
 
@@ -82,7 +98,7 @@ const DrawMasksOnPreloadedImage = ({
     return isInside;
   };
 
-  const handleMouseMove = (event) => {
+  const handleMouseMove = (event: React.MouseEvent<HTMLCanvasElement>) => {
     if (!imageLoaded || !masks?.length) return;
 
     const canvas = canvasRef.current;
@@ -91,17 +107,23 @@ const DrawMasksOnPreloadedImage = ({
       event.clientY
     );
 
-    let cursorOnMask = masks.some((maskSegment) =>
+    const cursorOnMask = masks.some((maskSegment: [number, number][]) =>
       isPointInMask(x, y, maskSegment, scaleX, scaleY)
     );
 
-    canvas.style.cursor = cursorOnMask ? "pointer" : "default";
+    if (canvas) {
+      canvas.style.cursor = cursorOnMask ? "pointer" : "default";
+    }
   };
 
-  const drawMasks = (ctx, scaleX, scaleY) => {
+  const drawMasks = (
+    ctx: CanvasRenderingContext2D,
+    scaleX: number,
+    scaleY: number
+  ) => {
     if (!masks?.length) return;
 
-    masks.forEach((maskSegment, segmentIndex) => {
+    masks.forEach((maskSegment: [number, number][], segmentIndex: number) => {
       if (!maskSegment?.length) return;
 
       const segmentColor = getSegmentColor(segmentIndex);
@@ -111,7 +133,7 @@ const DrawMasksOnPreloadedImage = ({
       const [firstY, firstX] = maskSegment[0];
       ctx.moveTo(firstX * scaleX, firstY * scaleY);
 
-      maskSegment.forEach(([pointY, pointX]) => {
+      maskSegment.forEach(([pointY, pointX]: [number, number]) => {
         ctx.lineTo(pointX * scaleX, pointY * scaleY);
       });
 
@@ -127,6 +149,10 @@ const DrawMasksOnPreloadedImage = ({
     if (!canvas || !image || !imageLoaded) return;
 
     const ctx = canvas.getContext("2d");
+    if (!ctx) {
+      console.error("Failed to get 2D context.");
+      return;
+    }
 
     // Set canvas dimensions based on loaded image
     const aspectRatio = image.width / image.height;
