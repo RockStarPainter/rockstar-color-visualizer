@@ -13,6 +13,7 @@
 
 .stepsContainer {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap; /* Allows wrapping to the next line */
    /* Evenly distributes the items in a row */
   gap: 20px; /* Adds space between the items */
