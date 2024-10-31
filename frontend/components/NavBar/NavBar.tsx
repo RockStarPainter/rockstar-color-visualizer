@@ -16,6 +16,7 @@ function NavBar() {
               src="/images/rockstar-logo.png"
               alt="Company Logo"
               className={`${styles.logo}`}
+              crossOrigin="anonymous"
             />
           </Link>
         </div>

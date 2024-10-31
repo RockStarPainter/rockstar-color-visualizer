@@ -89,6 +89,7 @@ const Footer = () => {
                 height={64}
                 className={styles.image}
                 quality={100}
+                crossOrigin="anonymous"
               />
             </Link>
 
@@ -265,6 +266,7 @@ const Footer = () => {
             height={64}
             className={` `}
             quality={100}
+            crossOrigin="anonymous"
           />
           <p className={styles.copyright} style={{ color: "#022e97" }}>
             Copyright {year}
