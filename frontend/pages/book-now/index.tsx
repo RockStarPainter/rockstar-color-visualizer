@@ -189,9 +189,10 @@ const BookingForm = () => {
         return;
       }
 
+      //
       const templateParams = {
-        customer_name: formData.firstName,
-        to_email: formData.email,
+        customer_name: "Rockstar Painting",
+        to_email: "contact@rockstarpaintingdenver.com",
         pdf_url: pdfUrl,
       };
 
