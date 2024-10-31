@@ -36,13 +36,13 @@ const BookingForm = () => {
   const additionalNotesRef = useRef<HTMLDivElement>(null);
   const [loader, setLoader] = useState(false); // Start with loading true
 
-  const handlePhoneChange = (value) => {
+  const handlePhoneChange = (value: any) => {
     setPhone(value);
     setValue("phone", value);
     trigger("phone");
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     setLoader(true);
     if (Object.keys(errors).length > 0) {
       console.warn("Form has errors:", errors);
@@ -104,7 +104,7 @@ const BookingForm = () => {
     return startY + imgHeight + SECTION_SPACING;
   };
 
-  const generatePdfAndSendEmail = async (formData) => {
+  const generatePdfAndSendEmail = async (formData: any) => {
     try {
       const generatePdf = async () => {
         // Custom dimensions for a taller page
@@ -205,7 +205,7 @@ const BookingForm = () => {
 
   return (
     <>
-      {loader && <Loading message={'Placing Your Order'} />}
+      {loader && <Loading message={"Placing Your Order"} />}
 
       <Container
         className="my-5 w-100"
@@ -438,6 +438,7 @@ const BookingForm = () => {
                 <div
                   ref={additionalNotesRef}
                   className="bg-white p-4 rounded mt-4"
+                  style={{ backgroundColor: "white" }}
                 >
                   <h5 className="mb-4 fw-bold">Additional Notes</h5>
                   <Form.Group controlId="formNote">
@@ -446,6 +447,7 @@ const BookingForm = () => {
                       rows={4}
                       {...register("note")}
                       placeholder="Add additional information here"
+                      style={{ backgroundColor: "white" }}
                     />
                   </Form.Group>
                 </div>
@@ -468,7 +470,13 @@ const BookingForm = () => {
 
 export default BookingForm;
 
-const InteriorField = ({ field, register, errors, watch, isSubmitted }) => {
+const InteriorField = ({
+  field,
+  register,
+  errors,
+  watch,
+  isSubmitted,
+}: any) => {
   const includeInterior = watch(`include_${field?.key}`) === "Yes";
 
   return (
@@ -521,7 +529,7 @@ const InteriorField = ({ field, register, errors, watch, isSubmitted }) => {
   );
 };
 
-function ExteriorField({ field, register, errors }) {
+function ExteriorField({ field, register, errors }: any) {
   return (
     <div className="mb-4">
       <Row>

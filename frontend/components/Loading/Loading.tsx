@@ -39,7 +39,7 @@
 import React, { useEffect } from 'react';
 import styles from './Loading.module.css'; // Ensure the CSS file is correctly imported
 
-const Loading: React.FC = ({message='Rockstar Color Visualiser'}:any) => {
+const Loading= ({message='Rockstar Color Visualiser'}:any) => {
   // Disable scrollbar when loader is shown
   useEffect(() => {
     document.body.style.overflow = 'hidden'; // Disable scroll
