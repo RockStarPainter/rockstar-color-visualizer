@@ -31,23 +31,26 @@ const DrawMasksOnPreloadedImage = ({
 
   const calculateCoordinates = (clientX: number, clientY: number) => {
     const canvas = canvasRef.current;
-
     if (!canvas) return { x: 0, y: 0, scaleX: 1, scaleY: 1 };
 
     const rect = canvas.getBoundingClientRect();
+    
+    // Calculate scale factors
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
 
-    // Calculate scale factors based on original image dimensions
-    const scaleX = canvas.width / imageDimensions.width;
-    const scaleY = canvas.height / imageDimensions.height;
+    // Calculate actual canvas coordinates
+    const x = (clientX - rect.left) * scaleX;
+    const y = (clientY - rect.top) * scaleY;
 
-    // Calculate normalized coordinates
-    const x = (clientY - rect.top) * (canvas.height / rect.height);
-    const y = (clientX - rect.left) * (canvas.width / rect.width);
+    // Calculate mask scaling factors
+    const maskScaleX = canvas.width / imageDimensions.width;
+    const maskScaleY = canvas.height / imageDimensions.height;
 
-    return { x, y, scaleX, scaleY };
+    return { x, y, scaleX: maskScaleX, scaleY: maskScaleY };
   };
 
-  const handleClick = (event: any) => {
+  const handleClick = (event: React.MouseEvent<HTMLCanvasElement>) => {
     if (!imageLoaded || !masks?.length) return;
 
     const { x, y, scaleX, scaleY } = calculateCoordinates(
@@ -55,13 +58,16 @@ const DrawMasksOnPreloadedImage = ({
       event.clientY
     );
 
-    masks.forEach((maskSegment: any, segmentIndex: any) => {
+    // Check each mask segment
+    for (let segmentIndex = 0; segmentIndex < masks.length; segmentIndex++) {
+      const maskSegment = masks[segmentIndex];
       if (isPointInMask(x, y, maskSegment, scaleX, scaleY)) {
         const updatedColors = [...currentMaskColors];
         updatedColors[segmentIndex] = selectedColor;
         setCurrentMaskColors(updatedColors);
+        break; // Exit after finding the first matching mask
       }
-    });
+    }
   };
 
   const isPointInMask = (
@@ -74,21 +80,21 @@ const DrawMasksOnPreloadedImage = ({
     if (!maskSegment?.length) return false;
 
     const ctx = canvasRef.current?.getContext("2d");
-
-    if (!ctx) {
-      console.error("Canvas context is not available.");
-      return false;
-    }
+    if (!ctx) return false;
 
     ctx.save();
     ctx.beginPath();
 
-    // Scale mask coordinates to match canvas dimensions
-    const [firstY, firstX] = maskSegment[0];
-    ctx.moveTo(firstX * scaleX, firstY * scaleY);
-
-    maskSegment.forEach(([pointY, pointX]: [number, number]) => {
-      ctx.lineTo(pointX * scaleX, pointY * scaleY);
+    // Create path from mask points with correct scaling
+    maskSegment.forEach(([maskY, maskX]: [number, number], index) => {
+      const scaledX = maskX * scaleX;
+      const scaledY = maskY * scaleY;
+      
+      if (index === 0) {
+        ctx.moveTo(scaledX, scaledY);
+      } else {
+        ctx.lineTo(scaledX, scaledY);
+      }
     });
 
     ctx.closePath();
@@ -107,9 +113,13 @@ const DrawMasksOnPreloadedImage = ({
       event.clientY
     );
 
-    const cursorOnMask = masks.some((maskSegment: [number, number][]) =>
-      isPointInMask(x, y, maskSegment, scaleX, scaleY)
-    );
+    let cursorOnMask = false;
+    for (const maskSegment of masks) {
+      if (isPointInMask(x, y, maskSegment, scaleX, scaleY)) {
+        cursorOnMask = true;
+        break;
+      }
+    }
 
     if (canvas) {
       canvas.style.cursor = cursorOnMask ? "pointer" : "default";
@@ -130,11 +140,16 @@ const DrawMasksOnPreloadedImage = ({
       ctx.fillStyle = segmentColor;
       ctx.beginPath();
 
-      const [firstY, firstX] = maskSegment[0];
-      ctx.moveTo(firstX * scaleX, firstY * scaleY);
-
-      maskSegment.forEach(([pointY, pointX]: [number, number]) => {
-        ctx.lineTo(pointX * scaleX, pointY * scaleY);
+      // Draw mask with correct scaling
+      maskSegment.forEach(([maskY, maskX]: [number, number], index) => {
+        const scaledX = maskX * scaleX;
+        const scaledY = maskY * scaleY;
+        
+        if (index === 0) {
+          ctx.moveTo(scaledX, scaledY);
+        } else {
+          ctx.lineTo(scaledX, scaledY);
+        }
       });
 
       ctx.closePath();
@@ -149,25 +164,25 @@ const DrawMasksOnPreloadedImage = ({
     if (!canvas || !image || !imageLoaded) return;
 
     const ctx = canvas.getContext("2d");
-    if (!ctx) {
-      console.error("Failed to get 2D context.");
-      return;
-    }
+    if (!ctx) return;
 
-    // Set canvas dimensions based on loaded image
+    // Set canvas dimensions maintaining aspect ratio
     const aspectRatio = image.width / image.height;
-    canvas.width = 640;
-    canvas.height = Math.round(640 / aspectRatio);
+    // canvas.width = 640;
+    // canvas.height = Math.round(640 / aspectRatio);
 
-    // Clear and draw image
+    canvas.width = 640
+    canvas.height = 450
+
+    // Clear canvas and draw image
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-    // Calculate and store scale factors
+    // Calculate scale factors
     const scaleX = canvas.width / imageDimensions.width;
     const scaleY = canvas.height / imageDimensions.height;
 
-    // Draw masks with correct scaling
+    // Draw masks
     drawMasks(ctx, scaleX, scaleY);
 
     // Export the result
@@ -223,7 +238,6 @@ const DrawMasksOnPreloadedImage = ({
         onClick={handleClick}
         onMouseMove={handleMouseMove}
         style={{
-          // border: "1px solid black",
           width: "100%",
           height: "100%",
           objectFit: "contain",
