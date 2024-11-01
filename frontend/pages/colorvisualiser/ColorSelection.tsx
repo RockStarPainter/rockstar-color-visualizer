@@ -86,26 +86,58 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
 
   const renderPaints = () => {
     return (
-      <div className="d-flex flex-wrap justify-content-center">
-        {filteredPaints?.map((paint: any, index: number) => (
+      <div
+        className="d-flex flex-wrap justify-content-center"
+        style={{ gap: "10px", overflow: "visible" }}
+      >
+        {filteredPaints?.map((paint: any, index: any) => (
           <div
             key={index}
             style={{
-              // padding: "5px",
+              width: "150px",
+              marginBottom: "10px",
               boxSizing: "border-box",
+              position: "relative",
+              overflow: "visible",
+              transition: "margin 0.3s ease-in-out",
             }}
             className="paint_cards"
           >
             <Card
               className={`position-relative paint_card ${
-                selectedColors.some((p) => p.code === paint.code) ? "selected" : ""
+                selectedColors.some((p) => p.code === paint.code)
+                  ? "selected"
+                  : ""
               }`}
               onClick={() => handlePaintSelection(paint)}
-              style={{ 
-                cursor: "pointer", 
-                border: "none", 
-                boxShadow: "0px 1px 5px rgba(0,0,0,0.1)", 
-                transition: "transform 0.2s ease-in-out" // Smooth transition for scaling
+              style={{
+                cursor: "pointer",
+                border: "1px solid transparent",
+                boxShadow: "0px 1px 5px rgba(0,0,0,0.1)",
+                transition:
+                  "transform 0.3s ease-in-out, border 0.3s ease-in-out",
+                zIndex: 1,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "scale(1.3)";
+                e.currentTarget.style.border = "2px solid #333";
+                e.currentTarget.style.borderRadius = "3px";
+                e.currentTarget.style.zIndex = "10";
+
+                const parent = e.currentTarget.parentNode;
+                if (parent && parent instanceof HTMLElement) {
+                  parent.style.margin = "10px";
+                }
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
+                e.currentTarget.style.border = "1px solid transparent";
+                e.currentTarget.style.zIndex = "1";
+
+                const parent = e.currentTarget.parentNode;
+                if (parent && parent instanceof HTMLElement) {
+                  parent.style.margin = "0";
+                }
               }}
             >
               <div
@@ -114,25 +146,32 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
                   height: "8rem",
                   width: "100%",
                   borderRadius: "3px",
+                  position: "relative", // Set to relative for positioning child elements
                 }}
                 className="p-2"
               >
-                <span className="fw-semibold" style={{ fontSize: ".9rem" }}>
-                  {paint.name}
-                </span>
-                <br />
-                <span style={{ fontSize: ".8rem" }}>{paint.code}</span>
-
-
-                {/* for testing  */}
-
-                <br />
-                <br />
-                <span className="fw-semibold " style={{ fontSize: ".8rem" }}>{paint.hex}</span>
-
-
+                {/* Absolute positioning for name and code */}
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: "10px",
+                    left: "10px",
+                    color: "white", // Optional: change color as needed for visibility
+                  }}
+                >
+                  <span
+                    className="fw-semibold"
+                    style={{ fontSize: ".9rem", color:'black'  }}
+                  >
+                    {paint.name}
+                  </span>
+                  <br />
+                  <span style={{ fontSize: ".8rem", color:'black' }}>
+                    {paint.code}
+                  </span>
+                </div>
               </div>
-  
+
               {selectedColors.some((p) => p.code === paint.code) && (
                 <FaCheckCircle
                   size={24}
@@ -157,7 +196,7 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
         <Col>
           <h4 className="fw-bold mt-3">Browse Paint Colors</h4>
         </Col>
-        <Col xs="auto" className="d-flex align-items-center">
+        <Col xs={4} className="d-flex align-items-center">
           {/* Search field with icon */}
           <InputGroup>
             <InputGroup.Text id="search-addon">
@@ -242,62 +281,60 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
         ))}
       </Row>
 
-      {/* Saved Colors Section - Sticky with its own scroll */}
+      {/* Saved Colors Section */}
       <Row className="custom-scrollbar mb-5">
-  <div className="saved-colors bg-light p-3 h-100 pt-5">
-    {/* "Paint Your Room" Button inside the saved colors section */}
-    <Button
-      variant="primary"
-      className="w-100 mb-3"
-      onClick={nextStep}
-      disabled={selectedColors.length === 0}
-    >
-      Visualize Room <FaLongArrowAltRight className="fs-3 ms-2" />
-    </Button>
+        <div className="saved-colors bg-light p-3 h-100 pt-5">
+          {/* "Paint Your Room" Button inside the saved colors section */}
+          <Button
+            variant="primary"
+            className="w-100 mb-3"
+            onClick={nextStep}
+            disabled={selectedColors.length === 0}
+          >
+            Visualize Room <FaLongArrowAltRight className="fs-3 ms-2" />
+          </Button>
 
-    <h5 className="fw-bold">Saved Colors</h5>
-    <div className="row">
-      {selectedColors.map((paint, index) => (
-        <div key={index} className="col-12 col-sm-6 mb-2">
-          <li className="list-group-item d-flex justify-content-between align-items-center bg-white p-1 rounded border">
-            <div className="d-flex align-items-center pt-2">
-              <div
-                style={{
-                  display: "inline-block",
-                  backgroundColor: paint.hex,
-                  width: "2rem",
-                  height: "2rem",
-                  marginRight: "10px",
-                  borderRadius: "10%",
-                }}
-                className="ms-3 mb-1"
-              ></div>
-              <div
-                className="fw-bold block pb-2"
-                style={{ fontSize: ".9rem" }}
-              >
-                {paint.name}
+          <h5 className="fw-bold">Saved Colors</h5>
+          <div className="row">
+            {selectedColors.map((paint, index) => (
+              <div key={index} className="col-12 col-sm-6 mb-2">
+                <li className="list-group-item d-flex justify-content-between align-items-center bg-white p-1 rounded border">
+                  <div className="d-flex align-items-center pt-2">
+                    <div
+                      style={{
+                        display: "inline-block",
+                        backgroundColor: paint.hex,
+                        width: "2rem",
+                        height: "2rem",
+                        marginRight: "10px",
+                        borderRadius: "10%",
+                      }}
+                      className="ms-3 mb-1"
+                    ></div>
+                    <div
+                      className="fw-bold block pb-2"
+                      style={{ fontSize: ".9rem" }}
+                    >
+                      {paint.name}
+                    </div>
+                  </div>
+                  <Button
+                    variant="danger"
+                    className="rounded-3 me-5"
+                    size="sm"
+                    onClick={() => removeColor(paint?.code)}
+                  >
+                    <MdOutlineDeleteOutline />
+                  </Button>
+                </li>
               </div>
-            </div>
-            <Button
-              variant="danger"
-              className="rounded-3 me-5"
-              size="sm"
-              onClick={() => removeColor(paint?.code)}
-            >
-              <MdOutlineDeleteOutline />
-            </Button>
-          </li>
+            ))}
+          </div>
         </div>
-      ))}
-    </div>
-  </div>
-</Row>
+      </Row>
 
-
-      
       {/* Paint Grid */}
-      <Row>{renderPaints()}</Row>
+      <Row style={{ position: "relative" }}>{renderPaints()}</Row>
     </Container>
   );
 };

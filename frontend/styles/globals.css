@@ -82,6 +82,10 @@ input[type="radio"]:checked::before {
     border-radius: 50% !important; /* Make the check mark circular for radio buttons */
 }
 
+.paint_cards {
+  flex-basis: 150px; /* Adjust to match the width in the JS code */
+  flex-grow: 1;
+}
 
 
 
@@ -273,6 +277,8 @@ body {
   border-radius: 30%;
   cursor: pointer;
 }
+
+
 /* Some Global CSS For File upload */
 .file_details--open {
   height: auto !important;
