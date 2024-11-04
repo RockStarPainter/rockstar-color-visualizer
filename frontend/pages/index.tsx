@@ -30,20 +30,16 @@ export default function Home(props: any) {
 
   return (
     <Container fluid className="p-0">
+      
       {/* Image and Video Overlay Section */}
       <Hero topRef={topRef} /> {/* Pass topRef to Hero */}
-      
       <HowItWorks />
-
       <BrandShowcase />
       <FeatureHighlights />
-      
       <AboutUs />
 
       {/* Our Services Section */}
       <Container fluid className="py-5">
-   
-
         <Services />
       </Container>
 

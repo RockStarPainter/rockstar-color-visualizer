@@ -31,6 +31,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
+import FeedbackToast from "../../components/shared/FeedbackToast";
 
 const OrderPaints = ({ nextStep, maskedImageWithColors }: any) => {
   const { selectedColors } = useColorContext(); // Fetch the selected colors from context
@@ -154,6 +155,9 @@ const OrderPaints = ({ nextStep, maskedImageWithColors }: any) => {
 
   return (
     <Container fluid className="order-page py-4 bg-white">
+
+      <FeedbackToast/>
+
       <Row>
         {/* Left Sidebar for Selected Colors */}
         <Col xs={12} md={4} className="order-colors-section mb-4 mb-md-0">

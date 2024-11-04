@@ -230,7 +230,13 @@ const BookingForm = () => {
               </h2>
               <Form onSubmit={handleSubmit(onSubmit)}>
                 {/* Personal Details Section */}
-                <div ref={personalDetailsRef} className="bg-white p-4 rounded">
+                <div
+                  ref={personalDetailsRef}
+                  className="bg_white p-4 rounded"
+                  style={{
+                    background: `white`,
+                  }}
+                >
                   <h5 className="mb-4 fw-bold">Personal Details</h5>
                   <div id="personal-details">
                     <Row>
@@ -384,7 +390,7 @@ const BookingForm = () => {
                 {/* Interior Services Section */}
                 <div
                   ref={interiorServicesRef}
-                  className="bg-white p-4 rounded mt-4"
+                  className="bg_white p-4 rounded mt-4"
                 >
                   <h5 className="text-center mb-4 fw-bold">
                     Interior Services
@@ -404,7 +410,7 @@ const BookingForm = () => {
                 {/* Exterior Services Section */}
                 <div
                   ref={exteriorServicesRef}
-                  className="bg-white p-4 rounded mt-4"
+                  className="bg_white p-4 rounded mt-4"
                 >
                   <h5 className="text-center mb-4 fw-bold">
                     Exterior Services
@@ -438,7 +444,7 @@ const BookingForm = () => {
                 {/* Additional Notes Section */}
                 <div
                   ref={additionalNotesRef}
-                  className="bg-white p-4 rounded mt-4"
+                  className="bg_white p-4 rounded mt-4"
                   style={{ backgroundColor: "white" }}
                 >
                   <h5 className="mb-4 fw-bold">Additional Notes</h5>
