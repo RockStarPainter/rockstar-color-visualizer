@@ -268,9 +268,9 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
       </Row>
 
       {/* Color Categories */}
-      <Row className="mb-4">
+      <Row className="mb-4 sticky-top bg_white py-3">
         {colorCategories.map((category) => (
-          <Col key={category.key} xs={6} sm={4} md={2}>
+          <Col key={category.key} xs={6} sm={4} md={2} className="m-auto">
             <Button
               variant={selectedCategory === category.key ? "dark" : "light"}
               onClick={() => handleCategorySelection(category.key)}

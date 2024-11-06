@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Container, Modal } from "react-bootstrap";
+import { Button, Col, Container, Modal, Row } from "react-bootstrap";
 import axios from "axios";
 import AppContext from "../../utils/hooks/createContext";
 import { handleImageScale } from "../../utils/helpers/scaleHelper";
@@ -11,6 +11,11 @@ import { preloadedImages } from "../../public/preloaded-images/preloadedImages";
 import FileUpload from "../../components/FileUpload/FileUpload";
 import Image from "next/image";
 import HowItWorksStyles from "../../styles/HowItWorks.module.css"; // Custom styles
+
+const preloadedImageCategories = [
+  { name: "Interior", key: "interior" },
+  { name: "Exterior", key: "exterior" },
+];
 
 function ImageSelection({
   nextStep,
@@ -31,6 +36,12 @@ function ImageSelection({
   const [preloadedImageUrl, setPreloadedImageUrl] = useState<string>(""); // Store preloaded image URL
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modelScale, setModelScale] = useState<modelScaleProps | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>("interior");
+
+  // Handle category selection
+  const handleCategorySelection = (category: string) => {
+    setSelectedCategory(category);
+  };
 
   useEffect(() => {
     setMaskedImageWithColors(null);
@@ -168,29 +179,46 @@ function ImageSelection({
             Try Sample Images
           </h2>
 
-          <div className={styles.preloadedGrid}>
-            {preloadedImages.map((image, index) => (
-              <div
-                key={index}
-                onClick={() => handlePreloadedImageClick(image)} // Call the function on image click
-                className={styles.preloadedCard}
-              >
-                <div className={styles.preloadedImageWrapper}>
-                  <img
-                    src={image.image}
-                    alt={image.name}
-                    className={styles.preloadedImage}
-                  />
-                </div>
-                <div className={styles.preloadedCardContent}>
-                  <h4
-                    className={`${styles.preloadedCardTitle} text-capitalize`}
-                  >
-                    {`image ${index + 1}`}
-                  </h4>
-                </div>
-              </div>
+          {/* Color Categories */}
+          <Row className="mb-4 sticky-top bg_white py-3">
+            {preloadedImageCategories.map((category) => (
+              <Col key={category.key} xs={6} sm={4} md={2} className="m-auto">
+                <Button
+                  variant={selectedCategory === category.key ? "dark" : "light"}
+                  onClick={() => handleCategorySelection(category.key)}
+                  className="w-100 mb-2"
+                >
+                  {category.name}
+                </Button>
+              </Col>
             ))}
+          </Row>
+
+          <div className={styles.preloadedGrid}>
+            {preloadedImages[selectedCategory as "interior" | "exterior"].map(
+              (image, index) => (
+                <div
+                  key={image?.name}
+                  onClick={() => handlePreloadedImageClick(image)} // Call the function on image click
+                  className={styles.preloadedCard}
+                >
+                  <div className={styles.preloadedImageWrapper}>
+                    <img
+                      src={image.image}
+                      alt={image.name}
+                      className={styles.preloadedImage}
+                    />
+                  </div>
+                  <div className={styles.preloadedCardContent}>
+                    <h4
+                      className={`${styles.preloadedCardTitle} text-capitalize`}
+                    >
+                      {`image ${index + 1}`}
+                    </h4>
+                  </div>
+                </div>
+              )
+            )}
           </div>
         </Container>
       </div>

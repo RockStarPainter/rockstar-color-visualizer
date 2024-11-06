@@ -170,7 +170,7 @@
 /* Preloaded Images Section */
 .preloadedSection {
   padding: 5%;
-  background-color: #f9f9f9; /* Light background for contrast */
+  background-color: white; /* Light background for contrast */
   margin-top: 7%;
   border-radius: 3%;
 }
