@@ -9,7 +9,7 @@ import { Spinner } from "react-bootstrap";
 function FeedbackToast() {
   const [showRatingModal, setShowRatingModal] = useState(false);
   const [showSuggestionModal, setShowSuggestionModal] = useState(false);
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(1);
   const { sendEmail, loading } = useEmail();
 
   // Form setup for rating modal
