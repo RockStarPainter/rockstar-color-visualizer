@@ -215,7 +215,7 @@ const BookingForm = () => {
         }}
       >
         <Row className="justify-content-center pb-5">
-          <Col md={10}>
+          <Col md={11}>
             <div
               className="p-4 rounded booking-form"
               // style={{
