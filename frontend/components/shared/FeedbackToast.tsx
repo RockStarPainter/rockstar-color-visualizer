@@ -114,7 +114,7 @@ function FeedbackToast() {
       process.env.NEXT_PUBLIC_EMAILJS_RATING_TEMPLATE_ID
     );
     setShowRatingModal(false);
-    toast.success("Your rating submitted successfully!");
+    toast.success("We appreciate your prompt attention to this feedback!");
     resetRatingForm();
   };
 
@@ -135,7 +135,7 @@ function FeedbackToast() {
       process.env.NEXT_PUBLIC_EMAILJS_PROBLEM_TEMPLATE_ID
     );
     setShowSuggestionModal(false);
-    toast.success("Your problem submitted successfully!");
+    toast.success("We appreciate your prompt attention to this feedback!");
 
     resetSuggestionForm();
   };
