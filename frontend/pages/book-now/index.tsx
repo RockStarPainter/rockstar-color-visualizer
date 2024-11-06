@@ -196,7 +196,7 @@ const BookingForm = () => {
         pdf_url: pdfUrl,
       };
 
-      await sendEmail(templateParams);
+      await sendEmail(templateParams, process.env.NEXT_PUBLIC_EMAILJS_ORDER_TEMPLATE_ID);
       toast.success("Order submitted successfully!");
     } catch (error) {
       console.error("Error generating or sending PDF:", error);

@@ -1,25 +1,23 @@
-import { useState } from 'react';
-import emailjs from '@emailjs/browser';
-import { toast } from 'react-toastify';
+import { useState } from "react";
+import emailjs from "@emailjs/browser";
+import { toast } from "react-toastify";
 
 const useEmail = () => {
   const [loading, setLoading] = useState(false);
 
-  const sendEmail = async (templateParams) => {
+  const sendEmail = async (templateParams, emailjsTemplateId) => {
     setLoading(true);
     try {
-      const result = await emailjs.send(
+      await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+        emailjsTemplateId,
         templateParams,
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
       );
 
-      console.log('Email sent successfully:', result.text);
-      toast.success('Check your email box! Your order has been placed successfully.');
+      // toast.success('Check your email box! Your order has been placed successfully.');
     } catch (error) {
-      console.error('Failed to send email:', error);
-      toast.error('There was an error sending your message. Please try again.');
+      toast.error("There was an error sending your message. Please try again.");
     } finally {
       setLoading(false);
     }

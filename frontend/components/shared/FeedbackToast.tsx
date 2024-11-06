@@ -3,17 +3,21 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import useEmail from "../../hooks/useEmail";
+import { Spinner } from "react-bootstrap";
 
 function FeedbackToast() {
   const [showRatingModal, setShowRatingModal] = useState(false);
   const [showSuggestionModal, setShowSuggestionModal] = useState(false);
   const [rating, setRating] = useState(0);
+  const { sendEmail, loading } = useEmail();
 
   // Form setup for rating modal
   const {
     register: registerRating,
     handleSubmit: handleSubmitRating,
     formState: { errors: ratingErrors },
+    reset: resetRatingForm,
   } = useForm();
 
   // Form setup for suggestion modal
@@ -21,6 +25,7 @@ function FeedbackToast() {
     register: registerSuggestion,
     handleSubmit: handleSubmitSuggestion,
     formState: { errors: suggestionErrors },
+    reset: resetSuggestionForm,
   } = useForm();
 
   useEffect(() => {
@@ -92,13 +97,47 @@ function FeedbackToast() {
   }, []);
 
   // Handle rating modal submission
-  const onSubmitRating = (data: any) => {
+  const onSubmitRating = async (data: any) => {
+    const { name, email, contact, comments } = data;
+
+    const templateParams = {
+      to_email: process.env.NEXT_PUBLIC_ROCKSTAR_EMAIL,
+      user_name: name,
+      user_email: email,
+      contact_number: contact,
+      rating: rating,
+      comments: comments,
+    };
+
+    await sendEmail(
+      templateParams,
+      process.env.NEXT_PUBLIC_EMAILJS_RATING_TEMPLATE_ID
+    );
     setShowRatingModal(false);
+    toast.success("Your rating submitted successfully!");
+    resetRatingForm();
   };
 
   // Handle suggestion modal submission
-  const onSubmitSuggestion = (data: any) => {
+  const onSubmitSuggestion = async (data: any) => {
+    const { name, email, contact, problem } = data;
+
+    const templateParams = {
+      to_email: process.env.NEXT_PUBLIC_ROCKSTAR_EMAIL,
+      user_name: name,
+      user_email: email,
+      contact_number: contact,
+      problem: problem,
+    };
+
+    await sendEmail(
+      templateParams,
+      process.env.NEXT_PUBLIC_EMAILJS_PROBLEM_TEMPLATE_ID
+    );
     setShowSuggestionModal(false);
+    toast.success("Your problem submitted successfully!");
+
+    resetSuggestionForm();
   };
 
   // Rating Modal content with react-hook-form
@@ -143,6 +182,7 @@ function FeedbackToast() {
               type="email"
               className="form-control"
               placeholder="Your email"
+              {...registerRating("email")}
             />
           </div>
 
@@ -178,8 +218,22 @@ function FeedbackToast() {
             >
               Close
             </Button>
-            <Button variant="primary" type="submit">
-              Submit
+
+            <Button variant="primary" type="submit" disabled={loading}>
+              {loading ? (
+                <>
+                  <Spinner
+                    as="span"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                  />
+                  &nbsp;Sending
+                </>
+              ) : (
+                "Submit"
+              )}
             </Button>
           </Modal.Footer>
         </form>
@@ -218,6 +272,7 @@ function FeedbackToast() {
               type="email"
               className="form-control"
               placeholder="Your email"
+              {...registerSuggestion("email")}
             />
           </div>
           <div className="mb-3">
@@ -238,12 +293,13 @@ function FeedbackToast() {
           </div>
           <div className="mb-3">
             <label className="form-label">Problem / Suggestion</label>
-            <input
-              type="text"
+
+            <textarea
               className="form-control"
-              placeholder="Problem you faced"
+              rows={2}
+              placeholder="Please let us know how we can improve..."
               {...registerSuggestion("problem")}
-            />
+            ></textarea>
           </div>
           <Modal.Footer className="bg_white">
             <Button
@@ -252,8 +308,21 @@ function FeedbackToast() {
             >
               Close
             </Button>
-            <Button variant="primary" type="submit">
-              Submit
+            <Button variant="primary" type="submit" disabled={loading}>
+              {loading ? (
+                <>
+                  <Spinner
+                    as="span"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                  />
+                  &nbsp;Sending
+                </>
+              ) : (
+                "Submit"
+              )}
             </Button>
           </Modal.Footer>
         </form>

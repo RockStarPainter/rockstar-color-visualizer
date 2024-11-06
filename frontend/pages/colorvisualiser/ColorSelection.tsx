@@ -196,8 +196,8 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
         <Col>
           <h4 className="fw-bold mt-3">Browse Paint Colors</h4>
         </Col>
-        <Col xs={4} className="d-flex align-items-center">
           {/* Search field with icon */}
+        <Col xs={4} className="d-flex align-items-center">
           <InputGroup>
             <InputGroup.Text id="search-addon">
               <FaSearch />
@@ -207,6 +207,7 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
               placeholder="Search paints"
               value={searchTerm}
               onChange={handleSearchChange}
+              style={{border: 'none'}}
             />
           </InputGroup>
         </Col>
@@ -320,7 +321,7 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
                   </div>
                   <Button
                     variant="danger"
-                    className="rounded-3 me-5"
+                    className="rounded-3 me-md-5"
                     size="sm"
                     onClick={() => removeColor(paint?.code)}
                   >
