@@ -27,6 +27,9 @@
 
   .logo {
     flex-direction: column; /* Stack the images vertically */
+    justify-content: start;
+    text-align: start;
+
   }
 
   .image {
@@ -50,7 +53,7 @@
 
   .logo {
     grid-column: span 2; /* Make the logo take up two columns on iPad view */
-    justify-content: center;
+    justify-content: start;
     text-align: center;
   }
 

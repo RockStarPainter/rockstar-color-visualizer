@@ -161,12 +161,12 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
                 >
                   <span
                     className="fw-semibold"
-                    style={{ fontSize: ".9rem", color:'black'  }}
+                    style={{ fontSize: ".9rem", color: "black" }}
                   >
                     {paint.name}
                   </span>
                   <br />
-                  <span style={{ fontSize: ".8rem", color:'black' }}>
+                  <span style={{ fontSize: ".8rem", color: "black" }}>
                     {paint.code}
                   </span>
                 </div>
@@ -196,7 +196,7 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
         <Col>
           <h4 className="fw-bold mt-3">Browse Paint Colors</h4>
         </Col>
-          {/* Search field with icon */}
+        {/* Search field with icon */}
         <Col xs={4} className="d-flex align-items-center">
           <InputGroup>
             <InputGroup.Text id="search-addon">
@@ -207,7 +207,7 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
               placeholder="Search paints"
               value={searchTerm}
               onChange={handleSearchChange}
-              style={{border: 'none'}}
+              style={{ border: "none" }}
             />
           </InputGroup>
         </Col>
@@ -270,7 +270,7 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
       {/* Color Categories */}
       <Row className="mb-4 sticky-top bg_white py-3">
         {colorCategories.map((category) => (
-          <Col key={category.key} xs={6} sm={4} md={2} className="m-auto">
+          <Col key={category.key} xs={6} sm={4} md={2}>
             <Button
               variant={selectedCategory === category.key ? "dark" : "light"}
               onClick={() => handleCategorySelection(category.key)}

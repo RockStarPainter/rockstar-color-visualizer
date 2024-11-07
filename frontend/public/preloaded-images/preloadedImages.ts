@@ -1,651 +1,679 @@
-export const preloadedImages: {
-  interior: { name: string; image: string }[];
-  exterior: { name: string; image: string }[];
-} = {
-  interior: [
-    {
-      name: "saeed_sample_img4",
-      image: "/preloaded-images/interior-images/saeed_sample_img4.jpg",
-    },
+export const preloadedImages = {
+  bedroom: [
     {
       name: "saeed_sample_img5",
-      image: "/preloaded-images/interior-images/saeed_sample_img5.jpg",
-    },
-    {
-      name: "saeed_sample_img6",
-      image: "/preloaded-images/interior-images/saeed_sample_img6.jpg",
-    },
-    {
-      name: "saeed_sample_img7",
-      image: "/preloaded-images/interior-images/saeed_sample_img7.jpg",
-    },
-    {
-      name: "saeed_sample_img8",
-      image: "/preloaded-images/interior-images/saeed_sample_img8.jpg",
-    },
-    {
-      name: "saeed_sample_img9",
-      image: "/preloaded-images/interior-images/saeed_sample_img9.jpg",
-    },
-    {
-      name: "saeed_sample_img10",
-      image: "/preloaded-images/interior-images/saeed_sample_img10.jpg",
-    },
-    {
-      name: "saeed_sample_img11",
-      image: "/preloaded-images/interior-images/saeed_sample_img11.jpg",
-    },
-    {
-      name: "saeed_sample_img12",
-      image: "/preloaded-images/interior-images/saeed_sample_img12.jpg",
-    },
-    {
-      name: "saeed_sample_img13",
-      image: "/preloaded-images/interior-images/saeed_sample_img13.jpg",
-    },
-    {
-      name: "saeed_sample_img14",
-      image: "/preloaded-images/interior-images/saeed_sample_img14.jpg",
-    },
-    {
-      name: "saeed_sample_img15",
-      image: "/preloaded-images/interior-images/saeed_sample_img15.jpg",
-    },
-    {
-      name: "saeed_sample_img16",
-      image: "/preloaded-images/interior-images/saeed_sample_img16.jpg",
-    },
-    {
-      name: "saeed_sample_img17",
-      image: "/preloaded-images/interior-images/saeed_sample_img17.jpg",
-    },
-    {
-      name: "saeed_sample_img18",
-      image: "/preloaded-images/interior-images/saeed_sample_img18.jpg",
-    },
-    {
-      name: "saeed_sample_img19",
-      image: "/preloaded-images/interior-images/saeed_sample_img19.jpg",
-    },
-    {
-      name: "saeed_sample_img20",
-      image: "/preloaded-images/interior-images/saeed_sample_img20.jpg",
-    },
-    {
-      name: "saeed_sample_img21",
-      image: "/preloaded-images/interior-images/saeed_sample_img21.jpg",
-    },
-    {
-      name: "saeed_sample_img22",
-      image: "/preloaded-images/interior-images/saeed_sample_img22.jpg",
-    },
-    {
-      name: "saeed_sample_img23",
-      image: "/preloaded-images/interior-images/saeed_sample_img23.jpg",
-    },
-    {
-      name: "saeed_sample_img24",
-      image: "/preloaded-images/interior-images/saeed_sample_img24.jpg",
-    },
-    {
-      name: "saeed_sample_img25",
-      image: "/preloaded-images/interior-images/saeed_sample_img25.jpg",
-    },
-    {
-      name: "saeed_sample_img26",
-      image: "/preloaded-images/interior-images/saeed_sample_img26.jpg",
-    },
-    {
-      name: "saeed_sample_img27",
-      image: "/preloaded-images/interior-images/saeed_sample_img27.jpg",
-    },
-    {
-      name: "saeed_sample_img28",
-      image: "/preloaded-images/interior-images/saeed_sample_img28.jpg",
-    },
-    {
-      name: "saeed_sample_img29",
-      image: "/preloaded-images/interior-images/saeed_sample_img29.jpg",
-    },
-    {
-      name: "saeed_sample_img30",
-      image: "/preloaded-images/interior-images/saeed_sample_img30.jpg",
+      image: "/preloaded-images/interior-images/bedroom/saeed_sample_img5.jpg",
     },
     {
       name: "saeed_sample_img31",
-      image: "/preloaded-images/interior-images/saeed_sample_img31.jpg",
+      image: "/preloaded-images/interior-images/bedroom/saeed_sample_img31.jpg",
     },
     {
       name: "saeed_sample_img32",
-      image: "/preloaded-images/interior-images/saeed_sample_img32.jpg",
+      image: "/preloaded-images/interior-images/bedroom/saeed_sample_img32.jpg",
     },
     {
       name: "saeed_sample_img33",
-      image: "/preloaded-images/interior-images/saeed_sample_img33.jpg",
+      image: "/preloaded-images/interior-images/bedroom/saeed_sample_img33.jpg",
     },
     {
       name: "saeed_sample_img34",
-      image: "/preloaded-images/interior-images/saeed_sample_img34.jpg",
-    },
-    {
-      name: "saeed_sample_img35",
-      image: "/preloaded-images/interior-images/saeed_sample_img35.jpg",
-    },
-    {
-      name: "saeed_sample_img36",
-      image: "/preloaded-images/interior-images/saeed_sample_img36.jpg",
-    },
-    {
-      name: "saeed_sample_img37",
-      image: "/preloaded-images/interior-images/saeed_sample_img37.jpg",
-    },
-    {
-      name: "saeed_sample_img38",
-      image: "/preloaded-images/interior-images/saeed_sample_img38.jpg",
-    },
-    {
-      name: "saeed_sample_img39",
-      image: "/preloaded-images/interior-images/saeed_sample_img39.jpg",
-    },
-    {
-      name: "saeed_sample_img40",
-      image: "/preloaded-images/interior-images/saeed_sample_img40.jpg",
-    },
-    {
-      name: "saeed_sample_img41",
-      image: "/preloaded-images/interior-images/saeed_sample_img41.jpg",
-    },
-    {
-      name: "saeed_sample_img42",
-      image: "/preloaded-images/interior-images/saeed_sample_img42.jpg",
-    },
-    {
-      name: "saeed_sample_img43",
-      image: "/preloaded-images/interior-images/saeed_sample_img43.jpg",
-    },
-    {
-      name: "saeed_sample_img44",
-      image: "/preloaded-images/interior-images/saeed_sample_img44.jpg",
-    },
-    {
-      name: "saeed_sample_img45",
-      image: "/preloaded-images/interior-images/saeed_sample_img45.jpg",
-    },
-    {
-      name: "saeed_sample_img46",
-      image: "/preloaded-images/interior-images/saeed_sample_img46.jpg",
-    },
-    {
-      name: "saeed_sample_img47",
-      image: "/preloaded-images/interior-images/saeed_sample_img47.jpg",
-    },
-    {
-      name: "saeed_sample_img48",
-      image: "/preloaded-images/interior-images/saeed_sample_img48.jpg",
-    },
-    {
-      name: "saeed_sample_img49",
-      image: "/preloaded-images/interior-images/saeed_sample_img49.jpg",
-    },
-    {
-      name: "saeed_sample_img50",
-      image: "/preloaded-images/interior-images/saeed_sample_img50.jpg",
-    },
-    {
-      name: "saeed_sample_img51",
-      image: "/preloaded-images/interior-images/saeed_sample_img51.jpg",
-    },
-    {
-      name: "saeed_sample_img52",
-      image: "/preloaded-images/interior-images/saeed_sample_img52.jpg",
-    },
-    {
-      name: "saeed_sample_img53",
-      image: "/preloaded-images/interior-images/saeed_sample_img53.jpg",
-    },
-    {
-      name: "saeed_sample_img54",
-      image: "/preloaded-images/interior-images/saeed_sample_img54.jpg",
-    },
-    {
-      name: "saeed_sample_img55",
-      image: "/preloaded-images/interior-images/saeed_sample_img55.jpg",
-    },
-    {
-      name: "saeed_sample_img56",
-      image: "/preloaded-images/interior-images/saeed_sample_img56.jpg",
-    },
-    {
-      name: "saeed_sample_img57",
-      image: "/preloaded-images/interior-images/saeed_sample_img57.jpg",
-    },
-    {
-      name: "saeed_sample_img58",
-      image: "/preloaded-images/interior-images/saeed_sample_img58.jpg",
-    },
-    {
-      name: "saeed_sample_img59",
-      image: "/preloaded-images/interior-images/saeed_sample_img59.jpg",
-    },
-    {
-      name: "saeed_sample_img60",
-      image: "/preloaded-images/interior-images/saeed_sample_img60.jpg",
-    },
-    {
-      name: "saeed_sample_img61",
-      image: "/preloaded-images/interior-images/saeed_sample_img61.jpg",
-    },
-    {
-      name: "saeed_sample_img64",
-      image: "/preloaded-images/interior-images/saeed_sample_img64.jpg",
-    },
-    {
-      name: "saeed_sample_img65",
-      image: "/preloaded-images/interior-images/saeed_sample_img65.jpg",
-    },
-    {
-      name: "saeed_sample_img80",
-      image: "/preloaded-images/interior-images/saeed_sample_img80.jpg",
-    },
-    {
-      name: "saeed_sample_img82",
-      image: "/preloaded-images/interior-images/saeed_sample_img82.jpg",
-    },
-    {
-      name: "saeed_sample_img83",
-      image: "/preloaded-images/interior-images/saeed_sample_img83.jpg",
-    },
-    {
-      name: "saeed_sample_img84",
-      image: "/preloaded-images/interior-images/saeed_sample_img84.jpg",
+      image: "/preloaded-images/interior-images/bedroom/saeed_sample_img34.jpg",
     },
     {
       name: "saeed_sample_img85",
-      image: "/preloaded-images/interior-images/saeed_sample_img85.jpg",
+      image: "/preloaded-images/interior-images/bedroom/saeed_sample_img85.jpg",
     },
     {
       name: "saeed_sample_img86",
-      image: "/preloaded-images/interior-images/saeed_sample_img86.jpg",
+      image: "/preloaded-images/interior-images/bedroom/saeed_sample_img86.jpg",
     },
     {
       name: "saeed_sample_img87",
-      image: "/preloaded-images/interior-images/saeed_sample_img87.jpg",
-    },
-    {
-      name: "saeed_sample_img88",
-      image: "/preloaded-images/interior-images/saeed_sample_img88.jpg",
-    },
-    {
-      name: "saeed_sample_img89",
-      image: "/preloaded-images/interior-images/saeed_sample_img89.jpg",
-    },
-    {
-      name: "saeed_sample_img90",
-      image: "/preloaded-images/interior-images/saeed_sample_img90.jpg",
-    },
-    {
-      name: "saeed_sample_img91",
-      image: "/preloaded-images/interior-images/saeed_sample_img91.jpg",
-    },
-    {
-      name: "saeed_sample_img92",
-      image: "/preloaded-images/interior-images/saeed_sample_img92.jpg",
-    },
-    {
-      name: "saeed_sample_img93",
-      image: "/preloaded-images/interior-images/saeed_sample_img93.jpg",
-    },
-    {
-      name: "saeed_sample_img94",
-      image: "/preloaded-images/interior-images/saeed_sample_img94.jpg",
-    },
-    {
-      name: "saeed_sample_img95",
-      image: "/preloaded-images/interior-images/saeed_sample_img95.jpg",
-    },
-    {
-      name: "saeed_sample_img96",
-      image: "/preloaded-images/interior-images/saeed_sample_img96.jpg",
-    },
-    {
-      name: "saeed_sample_img97",
-      image: "/preloaded-images/interior-images/saeed_sample_img97.jpg",
+      image: "/preloaded-images/interior-images/bedroom/saeed_sample_img87.jpg",
     },
     {
       name: "saeed_sample_img98",
-      image: "/preloaded-images/interior-images/saeed_sample_img98.jpg",
+      image: "/preloaded-images/interior-images/bedroom/saeed_sample_img98.jpg",
     },
     {
       name: "saeed_sample_img99",
-      image: "/preloaded-images/interior-images/saeed_sample_img99.jpg",
+      image: "/preloaded-images/interior-images/bedroom/saeed_sample_img99.jpg",
     },
     {
       name: "saeed_sample_img100",
-      image: "/preloaded-images/interior-images/saeed_sample_img100.jpg",
-    },
-    {
-      name: "saeed_sample_img101",
-      image: "/preloaded-images/interior-images/saeed_sample_img101.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img100.jpg",
     },
     {
       name: "saeed_sample_img102",
-      image: "/preloaded-images/interior-images/saeed_sample_img102.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img102.jpg",
     },
     {
       name: "saeed_sample_img103",
-      image: "/preloaded-images/interior-images/saeed_sample_img103.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img103.jpg",
     },
     {
       name: "saeed_sample_img104",
-      image: "/preloaded-images/interior-images/saeed_sample_img104.jpg",
-    },
-    {
-      name: "saeed_sample_img105",
-      image: "/preloaded-images/interior-images/saeed_sample_img105.jpg",
-    },
-    {
-      name: "saeed_sample_img106",
-      image: "/preloaded-images/interior-images/saeed_sample_img106.jpg",
-    },
-    {
-      name: "saeed_sample_img107",
-      image: "/preloaded-images/interior-images/saeed_sample_img107.jpg",
-    },
-    {
-      name: "saeed_sample_img108",
-      image: "/preloaded-images/interior-images/saeed_sample_img108.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img104.jpg",
     },
     {
       name: "saeed_sample_img109",
-      image: "/preloaded-images/interior-images/saeed_sample_img109.jpg",
-    },
-    {
-      name: "saeed_sample_img110",
-      image: "/preloaded-images/interior-images/saeed_sample_img110.jpg",
-    },
-    {
-      name: "saeed_sample_img111",
-      image: "/preloaded-images/interior-images/saeed_sample_img111.jpg",
-    },
-    {
-      name: "saeed_sample_img112",
-      image: "/preloaded-images/interior-images/saeed_sample_img112.jpg",
-    },
-    {
-      name: "saeed_sample_img113",
-      image: "/preloaded-images/interior-images/saeed_sample_img113.jpg",
-    },
-    {
-      name: "saeed_sample_img114",
-      image: "/preloaded-images/interior-images/saeed_sample_img114.jpg",
-    },
-    {
-      name: "saeed_sample_img115",
-      image: "/preloaded-images/interior-images/saeed_sample_img115.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img109.jpg",
     },
     {
       name: "saeed_sample_img116",
-      image: "/preloaded-images/interior-images/saeed_sample_img116.jpg",
-    },
-    {
-      name: "saeed_sample_img117",
-      image: "/preloaded-images/interior-images/saeed_sample_img117.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img116.jpg",
     },
     {
       name: "saeed_sample_img118",
-      image: "/preloaded-images/interior-images/saeed_sample_img118.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img118.jpg",
     },
     {
       name: "saeed_sample_img119",
-      image: "/preloaded-images/interior-images/saeed_sample_img119.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img119.jpg",
     },
     {
       name: "saeed_sample_img120",
-      image: "/preloaded-images/interior-images/saeed_sample_img120.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img120.jpg",
     },
     {
       name: "saeed_sample_img121",
-      image: "/preloaded-images/interior-images/saeed_sample_img121.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img121.jpg",
     },
     {
       name: "saeed_sample_img122",
-      image: "/preloaded-images/interior-images/saeed_sample_img122.jpg",
-    },
-    {
-      name: "saeed_sample_img123",
-      image: "/preloaded-images/interior-images/saeed_sample_img123.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img122.jpg",
     },
     {
       name: "saeed_sample_img124",
-      image: "/preloaded-images/interior-images/saeed_sample_img124.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img124.jpg",
     },
     {
       name: "saeed_sample_img125",
-      image: "/preloaded-images/interior-images/saeed_sample_img125.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img125.jpg",
     },
     {
       name: "saeed_sample_img126",
-      image: "/preloaded-images/interior-images/saeed_sample_img126.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img126.jpg",
     },
     {
       name: "saeed_sample_img127",
-      image: "/preloaded-images/interior-images/saeed_sample_img127.jpg",
-    },
-    {
-      name: "saeed_sample_img128",
-      image: "/preloaded-images/interior-images/saeed_sample_img128.jpg",
-    },
-    {
-      name: "saeed_sample_img129",
-      image: "/preloaded-images/interior-images/saeed_sample_img129.jpg",
-    },
-    {
-      name: "saeed_sample_img130",
-      image: "/preloaded-images/interior-images/saeed_sample_img130.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img127.jpg",
     },
     {
       name: "saeed_sample_img131",
-      image: "/preloaded-images/interior-images/saeed_sample_img131.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img131.jpg",
     },
     {
       name: "saeed_sample_img132",
-      image: "/preloaded-images/interior-images/saeed_sample_img132.jpg",
-    },
-    {
-      name: "saeed_sample_img133",
-      image: "/preloaded-images/interior-images/saeed_sample_img133.jpg",
-    },
-    {
-      name: "saeed_sample_img134",
-      image: "/preloaded-images/interior-images/saeed_sample_img134.jpg",
-    },
-    {
-      name: "saeed_sample_img135",
-      image: "/preloaded-images/interior-images/saeed_sample_img135.jpg",
-    },
-    {
-      name: "saeed_sample_img136",
-      image: "/preloaded-images/interior-images/saeed_sample_img136.jpg",
-    },
-    {
-      name: "saeed_sample_img137",
-      image: "/preloaded-images/interior-images/saeed_sample_img137.jpg",
-    },
-    {
-      name: "saeed_sample_img138",
-      image: "/preloaded-images/interior-images/saeed_sample_img138.jpg",
-    },
-    {
-      name: "saeed_sample_img139",
-      image: "/preloaded-images/interior-images/saeed_sample_img139.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img132.jpg",
     },
     {
       name: "saeed_sample_img140",
-      image: "/preloaded-images/interior-images/saeed_sample_img140.jpg",
-    },
-    {
-      name: "saeed_sample_img141",
-      image: "/preloaded-images/interior-images/saeed_sample_img141.jpg",
-    },
-    {
-      name: "saeed_sample_img142",
-      image: "/preloaded-images/interior-images/saeed_sample_img142.jpg",
-    },
-    {
-      name: "saeed_sample_img143",
-      image: "/preloaded-images/interior-images/saeed_sample_img143.jpg",
-    },
-    {
-      name: "saeed_sample_img144",
-      image: "/preloaded-images/interior-images/saeed_sample_img144.jpg",
-    },
-    {
-      name: "saeed_sample_img145",
-      image: "/preloaded-images/interior-images/saeed_sample_img145.jpg",
-    },
-    {
-      name: "saeed_sample_img146",
-      image: "/preloaded-images/interior-images/saeed_sample_img146.jpg",
-    },
-    {
-      name: "saeed_sample_img151",
-      image: "/preloaded-images/interior-images/saeed_sample_img151.jpg",
-    },
-    {
-      name: "saeed_sample_img160",
-      image: "/preloaded-images/interior-images/saeed_sample_img160.jpg",
-    },
-    {
-      name: "saeed_sample_img166",
-      image: "/preloaded-images/interior-images/saeed_sample_img166.jpg",
-    },
-    {
-      name: "saeed_sample_img167",
-      image: "/preloaded-images/interior-images/saeed_sample_img167.jpg",
-    },
-    {
-      name: "saeed_sample_img168",
-      image: "/preloaded-images/interior-images/saeed_sample_img168.jpg",
-    },
-    {
-      name: "saeed_sample_img169",
-      image: "/preloaded-images/interior-images/saeed_sample_img169.jpg",
-    },
-    {
-      name: "saeed_sample_img170",
-      image: "/preloaded-images/interior-images/saeed_sample_img170.jpg",
-    },
-    {
-      name: "saeed_sample_img171",
-      image: "/preloaded-images/interior-images/saeed_sample_img171.jpg",
-    },
-    {
-      name: "saeed_sample_img172",
-      image: "/preloaded-images/interior-images/saeed_sample_img172.jpg",
-    },
-    {
-      name: "saeed_sample_img175",
-      image: "/preloaded-images/interior-images/saeed_sample_img175.jpg",
-    },
-    {
-      name: "saeed_sample_img176",
-      image: "/preloaded-images/interior-images/saeed_sample_img176.jpg",
-    },
-    {
-      name: "saeed_sample_img178",
-      image: "/preloaded-images/interior-images/saeed_sample_img178.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img140.jpg",
     },
     {
       name: "saeed_sample_img179",
-      image: "/preloaded-images/interior-images/saeed_sample_img179.jpg",
-    },
-    {
-      name: "saeed_sample_img180",
-      image: "/preloaded-images/interior-images/saeed_sample_img180.jpg",
-    },
-    {
-      name: "saeed_sample_img181",
-      image: "/preloaded-images/interior-images/saeed_sample_img181.jpg",
-    },
-    {
-      name: "saeed_sample_img182",
-      image: "/preloaded-images/interior-images/saeed_sample_img182.jpg",
-    },
-    {
-      name: "saeed_sample_img183",
-      image: "/preloaded-images/interior-images/saeed_sample_img183.jpg",
-    },
-    {
-      name: "saeed_sample_img184",
-      image: "/preloaded-images/interior-images/saeed_sample_img184.jpg",
-    },
-    {
-      name: "saeed_sample_img185",
-      image: "/preloaded-images/interior-images/saeed_sample_img185.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img179.jpg",
     },
     {
       name: "saeed_sample_img186",
-      image: "/preloaded-images/interior-images/saeed_sample_img186.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img186.jpg",
     },
     {
       name: "saeed_sample_img187",
-      image: "/preloaded-images/interior-images/saeed_sample_img187.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img187.jpg",
     },
     {
       name: "saeed_sample_img188",
-      image: "/preloaded-images/interior-images/saeed_sample_img188.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img188.jpg",
     },
     {
       name: "saeed_sample_img189",
-      image: "/preloaded-images/interior-images/saeed_sample_img189.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img189.jpg",
     },
     {
       name: "saeed_sample_img190",
-      image: "/preloaded-images/interior-images/saeed_sample_img190.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img190.jpg",
     },
     {
       name: "saeed_sample_img191",
-      image: "/preloaded-images/interior-images/saeed_sample_img191.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img191.jpg",
     },
     {
       name: "saeed_sample_img192",
-      image: "/preloaded-images/interior-images/saeed_sample_img192.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img192.jpg",
     },
     {
       name: "saeed_sample_img193",
-      image: "/preloaded-images/interior-images/saeed_sample_img193.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img193.jpg",
     },
     {
       name: "saeed_sample_img194",
-      image: "/preloaded-images/interior-images/saeed_sample_img194.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img194.jpg",
     },
     {
       name: "saeed_sample_img195",
-      image: "/preloaded-images/interior-images/saeed_sample_img195.jpg",
+      image:
+        "/preloaded-images/interior-images/bedroom/saeed_sample_img195.jpg",
+    },
+  ],
+
+  room: [
+    {
+      name: "saeed_sample_img7",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img7.jpg",
+    },
+    {
+      name: "saeed_sample_img10",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img10.jpg",
+    },
+    {
+      name: "saeed_sample_img12",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img12.jpg",
+    },
+    {
+      name: "saeed_sample_img16",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img16.jpg",
+    },
+    {
+      name: "saeed_sample_img17",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img17.jpg",
+    },
+    {
+      name: "saeed_sample_img19",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img19.jpg",
+    },
+    {
+      name: "saeed_sample_img20",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img20.jpg",
+    },
+    {
+      name: "saeed_sample_img21",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img21.jpg",
+    },
+    {
+      name: "saeed_sample_img22",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img22.jpg",
+    },
+
+    {
+      name: "saeed_sample_img24",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img24.jpg",
+    },
+    {
+      name: "saeed_sample_img26",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img26.jpg",
+    },
+    {
+      name: "saeed_sample_img27",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img27.jpg",
+    },
+    {
+      name: "saeed_sample_img28",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img28.jpg",
+    },
+    {
+      name: "saeed_sample_img35",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img35.jpg",
+    },
+    {
+      name: "saeed_sample_img38",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img38.jpg",
+    },
+    {
+      name: "saeed_sample_img43",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img43.jpg",
+    },
+    {
+      name: "saeed_sample_img44",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img44.jpg",
+    },
+    {
+      name: "saeed_sample_img45",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img45.jpg",
+    },
+    {
+      name: "saeed_sample_img46",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img46.jpg",
+    },
+    {
+      name: "saeed_sample_img47",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img47.jpg",
+    },
+    {
+      name: "saeed_sample_img48",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img48.jpg",
+    },
+    {
+      name: "saeed_sample_img49",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img49.jpg",
+    },
+    {
+      name: "saeed_sample_img51",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img51.jpg",
+    },
+    {
+      name: "saeed_sample_img52",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img52.jpg",
+    },
+    {
+      name: "saeed_sample_img54",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img54.jpg",
+    },
+    {
+      name: "saeed_sample_img57",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img57.jpg",
+    },
+    {
+      name: "saeed_sample_img59",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img59.jpg",
+    },
+
+    {
+      name: "saeed_sample_img88",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img88.jpg",
+    },
+    {
+      name: "saeed_sample_img112",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img112.jpg",
+    },
+    {
+      name: "saeed_sample_img113",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img113.jpg",
+    },
+    {
+      name: "saeed_sample_img128",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img128.jpg",
+    },
+    {
+      name: "saeed_sample_img133",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img133.jpg",
+    },
+    {
+      name: "saeed_sample_img134",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img134.jpg",
+    },
+    {
+      name: "saeed_sample_img135",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img135.jpg",
+    },
+    {
+      name: "saeed_sample_img136",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img136.jpg",
+    },
+    {
+      name: "saeed_sample_img141",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img141.jpg",
+    },
+    {
+      name: "saeed_sample_img142",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img142.jpg",
+    },
+    {
+      name: "saeed_sample_img143",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img143.jpg",
+    },
+    {
+      name: "saeed_sample_img144",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img144.jpg",
+    },
+    {
+      name: "saeed_sample_img145",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img145.jpg",
+    },
+    {
+      name: "saeed_sample_img169",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img169.jpg",
+    },
+    {
+      name: "saeed_sample_img170",
+      image: "/preloaded-images/interior-images/rooms/saeed_sample_img170.jpg",
+    },
+  ],
+
+  dining: [
+    {
+      name: "saeed_sample_img14",
+      image: "/preloaded-images/interior-images/dining/saeed_sample_img14.jpg",
+    },
+    {
+      name: "saeed_sample_img64",
+      image: "/preloaded-images/interior-images/dining/saeed_sample_img64.jpg",
+    },
+    {
+      name: "saeed_sample_img92",
+      image: "/preloaded-images/interior-images/dining/saeed_sample_img92.jpg",
+    },
+    {
+      name: "saeed_sample_img95",
+      image: "/preloaded-images/interior-images/dining/saeed_sample_img95.jpg",
+    },
+    {
+      name: "saeed_sample_img106",
+      image: "/preloaded-images/interior-images/dining/saeed_sample_img106.jpg",
+    },
+    {
+      name: "saeed_sample_img138",
+      image: "/preloaded-images/interior-images/dining/saeed_sample_img138.jpg",
+    },
+    {
+      name: "saeed_sample_img166",
+      image: "/preloaded-images/interior-images/dining/saeed_sample_img166.jpg",
+    },
+    {
+      name: "saeed_sample_img168",
+      image: "/preloaded-images/interior-images/dining/saeed_sample_img168.jpg",
+    },
+    {
+      name: "saeed_sample_img172",
+      image: "/preloaded-images/interior-images/dining/saeed_sample_img172.jpg",
     },
     {
       name: "saeed_sample_img196",
-      image: "/preloaded-images/interior-images/saeed_sample_img196.jpg",
+      image: "/preloaded-images/interior-images/dining/saeed_sample_img196.jpg",
+    },
+  ],
+
+  bathroom: [
+    {
+      name: "saeed_sample_img23",
+      image:
+        "/preloaded-images/interior-images/bathroom/saeed_sample_img23.jpg",
     },
     {
-      name: "saeed_sample_img197",
-      image: "/preloaded-images/interior-images/saeed_sample_img197.jpg",
+      name: "saeed_sample_img50",
+      image:
+        "/preloaded-images/interior-images/bathroom/saeed_sample_img50.jpg",
     },
     {
-      name: "saeed_sample_img198",
-      image: "/preloaded-images/interior-images/saeed_sample_img198.jpg",
+      name: "saeed_sample_img55",
+      image:
+        "/preloaded-images/interior-images/bathroom/saeed_sample_img55.jpg",
     },
     {
-      name: "saeed_sample_img300",
-      image: "/preloaded-images/interior-images/saeed_sample_img300.jpg",
+      name: "saeed_sample_img115",
+      image:
+        "/preloaded-images/interior-images/bathroom/saeed_sample_img115.jpg",
+    },
+    {
+      name: "saeed_sample_img130",
+      image:
+        "/preloaded-images/interior-images/bathroom/saeed_sample_img130.jpg",
+    },
+    {
+      name: "saeed_sample_img171",
+      image:
+        "/preloaded-images/interior-images/bathroom/saeed_sample_img171.jpg",
     },
     {
       name: "saeed_sample_img301",
-      image: "/preloaded-images/interior-images/saeed_sample_img301.jpg",
+      image:
+        "/preloaded-images/interior-images/bathroom/saeed_sample_img301.jpg",
+    },
+  ],
+
+  hallway: [
+    {
+      name: "saeed_sample_img4",
+      image: "/preloaded-images/interior-images/hallway/saeed_sample_img4.jpg",
+    },
+    {
+      name: "saeed_sample_img6",
+      image: "/preloaded-images/interior-images/hallway/saeed_sample_img6.jpg",
+    },
+    {
+      name: "saeed_sample_img8",
+      image: "/preloaded-images/interior-images/hallway/saeed_sample_img8.jpg",
+    },
+    {
+      name: "saeed_sample_img9",
+      image: "/preloaded-images/interior-images/hallway/saeed_sample_img9.jpg",
+    },
+    {
+      name: "saeed_sample_img15",
+      image: "/preloaded-images/interior-images/hallway/saeed_sample_img15.jpg",
+    },
+    {
+      name: "saeed_sample_img18",
+      image: "/preloaded-images/interior-images/hallway/saeed_sample_img18.jpg",
+    },
+    {
+      name: "saeed_sample_img37",
+      image: "/preloaded-images/interior-images/hallway/saeed_sample_img37.jpg",
+    },
+    {
+      name: "saeed_sample_img53",
+      image: "/preloaded-images/interior-images/hallway/saeed_sample_img53.jpg",
+    },
+    {
+      name: "saeed_sample_img58",
+      image: "/preloaded-images/interior-images/hallway/saeed_sample_img58.jpg",
+    },
+    {
+      name: "saeed_sample_img61",
+      image: "/preloaded-images/interior-images/hallway/saeed_sample_img61.jpg",
+    },
+    {
+      name: "saeed_sample_img105",
+      image:
+        "/preloaded-images/interior-images/hallway/saeed_sample_img105.jpg",
+    },
+    {
+      name: "saeed_sample_img300",
+      image:
+        "/preloaded-images/interior-images/hallway/saeed_sample_img300.jpg",
     },
     {
       name: "saeed_sample_img302",
-      image: "/preloaded-images/interior-images/saeed_sample_img302.jpg",
+      image:
+        "/preloaded-images/interior-images/hallway/saeed_sample_img302.jpg",
+    },
+  ],
+
+  kitchen: [
+    {
+      name: "saeed_sample_img11",
+      image: "/preloaded-images/interior-images/kitchen/saeed_sample_img11.jpg",
+    },
+    {
+      name: "saeed_sample_img25",
+      image: "/preloaded-images/interior-images/kitchen/saeed_sample_img25.jpg",
+    },
+    {
+      name: "saeed_sample_img29",
+      image: "/preloaded-images/interior-images/kitchen/saeed_sample_img29.jpg",
+    },
+    {
+      name: "saeed_sample_img39",
+      image: "/preloaded-images/interior-images/kitchen/saeed_sample_img39.jpg",
+    },
+    {
+      name: "saeed_sample_img40",
+      image: "/preloaded-images/interior-images/kitchen/saeed_sample_img40.jpg",
+    },
+    {
+      name: "saeed_sample_img41",
+      image: "/preloaded-images/interior-images/kitchen/saeed_sample_img41.jpg",
+    },
+    {
+      name: "saeed_sample_img42",
+      image: "/preloaded-images/interior-images/kitchen/saeed_sample_img42.jpg",
+    },
+    {
+      name: "saeed_sample_img60",
+      image: "/preloaded-images/interior-images/kitchen/saeed_sample_img60.jpg",
+    },
+    {
+      name: "saeed_sample_img91",
+      image: "/preloaded-images/interior-images/kitchen/saeed_sample_img91.jpg",
+    },
+    {
+      name: "saeed_sample_img107",
+      image:
+        "/preloaded-images/interior-images/kitchen/saeed_sample_img107.jpg",
+    },
+    {
+      name: "saeed_sample_img111",
+      image:
+        "/preloaded-images/interior-images/kitchen/saeed_sample_img111.jpg",
+    },
+    {
+      name: "saeed_sample_img114",
+      image:
+        "/preloaded-images/interior-images/kitchen/saeed_sample_img114.jpg",
+    },
+    {
+      name: "saeed_sample_img137",
+      image:
+        "/preloaded-images/interior-images/kitchen/saeed_sample_img137.jpg",
+    },
+  ],
+
+  lounge: [
+    {
+      name: "saeed_sample_img13",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img13.jpg",
+    },
+    {
+      name: "saeed_sample_img36",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img36.jpg",
+    },
+    {
+      name: "saeed_sample_img65",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img65.jpg",
+    },
+    {
+      name: "saeed_sample_img83",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img83.jpg",
+    },
+    {
+      name: "saeed_sample_img84",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img84.jpg",
+    },
+    {
+      name: "saeed_sample_img93",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img93.jpg",
+    },
+    {
+      name: "saeed_sample_img94",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img94.jpg",
+    },
+    {
+      name: "saeed_sample_img96",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img96.jpg",
+    },
+    {
+      name: "saeed_sample_img97",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img97.jpg",
+    },
+    {
+      name: "saeed_sample_img101",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img101.jpg",
+    },
+    {
+      name: "saeed_sample_img108",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img108.jpg",
+    },
+    {
+      name: "saeed_sample_img117",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img117.jpg",
+    },
+    {
+      name: "saeed_sample_img123",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img123.jpg",
+    },
+    {
+      name: "saeed_sample_img129",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img129.jpg",
+    },
+    {
+      name: "saeed_sample_img146",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img146.jpg",
+    },
+    {
+      name: "saeed_sample_img151",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img151.jpg",
+    },
+    {
+      name: "saeed_sample_img160",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img160.jpg",
+    },
+    {
+      name: "saeed_sample_img165",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img165.jpg",
+    },
+    {
+      name: "saeed_sample_img167",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img167.jpg",
+    },
+    {
+      name: "saeed_sample_img175",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img175.jpg",
+    },
+    {
+      name: "saeed_sample_img176",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img176.jpg",
+    },
+    {
+      name: "saeed_sample_img178",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img178.jpg",
+    },
+    {
+      name: "saeed_sample_img180",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img180.jpg",
+    },
+    {
+      name: "saeed_sample_img181",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img181.jpg",
+    },
+    {
+      name: "saeed_sample_img182",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img182.jpg",
+    },
+    {
+      name: "saeed_sample_img183",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img183.jpg",
+    },
+    {
+      name: "saeed_sample_img184",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img184.jpg",
+    },
+    {
+      name: "saeed_sample_img185",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img185.jpg",
+    },
+    {
+      name: "saeed_sample_img198",
+      image: "/preloaded-images/interior-images/lounge/saeed_sample_img198.jpg",
     },
   ],
 
@@ -693,10 +721,6 @@ export const preloadedImages: {
     {
       name: "saeed_sample_img74",
       image: "/preloaded-images/exterior-images/saeed_sample_img74.jpg",
-    },
-    {
-      name: "saeed_sample_img75",
-      image: "/preloaded-images/exterior-images/saeed_sample_img75.jpg",
     },
     {
       name: "saeed_sample_img76",
@@ -797,6 +821,10 @@ export const preloadedImages: {
     {
       name: "saeed_sample_img177",
       image: "/preloaded-images/exterior-images/saeed_sample_img177.jpg",
+    },
+    {
+      name: "saeed_sample_img197",
+      image: "/preloaded-images/exterior-images/saeed_sample_img197.jpg",
     },
     {
       name: "saeed_sample_img199",
@@ -1169,10 +1197,6 @@ export const preloadedImages: {
     {
       name: "saeed_sample_img291",
       image: "/preloaded-images/exterior-images/saeed_sample_img291.jpg",
-    },
-    {
-      name: "saeed_sample_img292",
-      image: "/preloaded-images/exterior-images/saeed_sample_img292.jpg",
     },
     {
       name: "saeed_sample_img293",

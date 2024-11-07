@@ -13,7 +13,13 @@ import Image from "next/image";
 import HowItWorksStyles from "../../styles/HowItWorks.module.css"; // Custom styles
 
 const preloadedImageCategories = [
-  { name: "Interior", key: "interior" },
+  { name: "Bedroom", key: "bedroom" },
+  { name: "Room", key: "room" },
+  { name: "Dining", key: "dining" },
+  { name: "Bathroom", key: "bathroom" },
+  { name: "Hallway", key: "hallway" },
+  { name: "Kitchen", key: "kitchen" },
+  { name: "Lounge", key: "lounge" },
   { name: "Exterior", key: "exterior" },
 ];
 
@@ -36,11 +42,13 @@ function ImageSelection({
   const [preloadedImageUrl, setPreloadedImageUrl] = useState<string>(""); // Store preloaded image URL
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modelScale, setModelScale] = useState<modelScaleProps | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string>("interior");
+  const [selectedCategory, setSelectedCategory] = useState<string>("bedroom");
+  const [selectedSection, setSelectedSection] = useState<string>("Bedroom");
 
   // Handle category selection
-  const handleCategorySelection = (category: string) => {
-    setSelectedCategory(category);
+  const handleCategorySelection = (category: any) => {
+    setSelectedCategory(category?.key);
+    setSelectedSection(category?.name);
   };
 
   useEffect(() => {
@@ -182,10 +190,10 @@ function ImageSelection({
           {/* Color Categories */}
           <Row className="mb-4 sticky-top bg_white py-3">
             {preloadedImageCategories.map((category) => (
-              <Col key={category.key} xs={6} sm={4} md={2} className="m-auto">
+              <Col key={category.key} xs={6} sm={4} md={2}>
                 <Button
                   variant={selectedCategory === category.key ? "dark" : "light"}
-                  onClick={() => handleCategorySelection(category.key)}
+                  onClick={() => handleCategorySelection(category)}
                   className="w-100 mb-2"
                 >
                   {category.name}
@@ -195,30 +203,38 @@ function ImageSelection({
           </Row>
 
           <div className={styles.preloadedGrid}>
-            {preloadedImages[selectedCategory as "interior" | "exterior"].map(
-              (image, index) => (
-                <div
-                  key={image?.name}
-                  onClick={() => handlePreloadedImageClick(image)} // Call the function on image click
-                  className={styles.preloadedCard}
-                >
-                  <div className={styles.preloadedImageWrapper}>
-                    <img
-                      src={image.image}
-                      alt={image.name}
-                      className={styles.preloadedImage}
-                    />
-                  </div>
-                  <div className={styles.preloadedCardContent}>
-                    <h4
-                      className={`${styles.preloadedCardTitle} text-capitalize`}
-                    >
-                      {`image ${index + 1}`}
-                    </h4>
-                  </div>
+            {preloadedImages[
+              selectedCategory as
+                | "bedroom"
+                | "room"
+                | "hallway"
+                | "kitchen"
+                | "dining"
+                | "bathroom"
+                | "lounge"
+                | "exterior"
+            ].map((image, index) => (
+              <div
+                key={image?.name}
+                onClick={() => handlePreloadedImageClick(image)} // Call the function on image click
+                className={styles.preloadedCard}
+              >
+                <div className={styles.preloadedImageWrapper}>
+                  <img
+                    src={image.image}
+                    alt={image.name}
+                    className={styles.preloadedImage}
+                  />
                 </div>
-              )
-            )}
+                <div className={styles.preloadedCardContent}>
+                  <h4
+                    className={`${styles.preloadedCardTitle} text-capitalize`}
+                  >
+                    {`${selectedSection} ${index + 1}`}
+                  </h4>
+                </div>
+              </div>
+            ))}
           </div>
         </Container>
       </div>
