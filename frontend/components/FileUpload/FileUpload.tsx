@@ -150,9 +150,9 @@ const FileUpload = (props: any) => {
       <div className={styles.upload_area__header}>
         <h1 className={styles.upload_area__title}>Upload your file</h1>
         <p className={styles.upload_area__paragraph}>
-          File should be an image&nbsp;
+          Upload clear, well-lit images. Image quality and lighting may affect
+          the accuracy
           <strong className={styles.upload_area__tooltip}>
-            Like
             <span
               id="uploadAreaTooltipData"
               className={styles.upload_area__tooltip_data}
