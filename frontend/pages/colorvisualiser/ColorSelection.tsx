@@ -14,6 +14,8 @@ import { paints } from "../../public/paints";
 import { FaCheckCircle, FaLongArrowAltRight, FaSearch } from "react-icons/fa"; // Import search icon
 import { useColorContext } from "../../contexts/ColorContext";
 import { MdOutlineDeleteOutline } from "react-icons/md";
+import ScrollToTopButton from "../../components/ScrollToTopButton";
+import Pagination from "../../components/Pagination";
 
 const colorCategories = [
   { name: "Red", key: "red" },
@@ -33,6 +35,14 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
   const [selectedCompany, setSelectedCompany] = useState<string>("");
   const [selectedLogo, setSelectedLogo] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState<number>(1); // Current page
+  const [totalPages, setTotalPages] = useState<number>(); // Colors to display on the page
+  // const colorsPerPage = 20; // Colors per page
+  // Add this state for colors per page if you haven't already
+  const [colorsPerPage, setColorsPerPage] = useState(20);
+  let filteredPaints:any = []
+
+  
 
   const router = useRouter();
   const { selectedColors, addColor, removeColor } = useColorContext(); // Use the context
@@ -46,6 +56,12 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
       setCompanyPaints(firstCompany.paints);
     }
   }, []);
+
+  // Set default company on load
+  useEffect(() => {
+    setTotalPages(Math.ceil((filteredPaints?.length || 0) / colorsPerPage));
+    setCurrentPage(1);
+  }, [selectedCategory, selectedCompany]);
 
   // Handle company selection change
   const handleCompanySelection = (company: any) => {
@@ -78,19 +94,31 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
   };
 
   // Filter paints by name or code based on search term
-  const filteredPaints = companyPaints[selectedCategory]?.filter(
+  filteredPaints = companyPaints[selectedCategory]?.filter(
     (paint: any) =>
       paint.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       paint.code.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Add this handler if you haven't already
+  const handleColorsPerPageChange = (newValue) => {
+    setColorsPerPage(newValue);
+    setCurrentPage(1); // Reset to first page when changing items per page
+  };
+
+  // const totalPages = Math.ceil((filteredPaints?.length || 0) / colorsPerPage);
+
   const renderPaints = () => {
+    const startIndex = (currentPage - 1) * colorsPerPage;
+    const endIndex = startIndex + colorsPerPage;
+    const paginatedPaints = filteredPaints?.slice(startIndex, endIndex);
+
     return (
       <div
         className="d-flex flex-wrap justify-content-center"
         style={{ gap: "10px", overflow: "visible" }}
       >
-        {filteredPaints?.map((paint: any, index: any) => (
+        {paginatedPaints?.map((paint: any, index: any) => (
           <div
             key={index}
             style={{
@@ -334,8 +362,38 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
         </div>
       </Row>
 
+      <ScrollToTopButton />
+
       {/* Paint Grid */}
       <Row style={{ position: "relative" }}>{renderPaints()}</Row>
+
+      {/* <Row className="mt-4 justify-content-center">
+        <Button
+          variant="secondary"
+          disabled={currentPage === 1}
+          onClick={() => setCurrentPage(currentPage - 1)}
+        >
+          Previous
+        </Button>
+        <span className="mx-3">
+          Page {currentPage} of {totalPages}
+        </span>
+        <Button
+          variant="secondary"
+          disabled={currentPage === totalPages}
+          onClick={() => setCurrentPage(currentPage + 1)}
+        >
+          Next
+        </Button>
+      </Row> */}
+
+      {/* <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+        colorsPerPage={colorsPerPage}
+        onColorsPerPageChange={handleColorsPerPageChange}
+      /> */}
     </Container>
   );
 };
