@@ -13,7 +13,7 @@ const Pagination = ({
   onPageChange, 
   colorsPerPage = 20,
   onColorsPerPageChange 
-}) => {
+}: any) => {
   // Ensure we have valid numbers
   const page = Math.max(1, currentPage);
   const total = Math.max(1, totalPages);

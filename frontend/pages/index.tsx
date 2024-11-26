@@ -9,6 +9,7 @@ import Services from "./Services";
 import AboutUs from "./AboutUs";
 import Testimonials from "../components/Testimonials/Testimonials";
 import Hero from "../components/Hero/Hero";
+import ScrollToTopButton from "../components/ScrollToTopButton";
 
 // Styled Typography for section headings
 const SectionTitle = styled(Typography)(({ theme }) => ({
@@ -30,19 +31,16 @@ export default function Home(props: any) {
 
   return (
     <Container fluid className="p-0">
-      
       {/* Image and Video Overlay Section */}
       <Hero topRef={topRef} /> {/* Pass topRef to Hero */}
       <HowItWorks />
       <BrandShowcase />
       <FeatureHighlights />
       <AboutUs />
-
       {/* Our Services Section */}
       <Container fluid className="py-5">
         <Services />
       </Container>
-
       {/* Testimonials Section */}
       <Testimonials />
     </Container>

@@ -16,6 +16,7 @@ import Footer from "../components/Footer/Footer";
 // Import the Loading component
 import { useRouter } from "next/router"; // Import the useRouter hook
 import Loading from "../components/Loading/Loading";
+import ScrollToTopButton from "../components/ScrollToTopButton";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [model, setModel] = useState<ort.InferenceSession | null>(null);
@@ -92,6 +93,7 @@ export default function App({ Component, pageProps }: AppProps) {
               <Component {...pageProps} model={model} vithModel={vithModel} />
               <Analytics />
               <Footer />
+              <ScrollToTopButton />
             </>
           </ColorProvider>
         </AppContextProvider>

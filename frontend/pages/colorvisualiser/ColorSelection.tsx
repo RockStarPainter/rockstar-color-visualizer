@@ -14,7 +14,6 @@ import { paints } from "../../public/paints";
 import { FaCheckCircle, FaLongArrowAltRight, FaSearch } from "react-icons/fa"; // Import search icon
 import { useColorContext } from "../../contexts/ColorContext";
 import { MdOutlineDeleteOutline } from "react-icons/md";
-import ScrollToTopButton from "../../components/ScrollToTopButton";
 import Pagination from "../../components/Pagination";
 
 const colorCategories = [
@@ -37,12 +36,8 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1); // Current page
   const [totalPages, setTotalPages] = useState<number>(); // Colors to display on the page
-  // const colorsPerPage = 20; // Colors per page
-  // Add this state for colors per page if you haven't already
   const [colorsPerPage, setColorsPerPage] = useState(20);
-  let filteredPaints:any = []
-
-  
+  let filteredPaints: any = [];
 
   const router = useRouter();
   const { selectedColors, addColor, removeColor } = useColorContext(); // Use the context
@@ -95,18 +90,18 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
 
   // Filter paints by name or code based on search term
   filteredPaints = companyPaints[selectedCategory]?.filter(
+
     (paint: any) =>
       paint.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       paint.code.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // Add this handler if you haven't already
-  const handleColorsPerPageChange = (newValue) => {
+  const handleColorsPerPageChange = (newValue: any) => {
     setColorsPerPage(newValue);
     setCurrentPage(1); // Reset to first page when changing items per page
   };
 
-  // const totalPages = Math.ceil((filteredPaints?.length || 0) / colorsPerPage);
 
   const renderPaints = () => {
     const startIndex = (currentPage - 1) * colorsPerPage;
@@ -362,8 +357,6 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
         </div>
       </Row>
 
-      <ScrollToTopButton />
-
       {/* Paint Grid */}
       <Row style={{ position: "relative" }}>{renderPaints()}</Row>
 
@@ -387,13 +380,13 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
         </Button>
       </Row> */}
 
-      {/* <Pagination
+      <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={setCurrentPage}
         colorsPerPage={colorsPerPage}
         onColorsPerPageChange={handleColorsPerPageChange}
-      /> */}
+      />
     </Container>
   );
 };
