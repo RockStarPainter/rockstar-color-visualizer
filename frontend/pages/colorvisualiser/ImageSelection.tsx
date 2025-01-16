@@ -191,12 +191,11 @@ function ImageSelection({
         </div>
 
         {/* Preloaded Images Section */}
-        <Container fluid className={styles.preloadedSection}>
+        {/* <Container fluid className={styles.preloadedSection}>
           <h2 className={`${HowItWorksStyles.sectionTitle} text-center`}>
             Try Sample Images
           </h2>
 
-          {/* Color Categories */}
           <Row className="mb-4 sticky-top bg_white py-3">
             {preloadedImageCategories.map((category) => (
               <Col key={category.key} xs={6} sm={4} md={2}>
@@ -225,7 +224,7 @@ function ImageSelection({
             ].map((image, index) => (
               <div
                 key={image?.name}
-                onClick={() => handlePreloadedImageClick(image)} // Call the function on image click
+                onClick={() => handlePreloadedImageClick(image)} 
                 className={styles.preloadedCard}
               >
                 <div className={styles.preloadedImageWrapper}>
@@ -245,7 +244,7 @@ function ImageSelection({
               </div>
             ))}
           </div>
-        </Container>
+        </Container> */}
       </div>
 
       {/* Modal to show while processing */}
