@@ -61,40 +61,49 @@ function ImageSelection({
   // Function to handle file upload (uploaded image)
   const getImageEmbedding = async (file: any) => {
     handleShowModal();
-    setIsPreloaded(() => false); // It's not a preloaded image
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("sample_prediction", "false");
+
     await loadImage(file);
     await scrollTo(0, 0);
 
-    try {
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/image/upload/`,
-        formData
-      );
-
-      console.log("live api masks: " + JSON.stringify(res.data));
-
-      const data = JSON.parse(res?.data?.yolo_results.replace(/'/g, '"'));
-      setInitialMasks(data?.masks);
-
-      setTimeout(() => {
-        handleCloseModal();
-        nextStep();
-      }, 1000);
-    } catch (e) {
-      console.log("error-message: " + (e as Error)?.message);
-      console.log("error: " + e);
+    setTimeout(() => {
       handleCloseModal();
-      setError(
-        "Currently we are facing some issues, Try from one of our preloaded images"
-      );
-      setFile(null);
-      setTimeout(() => {
-        setError(null);
-      }, 2000);
-    }
+      nextStep();
+    }, 1000);
+
+    // setIsPreloaded(() => false); // It's not a preloaded image
+    // const formData = new FormData();
+    // formData.append("file", file);
+    // formData.append("sample_prediction", "false");
+    // await loadImage(file);
+    // await scrollTo(0, 0);
+
+    // try {
+    //   const res = await axios.post(
+    //     `${process.env.NEXT_PUBLIC_BACKEND_URL}/image/upload/`,
+    //     formData
+    //   );
+
+    //   console.log("live api masks: " + JSON.stringify(res.data));
+
+    //   const data = JSON.parse(res?.data?.yolo_results.replace(/'/g, '"'));
+    //   setInitialMasks(data?.masks);
+
+    //   setTimeout(() => {
+    //     handleCloseModal();
+    //     nextStep();
+    //   }, 1000);
+    // } catch (e) {
+    //   console.log("error-message: " + (e as Error)?.message);
+    //   console.log("error: " + e);
+    //   handleCloseModal();
+    //   setError(
+    //     "Currently we are facing some issues, Try from one of our preloaded images"
+    //   );
+    //   setFile(null);
+    //   setTimeout(() => {
+    //     setError(null);
+    //   }, 2000);
+    // }
   };
 
   // Function to handle loading the image (same for both uploaded and preloaded)

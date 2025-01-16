@@ -241,8 +241,8 @@ const OrderPaints = ({ nextStep, maskedImageWithColors }: any) => {
               src={maskedImageWithColors || image || ''} // Replace with dynamic image source
               alt="Selected Room Design"
               layout="responsive"
-              width={700}
-              height={400}
+              width={512}
+              height={512}
               className="img-fluid"
             />
           </div>

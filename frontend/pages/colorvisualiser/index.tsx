@@ -11,6 +11,8 @@ function ColorVisualizer() {
   const [initialMasks, setInitialMasks] = useState<any>(); // State to trigger mask reset
   const [maskedImageWithColors, setMaskedImageWithColors] = useState<any>(); // State to trigger mask reset
   const [isPreloaded, setIsPreloaded] = useState<boolean>(false); // To track preloaded images
+    const [imageFile, setImageFile] = useState<any>(null);
+  
 
 
   // Function to move to the next step
@@ -76,7 +78,10 @@ function ColorVisualizer() {
             initialMasks={initialMasks}
             setMaskedImageWithColors={setMaskedImageWithColors}
             isPreloaded={isPreloaded}
+            imageFile={imageFile}
           />
+
+          
         </div>
       ),
     },

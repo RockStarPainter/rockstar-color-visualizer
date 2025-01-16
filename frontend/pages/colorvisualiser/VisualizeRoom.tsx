@@ -34,6 +34,7 @@ import {
   downloadImage,
   processTexture,
 } from "../../utils/helpers/maskUtils";
+import ImageMaskComponent from "./ImageSegmentation";
 
 function VisualizeRoom({
   nextStep,
@@ -96,7 +97,7 @@ function VisualizeRoom({
         <div className="row m-0 p-0 align-items-center">
           {/* left side */}
           <div className="col-12 col-lg-8 colorvisualiser__container__left d-flex justify-content-center">
-            {isPreloaded ? (
+            {/* {isPreloaded ? (
               <DrawMasksOnPreloadedImage
                 imgSrc={image?.src}
                 masks={initialMasks}
@@ -112,7 +113,16 @@ function VisualizeRoom({
                 clearMasksSignal={clearSignal}
                 setDownloadableImage={setMaskedImageWithColors} // Ensure this is passed correctly
               />
-            )}
+            )} */}
+
+            <ImageMaskComponent
+              // selectedColor={selectedColor}
+              // clearMasksSignal={clearSignal}
+              // setDownloadableImage={setMaskedImageWithColors}
+              selectedColor={'#006fa6'}
+              clearMasksSignal={false}
+              setDownloadableImage={setMaskedImageWithColors}
+            />
           </div>
 
           {/* right side */}
