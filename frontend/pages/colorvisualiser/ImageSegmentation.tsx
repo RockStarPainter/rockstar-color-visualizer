@@ -13,11 +13,11 @@ const ImageMaskComponent = ({
     image: [image],
     texture: [texture, setTexture],
     color: [color, setColor],
-  } = useContext(AppContext);
+  } = useContext(AppContext)!;
 
-  const [segments, setSegments] = useState([]);
+  const [segments, setSegments] = useState<any>([]);
   const [loading, setLoading] = useState(false);
-  const imageRef = useRef(null);
+  const imageRef = useRef<HTMLImageElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [scale, setScale] = useState({ x: 1, y: 1 });
   const [naturalDimensions, setNaturalDimensions] = useState({
@@ -45,8 +45,8 @@ const ImageMaskComponent = ({
       naturalDimensions.height
     ) {
       const updateScale = () => {
-        const displayWidth = imageRef.current.clientWidth;
-        const displayHeight = imageRef.current.clientHeight;
+        const displayWidth = imageRef.current?.clientWidth || 0;
+        const displayHeight = imageRef.current?.clientHeight || 0;
 
         setScale({
           x: displayWidth / naturalDimensions.width,
@@ -66,12 +66,12 @@ const ImageMaskComponent = ({
       const canvas = canvasRef.current;
       if (canvas) {
         const ctx = canvas.getContext("2d");
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx?.clearRect(0, 0, canvas.width, canvas.height);
       }
     }
   }, [clearMasksSignal]);
 
-  const convertSrcToFile = async (src, fileName = "image.jpg") => {
+  const convertSrcToFile = async (src : string, fileName = "image.jpg") => {
     try {
       const response = await fetch(src);
       const blob = await response.blob();
@@ -82,7 +82,7 @@ const ImageMaskComponent = ({
     }
   };
 
-  const adjustColorOpacity = (color, opacity) => {
+  const adjustColorOpacity = (color: string, opacity: number) => {
     if (color.startsWith("#")) {
       const hex = color.replace("#", "");
       const bigint = parseInt(hex, 16);
@@ -95,26 +95,36 @@ const ImageMaskComponent = ({
   };
 
   const exportImage = async () => {
-    // if (!canvasRef.current || !image?.src) return;
-    // const tempCanvas = document.createElement("canvas");
-    // const tempCtx = tempCanvas.getContext("2d");
-    // tempCanvas.width = naturalDimensions.width;
-    // tempCanvas.height = naturalDimensions.height;
-    // // Create an HTML Image element instead of using Next.js Image
-    // const baseImage = document.createElement("img");
-    // baseImage.src = image.src;
-    // await new Promise((resolve) => {
-    //   baseImage.onload = () => {
-    //     tempCtx.drawImage(baseImage, 0, 0, tempCanvas.width, tempCanvas.height);
-    //     tempCtx.drawImage(canvasRef.current, 0, 0);
-    //     const combinedImageData = tempCanvas.toDataURL("image/png");
-    //     setDownloadableImage(combinedImageData);
-    //     resolve(null);
-    //   };
-    // });
+    if (!canvasRef.current || !image?.src) return;
+  
+    const tempCanvas = document.createElement("canvas");
+    const tempCtx = tempCanvas.getContext("2d");
+  
+    tempCanvas.width = naturalDimensions.width;
+    tempCanvas.height = naturalDimensions.height;
+  
+    // Create an HTML Image element instead of using Next.js Image
+    const baseImage = document.createElement("img");
+    baseImage.src = image.src;
+  
+    await new Promise((resolve) => {
+      baseImage.onload = () => {
+        if (!tempCtx) return; // Ensure tempCtx is not null
+        tempCtx.drawImage(baseImage, 0, 0, tempCanvas.width, tempCanvas.height);
+  
+        if (canvasRef.current) {
+          tempCtx.drawImage(canvasRef.current, 0, 0); // Safely use canvasRef.current
+        }
+  
+        const combinedImageData = tempCanvas.toDataURL("image/png");
+        setDownloadableImage(combinedImageData);
+        resolve(null);
+      };
+    });
   };
+  
 
-  const drawSegmentsOnCanvas = (allSegments) => {
+  const drawSegmentsOnCanvas = (allSegments: any) => {
     if (!canvasRef.current || !allSegments) return;
 
     const canvas = canvasRef.current;
@@ -123,14 +133,14 @@ const ImageMaskComponent = ({
     canvas.width = naturalDimensions.width;
     canvas.height = naturalDimensions.height;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx?.clearRect(0, 0, canvas.width, canvas.height);
 
-    allSegments.forEach(({ segmentData, color }) => {
-      segmentData.forEach((row, y) => {
-        row.forEach((value, x) => {
+    allSegments.forEach(({ segmentData, color } : any) => {
+      segmentData.forEach((row: any, y: any) => {
+        row.forEach((value: any, x:any) => {
           if (value) {
-            ctx.fillStyle = color;
-            ctx.fillRect(x, y, 1, 1);
+            ctx!.fillStyle = color;
+            ctx!.fillRect(x, y, 1, 1);
           }
         });
       });
@@ -139,7 +149,7 @@ const ImageMaskComponent = ({
     exportImage();
   };
 
-  const handleClick = async (e) => {
+  const handleClick = async (e: any) => {
     if (!image?.src || !imageRef.current) {
       console.error("No image selected or invalid image source.");
       return;
@@ -159,8 +169,8 @@ const ImageMaskComponent = ({
 
       setLoading(true);
       const response = await axios.post(
-        // "https://rockstarcolorvisualizer.xyz/image/upload/",
-        "https://a9cf-202-163-76-177.ngrok-free.app/image/upload/",
+        "https://rockstarcolorvisualizer.xyz/image/upload/",
+        // "https://a9cf-202-163-76-177.ngrok-free.app/image/upload/",
         formData,
         {
           headers: {

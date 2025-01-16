@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import AppContext from "../../utils/hooks/createContext";
-import DrawMasksOnLiveImage from "../../components/detection-canvas/DrawMasksOnLiveImage";
-import DrawMasksOnPreloadedImage from "../../components/detection-canvas/DrawMasksOnPreloadedImage";
 import {
   Button,
   Card,
@@ -97,30 +95,9 @@ function VisualizeRoom({
         <div className="row m-0 p-0 align-items-center">
           {/* left side */}
           <div className="col-12 col-lg-8 colorvisualiser__container__left d-flex justify-content-center">
-            {/* {isPreloaded ? (
-              <DrawMasksOnPreloadedImage
-                imgSrc={image?.src}
-                masks={initialMasks}
-                selectedColor={selectedColor}
-                clearMasksSignal={clearSignal}
-                setDownloadableImage={setMaskedImageWithColors} // Ensure this is passed correctly
-              />
-            ) : (
-              <DrawMasksOnLiveImage
-                imgSrc={image?.src}
-                masks={initialMasks}
-                selectedColor={selectedColor}
-                clearMasksSignal={clearSignal}
-                setDownloadableImage={setMaskedImageWithColors} // Ensure this is passed correctly
-              />
-            )} */}
-
             <ImageMaskComponent
-              // selectedColor={selectedColor}
-              // clearMasksSignal={clearSignal}
-              // setDownloadableImage={setMaskedImageWithColors}
-              selectedColor={'#006fa6'}
-              clearMasksSignal={false}
+              selectedColor={selectedColor}
+              clearMasksSignal={clearSignal}
               setDownloadableImage={setMaskedImageWithColors}
             />
           </div>
