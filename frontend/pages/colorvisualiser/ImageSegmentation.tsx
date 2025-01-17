@@ -42,7 +42,11 @@ const ImageMaskComponent = ({
   }, [image?.src]);
 
   useEffect(() => {
-    if (imageRef.current && naturalDimensions.width && naturalDimensions.height) {
+    if (
+      imageRef.current &&
+      naturalDimensions.width &&
+      naturalDimensions.height
+    ) {
       const updateScale = () => {
         setScale({
           x: naturalDimensions.width / DISPLAY_WIDTH,
@@ -92,25 +96,25 @@ const ImageMaskComponent = ({
 
   const exportImage = async () => {
     if (!canvasRef.current || !image?.src) return;
-  
+
     const tempCanvas = document.createElement("canvas");
     const tempCtx = tempCanvas.getContext("2d");
-  
+
     tempCanvas.width = naturalDimensions.width;
     tempCanvas.height = naturalDimensions.height;
-  
+
     const baseImage = document.createElement("img");
     baseImage.src = image.src;
-  
+
     await new Promise((resolve) => {
       baseImage.onload = () => {
         if (!tempCtx) return;
         tempCtx.drawImage(baseImage, 0, 0, tempCanvas.width, tempCanvas.height);
-  
+
         if (canvasRef.current) {
           tempCtx.drawImage(canvasRef.current, 0, 0);
         }
-  
+
         const combinedImageData = tempCanvas.toDataURL("image/png");
         setDownloadableImage(combinedImageData);
         resolve(null);
@@ -163,7 +167,7 @@ const ImageMaskComponent = ({
 
       setLoading(true);
       const response = await axios.post(
-        "https://rockstarcolorvisualizer.xyz/image/upload/",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/image/upload/`,
         formData,
         {
           headers: {
@@ -174,7 +178,7 @@ const ImageMaskComponent = ({
 
       const { segment: segmentData } = response.data;
       if (segmentData) {
-        const colorWithOpacity = adjustColorOpacity(selectedColor, 0.5);
+        const colorWithOpacity = adjustColorOpacity(selectedColor, 0.7);
         const newSegment = { segmentData, color: colorWithOpacity };
         const updatedSegments = [...segments, newSegment];
         setSegments(updatedSegments);

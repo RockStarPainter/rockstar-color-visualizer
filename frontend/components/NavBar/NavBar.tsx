@@ -39,6 +39,10 @@ function NavBar() {
               COLOR VISUALISER
             </Link>
 
+            <Link href="/help" className={`m-2 ${styles.navlink} `} style={{color: "red"}}>
+              Help
+            </Link>
+
             {/* Replace GitHub Icon with an autoplay video */}
           </Nav>
         </Navbar.Collapse>

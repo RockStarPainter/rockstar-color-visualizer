@@ -21,6 +21,7 @@ import styles from "./Footer.module.css";
 import { PiGlobeBold } from "react-icons/pi";
 import { FaXTwitter } from "react-icons/fa6";
 import { SiGooglemaps } from "react-icons/si";
+import { CircleHelp } from "lucide-react";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -187,6 +188,12 @@ const Footer = () => {
             <h3 className={styles.heading} style={{ color: "#022e97" }}>
               Features
             </h3>
+            <Link href="/help" style={{ textDecoration: "none" }}>
+              <p className={styles.link}>
+                <CircleHelp className={styles.icon} />{" "}
+                <span>Help</span>
+              </p>
+            </Link>
             <Link href="/" style={{ textDecoration: "none" }}>
               <p className={styles.link}>
                 <FontAwesomeIcon icon={faHome} className={styles.icon} />{" "}
