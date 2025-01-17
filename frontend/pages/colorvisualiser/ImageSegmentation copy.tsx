@@ -25,9 +25,6 @@ const ImageMaskComponent = ({
     height: 0,
   });
 
-  const DISPLAY_WIDTH = 800;
-  const DISPLAY_HEIGHT = 550;
-
   useEffect(() => {
     if (image?.src) {
       const tempImage = document.createElement("img");
@@ -42,11 +39,18 @@ const ImageMaskComponent = ({
   }, [image?.src]);
 
   useEffect(() => {
-    if (imageRef.current && naturalDimensions.width && naturalDimensions.height) {
+    if (
+      imageRef.current &&
+      naturalDimensions.width &&
+      naturalDimensions.height
+    ) {
       const updateScale = () => {
+        const displayWidth = imageRef.current?.clientWidth || 0;
+        const displayHeight = imageRef.current?.clientHeight || 0;
+
         setScale({
-          x: naturalDimensions.width / DISPLAY_WIDTH,
-          y: naturalDimensions.height / DISPLAY_HEIGHT,
+          x: displayWidth / naturalDimensions.width,
+          y: displayHeight / naturalDimensions.height,
         });
       };
 
@@ -54,7 +58,7 @@ const ImageMaskComponent = ({
       window.addEventListener("resize", updateScale);
       return () => window.removeEventListener("resize", updateScale);
     }
-  }, [naturalDimensions]);
+  }, [naturalDimensions, image]);
 
   useEffect(() => {
     if (clearMasksSignal) {
@@ -67,7 +71,7 @@ const ImageMaskComponent = ({
     }
   }, [clearMasksSignal]);
 
-  const convertSrcToFile = async (src: string, fileName = "image.jpg") => {
+  const convertSrcToFile = async (src : string, fileName = "image.jpg") => {
     try {
       const response = await fetch(src);
       const blob = await response.blob();
@@ -99,16 +103,17 @@ const ImageMaskComponent = ({
     tempCanvas.width = naturalDimensions.width;
     tempCanvas.height = naturalDimensions.height;
   
+    // Create an HTML Image element instead of using Next.js Image
     const baseImage = document.createElement("img");
     baseImage.src = image.src;
   
     await new Promise((resolve) => {
       baseImage.onload = () => {
-        if (!tempCtx) return;
+        if (!tempCtx) return; // Ensure tempCtx is not null
         tempCtx.drawImage(baseImage, 0, 0, tempCanvas.width, tempCanvas.height);
   
         if (canvasRef.current) {
-          tempCtx.drawImage(canvasRef.current, 0, 0);
+          tempCtx.drawImage(canvasRef.current, 0, 0); // Safely use canvasRef.current
         }
   
         const combinedImageData = tempCanvas.toDataURL("image/png");
@@ -117,6 +122,7 @@ const ImageMaskComponent = ({
       };
     });
   };
+  
 
   const drawSegmentsOnCanvas = (allSegments: any) => {
     if (!canvasRef.current || !allSegments) return;
@@ -129,9 +135,9 @@ const ImageMaskComponent = ({
 
     ctx?.clearRect(0, 0, canvas.width, canvas.height);
 
-    allSegments.forEach(({ segmentData, color }: any) => {
+    allSegments.forEach(({ segmentData, color } : any) => {
       segmentData.forEach((row: any, y: any) => {
-        row.forEach((value: any, x: any) => {
+        row.forEach((value: any, x:any) => {
           if (value) {
             ctx!.fillStyle = color;
             ctx!.fillRect(x, y, 1, 1);
@@ -150,8 +156,8 @@ const ImageMaskComponent = ({
     }
 
     const rect = imageRef.current.getBoundingClientRect();
-    const x = Math.floor((e.clientX - rect.left) * scale.x);
-    const y = Math.floor((e.clientY - rect.top) * scale.y);
+    const x = Math.floor((e.clientX - rect.left) / scale.x);
+    const y = Math.floor((e.clientY - rect.top) / scale.y);
 
     try {
       const file = await convertSrcToFile(image.src, "uploaded-image.jpg");
@@ -164,6 +170,7 @@ const ImageMaskComponent = ({
       setLoading(true);
       const response = await axios.post(
         "https://rockstarcolorvisualizer.xyz/image/upload/",
+        // "https://a9cf-202-163-76-177.ngrok-free.app/image/upload/",
         formData,
         {
           headers: {
@@ -196,10 +203,12 @@ const ImageMaskComponent = ({
           ref={imageRef}
           src={image?.src || ""}
           alt="Interactive Image"
-          width={DISPLAY_WIDTH}
-          height={DISPLAY_HEIGHT}
+          width={naturalDimensions.width || 512}
+          height={naturalDimensions.height || 512}
           onClick={handleClick}
-          style={{ cursor: "pointer", objectFit: "contain" }}
+          objectPosition="contain"
+          objectFit="contain"
+          style={{ cursor: "pointer" }}
         />
 
         <canvas
@@ -209,8 +218,6 @@ const ImageMaskComponent = ({
             top: 0,
             left: 0,
             pointerEvents: "none",
-            width: `${DISPLAY_WIDTH}px`,
-            height: `${DISPLAY_HEIGHT}px`,
           }}
         />
       </div>
