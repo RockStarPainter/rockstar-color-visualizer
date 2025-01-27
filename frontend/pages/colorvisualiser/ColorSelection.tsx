@@ -221,8 +221,8 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
         </Col>
         {/* Search field with icon */}
         <Col xs={4} className="d-flex align-items-center">
-       <Col xs={12} md={4} className="d-flex align-items-center">
-  <InputGroup className="search-bar">
+       <Col xs={12} md={6} className="d-flex align-items-center">
+  <InputGroup className="search-bar w-100">
     <InputGroup.Text id="search-addon" className="search-icon">
       <FaSearch />
     </InputGroup.Text>
@@ -231,23 +231,28 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
       placeholder="Search paints"
       value={searchTerm}
       onChange={handleSearchChange}
-      style={{ border: "none" }}
+      style={{ border: "none", width: "100%" }}
     />
   </InputGroup>
 </Col>
 
 <style jsx>
   {`
+    .search-bar .form-control {
+      flex-grow: 1;
+    }
+
     @media (max-width: 576px) {
       .search-icon {
         display: none;
       }
       .search-bar .form-control {
-        width: 105%; /* Increase the width by 5% */
+        width: 100%; /* Make the input take up full width on mobile */
       }
     }
   `}
 </style>
+
         </Col>
       </Row>
 
