@@ -11,7 +11,7 @@ import {
 } from "react-bootstrap";
 import { useRouter } from "next/navigation";
 import { paints } from "../../public/paints";
-import { FaCheckCircle, FaLongArrowAltRight, FaSearch } from "react-icons/fa"; // Import search icon
+import { FaCheckCircle, FaLongArrowAltRight, FaSearch } from "react-icons/fa"; 
 import { useColorContext } from "../../contexts/ColorContext";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import Pagination from "../../components/Pagination";
@@ -173,7 +173,7 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
                 }}
                 className="p-2"
               >
-                {/ Absolute positioning for name and code /}
+                {/* Absolute positioning for name and code */}
                 <div
                   style={{
                     position: "absolute",
@@ -219,10 +219,10 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
         <Col>
           <h4 className="fw-bold mt-3">Browse Paint Colors</h4>
         </Col>
-        {/ Search field with icon /}
+        {/* Search field with icon */}
         <Col xs={12} md={6} className="d-flex align-items-center">
   <InputGroup className="search-bar d-flex align-items-center w-100">
-    {/ Search Icon /}
+    {/* Search Icon */}
     <InputGroup.Text
       id="search-addon"
       className="search-icon d-flex align-items-center justify-content-center"
@@ -230,14 +230,14 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
         padding: "0 !important",
         backgroundColor: "#f8f9fa !important",
         borderRight: "1px solid #dee2e6 !important",
-        height: "45px !important", // Match input height
-        width: "45px !important", // Adjust width to match height
+        height: "45px !important", 
+        width: "45px !important", 
       }}
     >
-      <FaSearch style={{ fontSize: "24px" }} /> {/ Adjust font size /}
+      <FaSearch style={{ fontSize: "24px" }} /> {/* Adjust font size */}
     </InputGroup.Text>
 
-    {/ Search Bar /}
+    {/* Search Bar */}
     <Form.Control
       type="text"
       placeholder="Search paints"
@@ -248,42 +248,42 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
         border: "none !important",
         padding: "0.5rem !important",
         flex: "1 1 auto !important",
-        height: "45px !important", // Match the height of the icon
+        height: "45px !important", 
       }}
     />
   </InputGroup>
 
-  {/ Custom Styles /}
+  {/* Custom Styles */}
   <style jsx>
     {`
       .search-bar {
         display: flex !important;
         align-items: center !important;
         width: 100% !important;
-        gap: 0; / No extra spacing between elements /
+        gap: 0; /* No extra spacing between elements */
       }
 
       .search-bar .form-control {
         flex: 1 !important;
-        height: 45px !important; / Set height /
-        min-width: 0 !important; / Prevents shrinking /
+        height: 45px !important; /* Set height */
+        min-width: 0 !important; /* Prevents shrinking */
       }
 
       .search-icon {
-        height: 45px !important; / Match input height /
-        width: 45px !important; / Make it a square /
+        height: 45px !important; /* Match input height */
+        width: 45px !important; /* Make it a square */
         display: flex;
         align-items: center;
         justify-content: center;
       }
 
-      / Media Query: Adjust for small screens /
+      /* Media Query: Adjust for small screens */
       @media (max-width: 576px) {
         .search-icon {
-          display: none !important; / Hide the icon /
+          display: none !important; /* Hide the icon */
         }
         .search-bar .form-control {
-          width: 100% !important; / Expand the search bar /
+          width: 100% !important; /* Expand the search bar */
         }
       }
     `}
@@ -292,7 +292,7 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
 
       </Row>
 
-      {/ Company Logos Row /}
+      {/* Company Logos Row */}
       <Row className="mb-4 justify-content-center">
         {paints.map((company, index) => (
           <Col
@@ -323,13 +323,13 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
                 alt={company.companyName}
                 fluid
                 style={{
-                  width: "50px", // Set fixed width
-                  height: "50px", // Set fixed height
-                  objectFit: "contain", // Ensure the image scales while maintaining aspect ratio
+                  width: "50px", 
+                  height: "50px", 
+                  objectFit: "contain", 
                 }}
               />
 
-              {/ Centered company name below the logo /}
+              {/* Centered company name below the logo */}
               <h6
                 style={{
                   marginTop: "10px",
@@ -346,7 +346,7 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
         ))}
       </Row>
 
-      {/ Color Categories /}
+      {/* Color Categories */}
       <Row className="mb-4 sticky-top bg_white py-3">
         {colorCategories.map((category) => (
           <Col key={category.key} xs={6} sm={4} md={2}>
@@ -361,10 +361,10 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
         ))}
       </Row>
 
-      {/ Saved Colors Section /}
+      {/* Saved Colors Section */}
       <Row className="custom-scrollbar mb-5">
         <div className="saved-colors bg-light p-3 h-100 pt-5">
-          {/ "Paint Your Room" Button inside the saved colors section /}
+          {/* "Paint Your Room" Button inside the saved colors section */}
           <Button
             variant="primary"
             className="w-100 mb-3"
@@ -413,7 +413,7 @@ const ColorSelection = ({ handleCloseColorModal, nextStep }: any) => {
         </div>
       </Row>
 
-      {/ Paint Grid /}
+      {/* Paint Grid */}
       <Row style={{ position: "relative" }}>{renderPaints()}</Row>
 
       {/* <Row className="mt-4 justify-content-center">
