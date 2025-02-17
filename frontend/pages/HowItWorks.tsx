@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUpload,
@@ -6,6 +6,8 @@ import {
   faEye,
   faVolumeMute,
   faVolumeUp,
+  faPlay,
+  faPause,
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "../styles/HowItWorks.module.css"; // Custom styles
 
@@ -20,7 +22,9 @@ type VideoPath = (typeof VIDEOS)[keyof typeof VIDEOS];
 
 const HowItWorks = () => {
   const [isMuted, setIsMuted] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [videoSrc, setVideoSrc] = useState<VideoPath>(VIDEOS.DESKTOP);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     // Initial check
@@ -38,6 +42,22 @@ const HowItWorks = () => {
       setVideoSrc(VIDEOS.MOBILE);
     } else {
       setVideoSrc(VIDEOS.DESKTOP);
+    }
+  };
+
+  const togglePlayPause = (e: React.MouseEvent) => {
+    // Prevent toggling if clicking the mute button
+    if ((e.target as Element).closest(`.${styles.muteButton}`)) {
+      return;
+    }
+
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
     }
   };
 
@@ -92,10 +112,13 @@ const HowItWorks = () => {
       {/* Video Section */}
       <div className={styles.videoSection}>
         <h3 className={styles.sectionTitle}>Watch How to Use Our Tool</h3>
-        <div className={styles.videoWrapper}>
+        <div className={styles.videoWrapper} onClick={togglePlayPause}>
           <button
             className={styles.muteButton}
-            onClick={() => setIsMuted(!isMuted)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsMuted(!isMuted);
+            }}
             aria-label={isMuted ? "Unmute" : "Mute"}
           >
             <FontAwesomeIcon
@@ -103,7 +126,16 @@ const HowItWorks = () => {
               className={styles.muteIcon}
             />
           </button>
+
+          {/* Show play icon only when video is paused */}
+          {!isPlaying && (
+            <div className={styles.playPauseButton}>
+              <FontAwesomeIcon icon={faPlay} className={styles.playIcon} />
+            </div>
+          )}
+
           <video
+            ref={videoRef}
             key={videoSrc}
             className={styles.video}
             src={videoSrc}

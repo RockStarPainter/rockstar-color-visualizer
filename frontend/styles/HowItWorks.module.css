@@ -76,6 +76,7 @@
   position: relative;
   width: 100%;
   padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  cursor: pointer;
 }
 
 .video {
@@ -130,5 +131,38 @@
 
   .muteIcon {
     font-size: 1rem;
+  }
+}
+
+.playPauseButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  pointer-events: none; /* This makes clicks pass through to the video wrapper */
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.playIcon {
+  color: white;
+  font-size: 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .playPauseButton {
+    width: 60px;
+    height: 60px;
+  }
+
+  .playIcon {
+    font-size: 1.5rem;
   }
 }
