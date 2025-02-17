@@ -117,6 +117,10 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  .videoSection {
+    height: 140vh;
+  }
+
   .muteButton {
     width: 32px;
     height: 32px;
