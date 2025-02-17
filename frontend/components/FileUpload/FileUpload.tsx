@@ -148,7 +148,7 @@ const FileUpload = (props: any) => {
   return (
     <div id="uploadArea" className={`${styles.upload_area} mx-auto mb-0 pb-4`}>
       <div className={styles.upload_area__header}>
-        <h1 className={styles.upload_area__title}>Upload your file</h1>
+        <h1 className={styles.upload_area__title}>Upload your Image</h1>
         <p className={styles.upload_area__paragraph}>
           Upload clear, well-lit images. Image quality and lighting may affect
           the accuracy
@@ -159,11 +159,11 @@ const FileUpload = (props: any) => {
             ></span>
           </strong>
         </p>
-        <p className="fw-bold pb-0 mb-0">
+        {/* <p className="fw-bold pb-0 mb-0">
           Will crop image to{" "}
           <span className="text-danger">3:2 aspect ratio</span> for better
           viewing experience.
-        </p>
+        </p> */}
       </div>
       <div
         id="dropZoon"
@@ -173,7 +173,7 @@ const FileUpload = (props: any) => {
           <i className="bx bxs-file-image"></i>
         </span>
         <p className={styles.drop_zoon__paragraph}>
-          Drop your file here or Click to browse
+          Drop your Image here or Click to browse
         </p>
         <span id="loadingText" className={styles.drop_zoon__loading_text}>
           Please Wait
