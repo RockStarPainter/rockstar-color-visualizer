@@ -10,8 +10,8 @@ import {
 import styles from "../styles/HowItWorks.module.css"; // Custom styles
 
 const VIDEOS = {
-  DESKTOP: "/videos/hero-section-video.mp4",
-  MOBILE: "/videos/interior-painting.mp4",
+  DESKTOP: "/videos/user-manual-desktop.mp4",
+  MOBILE: "/videos/user-manual-mobile.mp4",
 } as const;
 
 const BREAKPOINT = 768; // Mobile breakpoint in pixels

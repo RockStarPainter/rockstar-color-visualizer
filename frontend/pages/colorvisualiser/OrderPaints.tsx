@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React, { useContext, useState } from "react";
 import {
   Button,
@@ -13,7 +11,7 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import Image from "next/image"; // For selected image
+import Image from "next/image";
 import { useColorContext } from "../../contexts/ColorContext";
 import AppContext from "../../utils/hooks/createContext";
 import { toast } from "react-toastify";
@@ -33,30 +31,31 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import FeedbackToast from "../../components/shared/FeedbackToast";
 
-const OrderPaints = ({ nextStep, maskedImageWithColors }: any) => {
-  const { selectedColors } = useColorContext(); // Fetch the selected colors from context
+interface OrderPaintsProps {
+  nextStep: () => void;
+  maskedImageWithColors: string;
+}
+
+const OrderPaints: React.FC<OrderPaintsProps> = ({ nextStep, maskedImageWithColors }) => {
+  const { selectedColors } = useColorContext();
   const [showModal, setShowModal] = useState(false);
-  const [showShareModal, setShowShareModal] = useState<boolean>(false);
-  const [showLoader, setShowLoader] = useState<boolean>(false);
-  const [shareURL, setShareURL] = useState<string>("");
+  const [showShareModal, setShowShareModal] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
+  const [shareURL, setShareURL] = useState("");
 
   const router = useRouter();
 
   const {
     clicks: [, setClicks],
     image: [image],
-    maskImg: [maskImg],
-    color: [color],
-    texture: [texture],
   } = useContext(AppContext)!;
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm(); // react-hook-form
+  } = useForm();
 
-  // Function to open/close the modal
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
   const handleShowShareModal = () => setShowShareModal(true);
@@ -64,105 +63,87 @@ const OrderPaints = ({ nextStep, maskedImageWithColors }: any) => {
   const handleCloseLoader = () => setShowLoader(false);
   const handleCloseShareModal = () => setShowShareModal(false);
 
-  // Handle form submission
   const onSubmit = (data: any) => {
-    console.log(data); // Handle the form submission logic
+    console.log(data);
     toast("Order submitted");
     handleCloseModal();
     nextStep();
     router.push("/");
   };
 
-  // Function to trigger download of the image using the base64 stored in maskedImageWithColors
   const downloadImage = () => {
     if (maskedImageWithColors) {
       const link = document.createElement("a");
-      link.href = maskedImageWithColors; // Use the base64 image from maskedImageWithColors
-      link.download = "masked_image.png"; // Set the filename for the downloaded image
-      link.click(); // Programmatically click the link to trigger the download
+      link.href = maskedImageWithColors;
+      link.download = "masked_image.png";
+      link.click();
     } else {
       console.error("No image available for download");
     }
   };
 
-  // Function to share image
   const shareImage = async () => {
-    // Check if the platform is mobile or web
-    if (
-      Capacitor.getPlatform() === "android" ||
-      Capacitor.getPlatform() === "ios"
-    ) {
-      const formData = new FormData();
+    if (Capacitor.getPlatform() === "android" || Capacitor.getPlatform() === "ios") {
+      try {
+        const formData = new FormData();
+        const blob = await (await fetch(maskedImageWithColors)).blob();
+        formData.append("file", blob);
+        formData.append("upload_preset", process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!);
+        formData.append("cloud_name", process.env.NEXT_PUBLIC_CLOUDINARY_CLOUDNAME!);
 
-      // Convert base64 data to a Blob for Cloudinary upload
-      const blob = await (await fetch(maskedImageWithColors)).blob();
-      formData.append("file", blob); // Append the blob to form data
-      formData.append(
-        "upload_preset",
-        process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!
-      );
-      formData.append("cloud_name", process.env.NEXT_PUBLIC_CLOUDINARY_CLOUDNAME!);
+        const res = await axios.post(
+          `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUDNAME}/image/upload`,
+          formData
+        );
+        const data = await res.data;
 
-      // Upload to Cloudinary
-      const res = await axios.post(
-        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUDNAME}/image/upload`,
-        formData
-      );
-      const data = await res.data;
-
-      // Share the image using native sharing
-      await Share.share({
-        title: "Rockstar Visualizer",
-        text: "Check out this Room Image from rockstar",
-        url: data.url,
-        dialogTitle: "Share with loved ones",
-      })
-        .then(() => {
-          console.log("Share successful");
-        })
-        .catch((e) => {
-          console.log(e);
+        await Share.share({
+          title: "Rockstar Visualizer",
+          text: "Check out this Room Image from rockstar",
+          url: data.url,
+          dialogTitle: "Share with loved ones",
         });
-      return;
+      } catch (error) {
+        console.error("Error sharing:", error);
+      }
     } else if (Capacitor.getPlatform() === "web") {
       handleShowShareModal();
       handleShowLoader();
 
-      const formData = new FormData();
+      try {
+        const formData = new FormData();
+        const blob = await (await fetch(maskedImageWithColors)).blob();
+        formData.append("file", blob);
+        formData.append("upload_preset", process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!);
+        formData.append("cloud_name", process.env.NEXT_PUBLIC_CLOUDINARY_CLOUDNAME!);
 
-      // Convert base64 to Blob
-      const blob = await (await fetch(maskedImageWithColors)).blob();
-      formData.append("file", blob); // Append the blob to form data
-      formData.append("upload_preset", process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!);
-      formData.append("cloud_name", process.env.NEXT_PUBLIC_CLOUDINARY_CLOUDNAME!);
+        const res = await axios.post(
+          `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUDNAME}/image/upload`,
+          formData
+        );
+        const data = await res.data;
 
-      const res = await axios.post(
-        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUDNAME}/image/upload`,
-        formData
-      );
-      const data = await res.data;
-
-      await handleCloseLoader();
-      await setShareURL(data.url);
+        handleCloseLoader();
+        setShareURL(data.url);
+      } catch (error) {
+        console.error("Error uploading:", error);
+        handleCloseLoader();
+      }
     }
-    // await handleCloseShareModal();
   };
 
-  // Function to create the tooltip
   const showTooltip = (msg: string) => (
     <Tooltip id="button-tooltip">{msg}</Tooltip>
   );
 
   return (
     <Container fluid className="order-page py-4 bg-white">
-
-      <FeedbackToast/>
+      <FeedbackToast />
 
       <Row>
-        {/* Left Sidebar for Selected Colors */}
+        {/* Left Sidebar */}
         <Col xs={12} md={4} className="order-colors-section mb-4 mb-md-0">
           <div className="bg-light p-3 h-100">
-            {/* "Save Your Order" button */}
             <Row className="mb-5">
               <Col>
                 <Button
@@ -178,7 +159,6 @@ const OrderPaints = ({ nextStep, maskedImageWithColors }: any) => {
             <div className="colorvisualiser__tools_container mb-4">
               <Card className="border-2 shadow-sm">
                 <Card.Body className="d-flex justify-content-center gap-3 align-items-center">
-                  {/* Download Image */}
                   <OverlayTrigger
                     placement="top"
                     overlay={showTooltip("Download Image")}
@@ -194,7 +174,6 @@ const OrderPaints = ({ nextStep, maskedImageWithColors }: any) => {
                     </Button>
                   </OverlayTrigger>
 
-                  {/* Share Image */}
                   <OverlayTrigger
                     placement="top"
                     overlay={showTooltip("Share Image")}
@@ -233,182 +212,48 @@ const OrderPaints = ({ nextStep, maskedImageWithColors }: any) => {
           </div>
         </Col>
 
-        {/* Right Side for Selected Image */}
+        {/* Right Side - Image Display */}
         <Col xs={12} md={8} className="order-image-section">
           <div className="image-wrapper">
-            {/* Assuming you have a selected image, replace the src with dynamic image source */}
-            <Image
-              src={maskedImageWithColors || image || ''} // Replace with dynamic image source
-              alt="Selected Room Design"
-              layout="responsive"
-              width={512}
-              height={512}
-              className="img-fluid"
-            />
+            <div className="position-relative w-100" style={{
+              aspectRatio: '4/3',
+              maxWidth: '1200px',
+              margin: '0 auto'
+            }}>
+              <Image
+                src={maskedImageWithColors || image?.src || ''}
+                alt="Selected Room Design"
+                fill
+                style={{
+                  objectFit: 'contain',
+                }}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
+                priority
+              />
+            </div>
           </div>
         </Col>
       </Row>
 
-      {/* Order Form Modal */}
-      <Modal show={showModal} onHide={handleCloseModal} size="lg" centered>
-        <Modal.Header closeButton>
-          <Modal.Title className="text-center w-100">Book your service Now</Modal.Title>
-        </Modal.Header>
-        <Modal.Body style={{ backgroundColor: "white" }}>
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            {/* First Name */}
-            <Form.Group className="mb-3" controlId="formFirstName">
-              <Form.Label>First Name</Form.Label>
-              <Form.Control
-                type="text"
-                {...register("firstName", {
-                  required: "First name is required",
-                })}
-                placeholder="Enter your first name"
-                isInvalid={!!errors.firstName}
-              />
-              <Form.Control.Feedback className="text-danger" type="invalid">
-                <span style={{ color: "red !important" }}>
-                  {errors?.firstName?.message?.toString() || ""}
-                </span>
-              </Form.Control.Feedback>
-            </Form.Group>
-
-            {/* Last Name */}
-            <Form.Group className="mb-3" controlId="formLastName">
-              <Form.Label>Last Name</Form.Label>
-              <Form.Control
-                type="text"
-                {...register("lastName", { required: "Last name is required" })}
-                placeholder="Enter your last name"
-                isInvalid={!!errors.lastName}
-              />
-              <Form.Control.Feedback className="text-danger" type="invalid">
-                <span style={{ color: "red !important" }}>
-                  {errors.lastName?.message?.toString() || ""}
-                </span>
-              </Form.Control.Feedback>
-            </Form.Group>
-
-            {/* Email */}
-            <Form.Group className="mb-3" controlId="formEmail">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                {...register("email", {
-                  required: "Email is required",
-                  pattern: {
-                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                    message: "Enter a valid email address",
-                  },
-                })}
-                placeholder="Enter your email"
-                isInvalid={!!errors.email}
-              />
-              <Form.Control.Feedback className="text-danger" type="invalid">
-                <span style={{ color: "red !important" }}>
-                  {errors.email?.message?.toString() || ""}
-                </span>
-              </Form.Control.Feedback>
-            </Form.Group>
-
-            {/* Where do you prefer to buy PPG Paints? */}
-            <Form.Group className="mb-3" controlId="formBuyPreference">
-              <Form.Label>Where do you prefer to buy PPG Paints?</Form.Label>
-              <Form.Control
-                as="select"
-                {...register("buyPreference", {
-                  required: "Please select your buying preference",
-                })}
-                isInvalid={!!errors.buyPreference}
-              >
-                <option value="">Select an option</option>
-                <option value="Independent Dealer">Independent Dealer</option>
-                <option value="PPG Paint Store">PPG Paint Store</option>
-                <option value="The Home Depot">The Home Depot</option>
-              </Form.Control>
-              <Form.Control.Feedback className="text-danger" type="invalid">
-                <span style={{ color: "red !important" }}>
-                  {errors?.buyPreference?.message?.toString() || ""}
-                </span>
-              </Form.Control.Feedback>
-            </Form.Group>
-
-            {/* Who are you? */}
-            <Form.Group className="mb-3" controlId="formWhoAreYou">
-              <Form.Label>Who are you?</Form.Label>
-              <Form.Control
-                as="select"
-                {...register("whoAreYou", {
-                  required: "Please select who you are",
-                })}
-                isInvalid={!!errors.whoAreYou}
-              >
-                <option value="">Select an option</option>
-                <option value="Homeowner">Homeowner</option>
-                <option value="Professional">Professional</option>
-              </Form.Control>
-              <Form.Control.Feedback className="text-danger" type="invalid">
-                <span style={{ color: "red !important" }}>
-                  {errors.whoAreYou?.message?.toString() || ""}
-                </span>
-              </Form.Control.Feedback>
-            </Form.Group>
-
-            {/* Country */}
-            <Form.Group className="mb-3" controlId="formCountry">
-              <Form.Label>Country</Form.Label>
-              <Form.Control
-                as="select"
-                {...register("country", {
-                  required: "Please select your country",
-                })}
-                isInvalid={!!errors.country}
-              >
-                <option value="">Select a country</option>
-                <option value="USA">USA</option>
-                <option value="Canada">Canada</option>
-                <option value="UK">UK</option>
-              </Form.Control>
-              <Form.Control.Feedback className="text-danger" type="invalid">
-                <span style={{ color: "red !important" }}>
-                  {errors.country?.message?.toString() || ""}
-                </span>
-              </Form.Control.Feedback>
-            </Form.Group>
-
-            <div className="text-center">
-              <Button variant="primary" type="submit">
-                Submit Order
-              </Button>
-            </div>
-          </Form>
-        </Modal.Body>
-      </Modal>
-
       {/* Share Modal */}
       <Modal show={showShareModal} centered onHide={handleCloseShareModal}>
-        <Modal.Body style={{ backgroundColor: "white" }}>
-          {/* Show loader */}
+        <Modal.Body className="bg-white">
           {showLoader ? (
             <div className="d-flex justify-content-center align-items-center fw-bold mt-2">
               Generating Image URL
-              <div className="spinner-border ms-2 " role="status">
+              <div className="spinner-border ms-2" role="status">
                 <span className="visually-hidden">Loading...</span>
               </div>
             </div>
           ) : (
             <>
-              <div className=" d-flex gap-4 justify-content-center align-items-center">
-                <label className="fw-bold " htmlFor="shareURL">
-                  Share URL
-                </label>
+              <div className="d-flex gap-4 justify-content-center align-items-center">
+                <label className="fw-bold" htmlFor="shareURL">Share URL</label>
                 <div className="colorvisualiser__copylink position-relative">
                   <input
                     id="shareURL"
                     type="text"
-                    alt="Share URL"
-                    className="form-control d-inline"
+                    className="form-control"
                     value={shareURL}
                     readOnly
                   />
@@ -418,10 +263,7 @@ const OrderPaints = ({ nextStep, maskedImageWithColors }: any) => {
                 <div
                   className="colorvisualiser__share__icon"
                   onClick={() => {
-                    window.open(
-                      `https://www.facebook.com/sharer/sharer.php?u=${shareURL}`,
-                      "_blank"
-                    );
+                    window.open(`https://www.facebook.com/sharer/sharer.php?u=${shareURL}`, "_blank");
                   }}
                 >
                   <FontAwesomeIcon icon={faFacebook} size="2x" />
@@ -429,10 +271,7 @@ const OrderPaints = ({ nextStep, maskedImageWithColors }: any) => {
                 <div
                   className="colorvisualiser__share__icon"
                   onClick={() => {
-                    window.open(
-                      `https://twitter.com/intent/tweet?url=${shareURL}`,
-                      "_blank"
-                    );
+                    window.open(`https://twitter.com/intent/tweet?url=${shareURL}`, "_blank");
                   }}
                 >
                   <FontAwesomeIcon icon={faTwitter} size="2x" />
@@ -448,26 +287,21 @@ const OrderPaints = ({ nextStep, maskedImageWithColors }: any) => {
                 <div
                   className="colorvisualiser__share__icon"
                   onClick={() => {
-                    window.open(
-                      `https://api.whatsapp.com/send?text=${shareURL}`,
-                      "_blank"
-                    );
+                    window.open(`https://api.whatsapp.com/send?text=${shareURL}`, "_blank");
                   }}
                 >
                   <FontAwesomeIcon icon={faWhatsapp} size="2x" />
                 </div>
-                <div className="colorvisualiser__share__clipboard">
-                  <div
-                    className="colorvisualiser__copy_button"
-                    onClick={async () => {
-                      if (navigator.clipboard) {
-                        await navigator.clipboard.writeText(shareURL);
-                        toast.success("Copied to Clipboard");
-                      }
-                    }}
-                  >
-                    <FontAwesomeIcon icon={faCopy} size="2x" />
-                  </div>
+                <div
+                  className="colorvisualiser__share__clipboard"
+                  onClick={async () => {
+                    if (navigator.clipboard) {
+                      await navigator.clipboard.writeText(shareURL);
+                      toast.success("Copied to Clipboard");
+                    }
+                  }}
+                >
+                  <FontAwesomeIcon icon={faCopy} size="2x" />
                 </div>
               </div>
             </>
@@ -475,7 +309,6 @@ const OrderPaints = ({ nextStep, maskedImageWithColors }: any) => {
         </Modal.Body>
       </Modal>
 
-      {/* Custom Styles */}
       <style jsx>{`
         .order-page {
           min-height: 100vh;
@@ -483,13 +316,11 @@ const OrderPaints = ({ nextStep, maskedImageWithColors }: any) => {
         .order-colors-section {
           border-right: 1px solid #e0e0e0;
         }
-        .order-image-section {
-          padding-left: 30px;
-        }
         .image-wrapper {
           background-color: #f8f9fa;
           border-radius: 8px;
           padding: 20px;
+          width: 100%;
         }
         .list-group-item {
           border: 0;
@@ -497,15 +328,6 @@ const OrderPaints = ({ nextStep, maskedImageWithColors }: any) => {
           border-radius: 8px;
           padding: 10px 20px;
         }
-        .order-image-section img {
-          border-radius: 8px;
-        }
-
-        .modal-title {
-          text-align: center;
-          width: 100%;
-        }
-
         @media (max-width: 767px) {
           .order-colors-section {
             border-right: none;
@@ -513,13 +335,18 @@ const OrderPaints = ({ nextStep, maskedImageWithColors }: any) => {
           }
           .order-image-section {
             padding-left: 0;
+            padding-top: 20px;
+          }
+          .image-wrapper {
+            padding: 10px;
           }
         }
-
-        .text-center {
-          display: flex;
-          justify-content: center;
-          align-items: center;
+        .colorvisualiser__share__icon {
+          cursor: pointer;
+          transition: transform 0.2s;
+        }
+        .colorvisualiser__share__icon:hover {
+          transform: scale(1.1);
         }
       `}</style>
     </Container>
