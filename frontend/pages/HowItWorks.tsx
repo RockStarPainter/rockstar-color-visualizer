@@ -12,7 +12,8 @@ import {
 import styles from "../styles/HowItWorks.module.css"; // Custom styles
 
 const VIDEOS = {
-  DESKTOP: "/videos/user-manual-desktop.mp4",
+  // DESKTOP: "/videos/user-manual-desktop.mp4",
+  DESKTOP: "",
   MOBILE: "/videos/user-manual-mobile.mp4",
 } as const;
 
@@ -110,42 +111,44 @@ const HowItWorks = () => {
       </div>
 
       {/* Video Section */}
-      <div className={styles.videoSection}>
-        <h3 className={styles.sectionTitle}>Watch How to Use Our Tool</h3>
-        <div className={styles.videoWrapper} onClick={togglePlayPause}>
-          <button
-            className={styles.muteButton}
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsMuted(!isMuted);
-            }}
-            aria-label={isMuted ? "Unmute" : "Mute"}
-          >
-            <FontAwesomeIcon
-              icon={isMuted ? faVolumeMute : faVolumeUp}
-              className={styles.muteIcon}
+      {videoSrc && (
+        <div className={styles.videoSection}>
+          <h3 className={styles.sectionTitle}>Watch How to Use Our Tool</h3>
+          <div className={styles.videoWrapper} onClick={togglePlayPause}>
+            <button
+              className={styles.muteButton}
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsMuted(!isMuted);
+              }}
+              aria-label={isMuted ? "Unmute" : "Mute"}
+            >
+              <FontAwesomeIcon
+                icon={isMuted ? faVolumeMute : faVolumeUp}
+                className={styles.muteIcon}
+              />
+            </button>
+
+            {/* Show play icon only when video is paused */}
+            {!isPlaying && (
+              <div className={styles.playPauseButton}>
+                <FontAwesomeIcon icon={faPlay} className={styles.playIcon} />
+              </div>
+            )}
+
+            <video
+              ref={videoRef}
+              key={videoSrc}
+              className={styles.video}
+              src={videoSrc}
+              autoPlay
+              loop
+              playsInline
+              muted={isMuted}
             />
-          </button>
-
-          {/* Show play icon only when video is paused */}
-          {!isPlaying && (
-            <div className={styles.playPauseButton}>
-              <FontAwesomeIcon icon={faPlay} className={styles.playIcon} />
-            </div>
-          )}
-
-          <video
-            ref={videoRef}
-            key={videoSrc}
-            className={styles.video}
-            src={videoSrc}
-            autoPlay
-            loop
-            playsInline
-            muted={isMuted}
-          />
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 };
