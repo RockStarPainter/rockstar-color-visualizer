@@ -137,9 +137,9 @@ const FileUpload = (props: any) => {
         lastModified: compressedFile.lastModified,
       });
 
-      const croppedImage = await cropImage(3 / 2, compfile);
-      props.setFile(croppedImage);
-      props.getEmbedding(croppedImage);
+      // const croppedImage = await cropImage(3 / 2, compfile);
+      props.setFile(compfile);
+      props.getEmbedding(compfile);
     } catch (error) {
       console.error(error);
     }
