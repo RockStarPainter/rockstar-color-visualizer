@@ -1,0 +1,121 @@
+.testimonialSection {
+  font-family: sans-serif;
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap; /* Allow the items to wrap in smaller viewports */
+}
+
+.arrowButton {
+  background-color: #719e37;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 15px;
+  font-size: 18px;
+}
+
+.testimonialWrapper {
+  display: flex;
+  flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
+  overflow: hidden;
+  max-width: 1200px;
+  justify-content: center;
+}
+
+.testimonialContainer {
+  background-color: white;
+  width: 330px;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-basis: calc(33.33% - 20px); /* Default: 3 cards per row */
+}
+
+/* Adjust the width and layout of the testimonial cards */
+.googleIcon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 24px;
+  height: 24px;
+}
+
+.testimonialHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.profileImage {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.nameContainer {
+  text-align: left;
+}
+
+.heading {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.paragraph {
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.testimonialBody {
+  text-align: left;
+  color: #333;
+  font-size: 0.95rem;
+  margin-top: 10px;
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  color: #fbc02d; /* Gold color for the stars */
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.date {
+  font-size: 0.85rem;
+  color: #999;
+  margin-bottom: 5px;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 1200px) {
+  .testimonialContainer {
+    flex-basis: calc(50% - 20px); /* 2 cards per row for tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  .testimonialContainer {
+    flex-basis: calc(100% - 20px); /* 1 card per row for mobile screens */
+  }
+}

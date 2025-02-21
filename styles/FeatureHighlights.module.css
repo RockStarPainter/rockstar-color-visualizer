@@ -1,0 +1,100 @@
+.featureHighlightsSection {
+  text-align: center;
+  padding: 50px 0;
+  background-color: #f9f9f9;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #323232;
+}
+
+.stepsContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Allows wrapping to the next line */
+   /* Evenly distributes the items in a row */
+  gap: 20px; /* Adds space between the items */
+}
+
+
+.step {
+  position: relative; /* Ensure the overlay is positioned correctly */
+  flex: 1 1 30%; /* Ensures three items per row */
+  max-width: 30%; /* Restricts each item to 30% of the row */
+  text-align: center;
+  padding: 20px;
+  overflow: hidden; /* Ensure content stays within the card */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.step::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, 
+    rgba(255, 0, 0, 0.3) 0%,    /* Light Red */
+    rgba(255, 255, 0, 0.3) 25%, /* Light Yellow */
+    rgba(0, 0, 255, 0.3) 50%,   /* Light Blue */
+    rgba(0, 128, 0, 0.3) 75%    /* Light Green */
+  ); /* Softer gradient for a professional look */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 10px;
+  z-index: 0;
+}
+
+.step:hover {
+  transform: scale(1.05); /* Slight scaling effect */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.step:hover::before {
+  opacity: 1; /* Show the gradient overlay */
+}
+
+.icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  width: 4rem;
+  height: 4rem;
+  transition: transform 0.3s ease;
+  position: relative;
+  z-index: 1; /* Ensuring icons stay above the overlay */
+}
+
+.icon:hover {
+  transform: scale(1.1); /* Slight icon zoom effect */
+}
+
+.step h3,
+.step p {
+  position: relative;
+  z-index: 1; /* Ensure content stays above the overlay */
+}
+
+/* Responsive adjustments remain the same */
+@media (max-width: 1024px) {
+  .step {
+    flex: 1 1 45%; /* Two items per row on medium screens */
+    max-width: 45%;
+  }
+}
+
+@media (max-width: 768px) {
+  .stepsContainer {
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;
+  }
+
+  .step {
+    max-width: 100%; /* Full width on smaller screens */
+  }
+}

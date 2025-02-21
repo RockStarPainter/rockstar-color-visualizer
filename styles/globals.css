@@ -1,0 +1,470 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+
+.bg_white{
+  background-color: white !important;
+}
+
+/* bootstrap inputs style  */
+
+/* Input Styles */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+textarea,
+select {
+  /* display: block;
+  width: 100% !important; */
+  padding: 0.375rem 0.75rem !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+  color: #495057 !important;
+  background-color: #fff !important;
+  background-clip: padding-box !important;
+  border: 1px solid #ced4da !important;
+  border-radius: 0.25rem !important;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+}
+
+/* Focus Styles */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+textarea:focus,
+select:focus {
+  color: #495057 !important;
+  background-color: #fff !important;
+  border-color: #80bdff !important;
+  outline: 0 !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important;
+}
+
+/* Disabled Input Styles */
+input[disabled],
+textarea[disabled],
+select[disabled] {
+  background-color: #e9ecef !important;
+  opacity: 1 !important;
+}
+
+/* Invalid Input Styles */
+input:invalid,
+textarea:invalid,
+select:invalid {
+  border-color: #dc3545 !important;
+}
+
+/* Valid Input Styles */
+input:valid,
+textarea:valid,
+select:valid {
+  border-color: #646865 !important;
+}
+
+/* Checkbox and Radio Styles */
+.form-check-input {
+  margin-top: 0.3rem !important;
+}
+
+
+/* Button Styles */
+button {
+  border-radius: 0.5rem !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.paint_cards {
+  flex: 0 0 calc(100% / 2); /* Default to 2 cards per row for extra small screens */
+  max-width: calc(100% / 2);
+  /* padding: 5px; */
+  box-sizing: border-box;
+  border: 5px solid white;
+  transition: transform 0.3s ease, all 0.3s ease;
+  z-index: 3;
+}
+
+.paint_card:hover {
+  transform: scale(1.05); /* Scale up by 5% */
+  border: 7px solid white;
+  z-index: 15;
+}
+
+
+@media (min-width: 576px) {
+  .paint_cards {
+    flex: 0 0 calc(100% / 3); /* 3 cards per row on small screens */
+    max-width: calc(100% / 3);
+  }
+}
+
+@media (min-width: 768px) {
+  .paint_cards {
+    flex: 0 0 calc(100% / 4); /* 4 cards per row on medium screens */
+    max-width: calc(100% / 4);
+  }
+}
+
+@media (min-width: 992px) {
+  .paint_cards {
+    flex: 0 0 calc(100% / 5); /* 5 cards per row on large screens */
+    max-width: calc(100% / 5);
+  }
+}
+
+@media (min-width: 1200px) {
+  .paint_cards {
+    flex: 0 0 calc(100% / 7); /* 7 cards per row on extra-large screens */
+    max-width: calc(100% / 7);
+  }
+}
+
+
+input[type="checkbox"],
+input[type="radio"] {
+    appearance: none !important; /* Remove default styling */
+    -webkit-appearance: none !important; /* For Safari */
+    width: 17px !important; /* Adjust size */
+    height: 17px !important; /* Adjust size */
+    border: 2px solid #ccc !important; /* Border color */
+    border-radius: 5px !important; /* Rounded corners for checkbox (adjust as needed) */
+    cursor: pointer !important; /* Pointer cursor on hover */
+    position: relative !important; /* For pseudo-elements */
+    background-color: #fff !important; /* Default background color (white) */
+}
+
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
+    background-color: #022e97 !important; /* Change background color when checked to blue */
+    border-color: #022e97 !important; /* Border color when checked */
+}
+
+input[type="radio"] {
+    border-radius: 50% !important; /* Make radio buttons circular */
+}
+
+input[type="checkbox"]:checked::before,
+input[type="radio"]:checked::before {
+    content: '' !important; /* Create pseudo-element */
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important; /* Center the check or dot */
+    width: 10px !important; /* Size of the check mark or dot */
+    height: 10px !important; /* Size of the check mark or dot */
+    background-color: #fff !important; /* Color of the check mark or dot */
+    border-radius: 50% !important; /* Make the check mark circular for radio buttons */
+}
+
+.paint_cards {
+  flex-basis: 150px; /* Adjust to match the width in the JS code */
+  flex-grow: 1;
+}
+
+
+
+
+:root {
+  --clr-white: rgb(255, 255, 255);
+  --clr-black: rgb(0, 0, 0);
+  --clr-light: rgb(245, 248, 255);
+  --clr-light-gray: rgb(196, 195, 196);
+  --clr-blue: rgb(63, 134, 255);
+  --clr-light-blue: rgb(171, 202, 255);
+}
+._3uApM {
+  display: none !important;
+}
+
+body {
+  font-family: "montserrat" !important;
+}
+/* Home Page */
+.parallax-container {
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.parallax-text {
+  height: 100%;
+}
+.parallax-title {
+  margin-top: 23%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: " montserrat";
+  color: #2b2b2b;
+}
+
+.projects-title {
+  font-family: " montserrat";
+  color: #2b2b2b;
+  font-size: 3.5rem;
+  margin-bottom: 40px;
+}
+
+.description {
+  font-size: 3rem;
+}
+.projects-list {
+  margin-top: 40px;
+  margin-bottom: 0;
+}
+.contact-button {
+  margin-top: 8%;
+}
+
+.contact-button2 {
+  margin-bottom: 5%;
+}
+.features-list {
+  background: linear-gradient(to top, #ffffff, #dfecf9);
+}
+
+@media screen and (max-width: 1100px) and (max-height: 1400px) {
+  .parallax-container {
+    height: 35vh;
+  }
+}
+@media screen and (max-width: 1100px) and (max-height: 990px) {
+  .parallax-container {
+    height: 45vh;
+  }
+}
+@media screen and (max-width: 1100px) and (max-height: 800px) {
+  .parallax-container {
+    height: 60vh;
+  }
+}
+
+@media screen and (max-width: 1030px) {
+  .projects-title {
+    margin-top: 60px;
+    font-size: 3rem;
+  }
+  .description {
+    font-size: 2rem;
+  }
+}
+/* About Page */
+.about-title {
+  font-size: 3.5rem;
+  font-family: "montserrat";
+  color: #2b2b2b;
+}
+
+.about-text {
+  color: #2b2b2b;
+  text-align: justify;
+}
+@media screen and (max-width: 1030px) {
+  .about-title {
+    font-size: 3rem;
+  }
+  .about-text {
+    font-size: medium;
+  }
+}
+/* Contact Page */
+.contact-title {
+  font-size: 4rem;
+  font-family: " montserrat";
+  color: #2b2b2b;
+  padding: 2% 0 0 5%;
+}
+
+.contact-subtitle {
+  font-size: 2rem;
+  font-family: " montserrat";
+  color: #2b2b2b;
+  padding: 0 5% 2% 5%;
+}
+
+.contact-form {
+  margin-bottom: 2%;
+  margin-top: 40px;
+}
+
+/* Color Visualizer Page */
+.colorvisualiser {
+  background: linear-gradient(to bottom, #ffffff, #9fd3ff);
+}
+
+.colorvisualiser__color_button.selected {
+  border: 3px solid #0000; /* Example style */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Example style */
+}
+
+.colorvisualiser__container__left h1 {
+  font-weight: 500;
+  color: #05308b;
+}
+.colorvisualiser__color_button {
+  width: 50px;
+  height: 50px;
+  border: 0px;
+}
+.colorvisualiser__color_button--active {
+  border: 4px solid #000000;
+  width: 50px;
+  height: 50px;
+}
+.colorvisualiser__color_button:hover {
+  border: 4px solid #eba206;
+}
+
+.colorvisualiser__texture_button > img:hover {
+  border: 4px solid #eba206;
+}
+
+.colorvisualiser__texture_button > img {
+  border-radius: 5px;
+  overflow: hidden;
+}
+.colorvisualiser__currtexture_button {
+  border: 4px solid #0a0a0a;
+  border-radius: 10%;
+
+  overflow: hidden;
+}
+.colorvisualiser__copylink {
+  flex-grow: 1;
+}
+.colorvisualiser__copy_button {
+  background-color: #05308b;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.colorvisualiser__copy_button:hover,
+.colorvisualiser__copy_button:focus {
+  background-color: #eba206;
+}
+.colorvisualiser__share__icon {
+  background-color: #d7d7d7;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 30%;
+  cursor: pointer;
+}
+
+
+/* Some Global CSS For File upload */
+.file_details--open {
+  height: auto !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.uploaded_file--open {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.uploaded_file__info--active::after {
+  animation: progressMove 800ms ease-in-out;
+  animation-delay: 300ms;
+}
+
+@keyframes progressMove {
+  from {
+    width: 0%;
+    background-color: transparent;
+  }
+
+  to {
+    width: 100%;
+    background-color: var(--clr-blue);
+  }
+}
+.upload_area--open {
+  /* Slid Down Animation */
+  animation: slidDown 500ms ease-in-out;
+}
+
+@keyframes slidDown {
+  from {
+    height: 28.125rem; /* 450px */
+  }
+
+  to {
+    height: 32rem; /* 560px */
+  }
+}
+.drop_zoon--over {
+  border-color: var(--clr-blue);
+}
+
+/* Tools Global CSS */
+.baseimagecontainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.baseImage {
+  width: 100%;
+  height: 100%;
+  object-position: center;
+}
+.maskImage {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 0.4;
+  filter: grayscale(100%);
+  pointer-events: none;
+}
+
+.appliedImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: var(--opacity);
+
+  pointer-events: none;
+}
+
+/* Webkit-based browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 8px !important;
+  height: 6px !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #8f93ac !important;
+  border-radius: 84px !important;
+  height: 10px !important;
+  cursor: pointer !important;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #eeeff3 !important;
+  border-radius: 84px !important;
+}
+
+/* Firefox */
+scrollbar-width: thin !important;
+scrollbar-color: #8866 transparent !important;
