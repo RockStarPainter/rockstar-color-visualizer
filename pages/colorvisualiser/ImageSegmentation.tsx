@@ -303,15 +303,14 @@ const ImageMaskComponent: React.FC<ImageMaskProps> = ({
         setLoading(true);
         const file = await convertSrcToFile(image.src);
         const formData = new FormData();
-        formData.append("file", file);
-        formData.append("sample_prediction", "false");
+        formData.append("image", file);
         formData.append("x", x.toString());
         formData.append("y", y.toString());
 
         console.log('env variable:', process.env.NEXT_PUBLIC_BACKEND_URL)
 
         const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/image/upload/`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/image/get-segment/`,
           formData,
           {
             headers: { "Content-Type": "multipart/form-data" },
