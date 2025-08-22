@@ -179,7 +179,10 @@ function VisualizeRoom({
                   style={{
                     backgroundColor: '#e3f2fd',
                     borderLeft: '4px solid #2196f3',
-                    fontSize: '0.875rem'
+                    fontSize: '0.875rem',
+                    padding: '0.75rem 1.25rem',
+                    borderRadius: '0.375rem',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
                   }}
                 >
                   <FaInfoCircle className="me-2" />
@@ -274,7 +277,9 @@ function VisualizeRoom({
                             marginBottom: '2px'
                           }}
                         ></div>
-                        <span style={{ color: '#495057', fontWeight: '500', fontSize: '0.8rem' }}>Don't paint furniture</span>
+                        <span style={{ color: '#495057', fontWeight: '500', fontSize: '0.8rem' }}>
+                          Don&#39;t paint furniture
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -352,10 +357,7 @@ function VisualizeRoom({
                   border: '1px solid #e1e5e9',
                 }}
               >
-                <Card.Body 
-                  className="d-flex justify-content-center gap-2 gap-md-3 align-items-center"
-                  style={{ padding: '15px 20px' }}
-                >
+                <Card.Body className="d-flex justify-content-center gap-2 gap-md-3 align-items-center" style={{ padding: '15px 20px' }}>
                   {/* 🚀 NEW: Undo Last Action Button - FIRST IN ROW */}
                   <OverlayTrigger
                     placement="top"
