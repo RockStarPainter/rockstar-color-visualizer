@@ -11,7 +11,19 @@ function ColorVisualizer() {
   const [initialMasks, setInitialMasks] = useState<any>(); // State to trigger mask reset
   const [maskedImageWithColors, setMaskedImageWithColors] = useState<any>(); // State to trigger mask reset
   const [isPreloaded, setIsPreloaded] = useState<boolean>(false); // To track preloaded images
-    const [imageFile, setImageFile] = useState<any>(null);
+  const [imageFile, setImageFile] = useState<any>(null);
+  
+  // 🚀 NEW: Comprehensive state persistence for segmented images
+  const [segmentedImageState, setSegmentedImageState] = useState<{
+    imageSrc: string | null;
+    wallMasks: any[];
+    naturalDimensions: any;
+    paintedPixels: Map<string, string>;
+    wallColors: Record<string, string>;
+    originalImageData: any;
+    downloadableImage: string | null;
+    isProcessed: boolean;
+  } | null>(null);
   
 
 
@@ -30,6 +42,22 @@ function ColorVisualizer() {
   const moveToStep = (step: number) => {
     if (currentStep > 0 && currentStep < stepList.length - 1)
       setCurrentStep(step);
+  };
+
+  // 🚀 NEW: Function to save segmented image state
+  const saveSegmentedImageState = (state: any) => {
+    console.log("Saving segmented image state:", state);
+    setSegmentedImageState(state);
+  };
+
+  // 🚀 NEW: Function to restore segmented image state
+  const restoreSegmentedImageState = () => {
+    return segmentedImageState;
+  };
+
+  // 🚀 NEW: Function to check if we have a processed image
+  const hasProcessedImage = () => {
+    return segmentedImageState && segmentedImageState.isProcessed;
   };
 
   const stepList = [
@@ -79,6 +107,9 @@ function ColorVisualizer() {
             setMaskedImageWithColors={setMaskedImageWithColors}
             isPreloaded={isPreloaded}
             imageFile={imageFile}
+            saveSegmentedImageState={saveSegmentedImageState}
+            restoreSegmentedImageState={restoreSegmentedImageState}
+            hasProcessedImage={hasProcessedImage}
           />
 
           
